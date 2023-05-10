@@ -1,7 +1,6 @@
 import React from "react";
-import Header from "../../components/Header";
-import Header_Main from "../../components/HeaderMain";
-import heroImg from "../../asset/heromain.jpg";
+// import Header from "../../components/Header";
+// import Header_Main from "../../components/HeaderMain";
 import styled from "styled-components";
 
 
@@ -20,9 +19,7 @@ const Container = styled.div`
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-    }
-
-        
+    }   
 `
 
 const MainPage = () => {
@@ -41,7 +38,7 @@ const MainPage = () => {
                 <div className="uppper_menu"></div>
             </div>
             {/* <div className="hero_main"> */}
-            <img src={heroImg} className="hero_img" alt="히어로이미지" />
+            {/* <img src={heroImg} className="hero_img" alt="히어로이미지" /> */}
             {/* </div> */}
         </Container>
     )
