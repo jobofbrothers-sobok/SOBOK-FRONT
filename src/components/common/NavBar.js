@@ -4,11 +4,11 @@ import logo2 from "../../asset/images/sobok_logo_rect_jua.png";
 import menuImg from "../../asset/images/hamburger.png";
 
 const NavContainer = styled.div`
+    width: 100%;
     display: flex;
     align-items: center;
     position: fixed;
     top: 0;
-    width: 400px;
     height: 60px;
     background-color: #FFFFFF;
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1)
