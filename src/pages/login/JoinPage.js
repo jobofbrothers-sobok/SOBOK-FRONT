@@ -1,28 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import BackButton from "../../components/common/BackButton";
 import AgreeForm from "../../components/AgreeForm";
 import Footer from "../../components/common/Footer";
 import Button from "../../components/common/Button";
+import JoinInputForm from "../../components/JoinInputForm";
 
 
 const JoinPage = () => {
 
+    // 약관동의: false, 입력폼: true
+    const [isNext, setNext] = useState(false);
+
+    const handleNextButton = () => {
+        setNext(!isNext);
+    }
+
+
     return (
-        <JoinContainer>
+        <>
             <NavBar />
-            <BackButton />
-            <div className="join-form">
-                <br />
-                <p className="join-title">회원가입</p>
-                <AgreeForm />
-                <Button text="다음으로" color="#FF9F74" />
-                <br />
-            </div>
-            <hr width={"100%"} />
-            <Footer />
-        </JoinContainer>
+            <JoinContainer>
+                <BackButton />
+                <div className="join-form">
+                    <br />
+                    <p className="join-title">회원가입</p>
+                    {isNext ?
+                        <>
+                            <JoinInputForm />
+                            <Button text="가입 완료" color="#FF9F74" />
+                        </> :
+                        <>
+                            <AgreeForm />
+                            <Button text="다음으로" color="#FF9F74" onClick={handleNextButton} />
+                        </>
+                    }
+                    <br />
+                </div>
+                <hr width="100%" />
+                <Footer />
+            </JoinContainer>
+        </>
     )
 }
 
@@ -46,11 +65,10 @@ const JoinContainer = styled.div`
     }
     .join-title{
         text-align: center;
-        font-style: normal;
-        font-weight: 700;
+        font-weight: 1000;
         font-size: 25px;
         line-height: 20px;
-        letter-spacing: -0.04em;
+        letter-spacing: -0.08em;
         color: #222222;            
     }
     > hr {

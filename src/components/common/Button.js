@@ -15,9 +15,9 @@ const ButtonContainer = styled.button`
 `
 
 const Button = (props) => {
-    const { text, color } = props;
+    const { text, color, onClick } = props;
     return (
-        <ButtonContainer color={color}>
+        <ButtonContainer color={color} onClick={onClick}>
             {text}
         </ButtonContainer>
     )
