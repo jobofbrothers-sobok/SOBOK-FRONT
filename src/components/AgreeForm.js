@@ -2,35 +2,55 @@ import React from "react";
 import styled from "styled-components";
 
 const AgreeContainer = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
-
     .all-agree-box{
         display: flex;
         align-items: center;
         height: 60px;
         background: #7F7F7F;
         padding-left: 15px;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 100;
-        font-size: 18px;
         line-height: 33px;
         letter-spacing: -0.04em;
         color: #FFFFFF;
     }
-    .sobok-btn{
-        height: 60px;
-        background: #FF9F74;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 38px;
-        letter-spacing: -0.04em;
-        color: #FFFFFF;
-        border: none;
+    > input {
+        border: 1px solid #D9D9D9;
+        border-radius: 4px;
+    }
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        position: relative;
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+        outline: none !important;
+        border: 1px solid #9999;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+    input[type="checkbox"]::before {
+        content: "✔";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        transform: scale(0) translate(-50%, -50%);
+        font-size: 12px;
+        line-height: 14px;
+    }
+    input[type="checkbox"]:checked {
+        background-color: #FF9F74;
+        border-color: rgba(255, 255, 255, 0.3);
+        color: white;
+    }
+    input[type="checkbox"]:checked::before {
+        border-radius: 4px;
+        transform: scale(1) translate(-50%, -50%)
     }
 `
 

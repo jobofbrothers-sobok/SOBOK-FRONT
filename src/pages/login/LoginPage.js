@@ -39,11 +39,12 @@ const LoginPage = () => {
 export default LoginPage;
 
 const LoginContainer = styled.div`
+    width: 100%;
+    padding: 0 20px 20px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    max-width: 400px;
-    max-height: 800px;
     justify-content: center;
     align-items: center;
     margin-top: 60px;
@@ -65,12 +66,9 @@ const LoginContainer = styled.div`
         color: #C0C0C0;
     }
     .login-form {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 15px;
         line-height: 31px;
         letter-spacing: -0.04em;
         color: #222222;
@@ -78,33 +76,25 @@ const LoginContainer = styled.div`
     }
     .login-form > input {
         padding: 5px 10px;
-        width: 300px;
-        height: 30px;
+        height: 40px;
         background: #FFFFFF;
         border: 1px solid #D9D9D9;
         border-radius: 4px
     }
     .login-form > p {
+        margin-top: 10px;
+        margin-bottom: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 15px;
         line-height: 15px;
         text-align: center;
         letter-spacing: -0.04em;
         color: #7F7F7F;
     }
-    .login-form > hr {
-        background: #D9D9D9;
-    }
     .is-owner{
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 15px;
+        margin-top: 20px;
+        margin-bottom: 10px;
         line-height: 29px;
         text-align: center;
         letter-spacing: -0.04em;
@@ -116,10 +106,6 @@ const LoginContainer = styled.div`
         background: #FF9F74;
         border-radius: 10px; 
         border: none;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 15px;
         line-height: 29px;
         text-align: center;
         letter-spacing: -0.04em;
@@ -136,6 +122,7 @@ const LoginContainer = styled.div`
         outline: none !important;
         border: 1px solid #9999;
         vertical-align: middle;
+        margin-right: 5px;
     }
     .check input[type="checkbox"]::before {
         content: "✔";
@@ -144,6 +131,8 @@ const LoginContainer = styled.div`
         left: 50%;
         overflow: hidden;
         transform: scale(0) translate(-50%, -50%);
+        font-size: 12px;
+        line-height: 14px;
     }
     .check input[type="checkbox"]:checked {
         background-color: #FF9F74;
@@ -155,7 +144,8 @@ const LoginContainer = styled.div`
         transform: scale(1) translate(-50%, -50%)
     }
     > hr {
-        color: #E4E4E4; 
+        width: 100%;
+        color: #E0E0E0; 
         opacity: 0.5;
     }
 `

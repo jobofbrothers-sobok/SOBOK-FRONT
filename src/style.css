@@ -1,0 +1,20 @@
+* {
+    font-family: "Pretandard", sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    min-width: 360px;
+    max-width: 768px;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    color: black;
+}

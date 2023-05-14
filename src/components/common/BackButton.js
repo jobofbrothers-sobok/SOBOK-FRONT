@@ -7,14 +7,9 @@ const BackContainer = styled.div`
     display: flex;
     flex-direction: row;
     gap: 15px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 31px;
     color: #222222;
-    > img{
-        margin-left: 10px;
+    > p {
+        font-size: 15px;
     }
 `
 
