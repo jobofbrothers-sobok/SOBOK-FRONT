@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../../asset/images/sobok_logo_square_jua.png";
 import "../../asset/fonts/font.css";
 import Button from "../../components/common/Button";
 
 const LoginPage = () => {
+
+    // 점주: true, 고객: false
+    const [isOwner, setOwner] = useState(false);
+
+    // 전환 버튼
+    const handleButton = () => {
+        setOwner(!isOwner)
+    }
 
     return (
         <LoginContainer>
@@ -29,8 +37,8 @@ const LoginPage = () => {
             </div>
             <br />
             <hr width="320px" />
-            <p className="is-owner">점주님이신가요?</p>
-            <button className="is-owner-btn">점주 로그인</button>
+            <p className="is-owner">{isOwner ? '고객님이신가요?' : '점주님이신가요?'}</p>
+            <button className="is-owner-btn" onClick={handleButton}>점주 로그인</button>
             <br />
         </LoginContainer>
     )
