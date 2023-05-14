@@ -3,16 +3,25 @@ import styled from "styled-components";
 import logo from "../../asset/images/sobok_logo_square_jua.png";
 import "../../asset/fonts/font.css";
 import Button from "../../components/common/Button";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+
+    const navigate = useNavigate();
 
     // 점주: true, 고객: false
     const [isOwner, setOwner] = useState(false);
 
-    // 전환 버튼
+    // 점주<->고객 로그인 전환
     const handleButton = () => {
         setOwner(!isOwner)
     }
+
+    // 회원가입 페이지 이동
+    const moveJoinPage = () => {
+        navigate('/join');
+    }
+
 
     return (
         <LoginContainer>
@@ -22,21 +31,21 @@ const LoginPage = () => {
             <div className="description">디저트 속 소소한 행복</div>
             <br /><br />
             <div className="login-form">
-                아이디<br />
+                <p>아이디</p>
                 <input type="text" placeholder="010-0000-0000" />
-                비밀번호<br />
+                <p>비밀번호</p>
                 <input type="text" placeholder="Password" />
                 <div className="check">
                     <input type="checkbox" id="checkbox" />
-                    <label for="remember-me">자동 로그인</label>
+                    <label className="remember-me">자동 로그인</label>
                 </div>
                 <br />
                 <Button text="로그인" color="#FF9F74" />
-                <Button text="회원가입" color="#7F7F7F" />
-                <p>아이디/비밀번호 찾기</p>
+                <Button text="회원가입" color="#7F7F7F" onClick={moveJoinPage} />
             </div>
+            <p>아이디/비밀번호 찾기</p>
             <br />
-            <hr width="320px" />
+            <hr width="100%" />
             <p className="is-owner">{isOwner ? '고객님이신가요?' : '점주님이신가요?'}</p>
             <button className="is-owner-btn" onClick={handleButton}>점주 로그인</button>
             <br />
@@ -87,10 +96,14 @@ const LoginContainer = styled.div`
         height: 40px;
         background: #FFFFFF;
         border: 1px solid #D9D9D9;
-        border-radius: 4px
+        border-radius: 4px;
+        margin-bottom: 10px;
     }
     .login-form > p {
-        margin-top: 10px;
+        font-weight: 900;
+    }
+    > p {
+        margin-top: 20px;
         margin-bottom: 20px;
         display: flex;
         justify-content: center;

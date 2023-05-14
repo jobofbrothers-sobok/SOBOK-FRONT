@@ -59,16 +59,16 @@ const AgreeForm = () => {
         <AgreeContainer>
             <div className="all-agree-box">
                 <input type="checkbox" id="checkbox" />
-                <label for="remember-me">모두 동의(선택 정보 포함)</label>
+                <label className="remember-me">모두 동의(선택 정보 포함)</label>
             </div>
             <div className="agree-box1">
                 <input type="checkbox" id="checkbox" />
-                <label for="remember-me">[필수] 홈페이지 이용약관의 내용에 동의합니다.</label>
+                <label className="remember-me">[필수] 홈페이지 이용약관의 내용에 동의합니다.</label>
             </div>
             <textarea className="use-term" rows="6"></textarea>
             <div className="agree-box2">
                 <input type="checkbox" id="checkbox" />
-                <label for="remember-me">[선택] 광고성 정보 수신 및 마케팅 활용 동의</label>
+                <label className="remember-me">[선택] 광고성 정보 수신 및 마케팅 활용 동의</label>
             </div>
             <textarea className="use-term" rows="6"></textarea>
         </AgreeContainer>

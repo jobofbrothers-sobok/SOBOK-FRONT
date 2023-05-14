@@ -6,7 +6,7 @@ const BackContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 10px;
     color: #222222;
     > p {
         font-size: 15px;
