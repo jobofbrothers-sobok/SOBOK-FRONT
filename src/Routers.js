@@ -8,6 +8,7 @@ import FindPage from "./pages/login/FindPage";
 import SuccessPage from "./pages/login/SuccessPage";
 import AdminPage from "./pages/mypage/AdminPage";
 import OwnerPage from "./pages/mypage/OwnerPage";
+import OwnerManager from "./pages/mypage/OwnerManager";
 
 
 const Routers = () => {
@@ -21,6 +22,7 @@ const Routers = () => {
                 <Route element={<MainPage />} path='/home' />
                 <Route element={<AdminPage />} path='/admin' />
                 <Route element={<OwnerPage />} path='/owner' />
+                <Route element={<OwnerManager />} path="/owner/manager" />
             </Routes>
         </BrowserRouter>
 
