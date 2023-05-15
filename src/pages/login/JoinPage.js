@@ -38,11 +38,9 @@ const JoinPage = () => {
                             <Button text="다음으로" color="#FF9F74" onClick={handleNextButton} />
                         </>
                     }
-                    <br />
                 </div>
-                <hr width="100%" />
-                <Footer />
             </JoinContainer>
+            <Footer />
         </>
     )
 }

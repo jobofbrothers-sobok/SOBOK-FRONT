@@ -10,6 +10,8 @@ const FooterContainer = styled.div`
     align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    border-top: 1px solid #E0E0E0;
+    padding-top: 20px;
     .sobok-info-text{
         font-size: 13px;
         line-height: 25px;

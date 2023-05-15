@@ -6,6 +6,8 @@ import MainPage from "./pages/main/MainPage";
 import JoinPage from "./pages/login/JoinPage";
 import FindPage from "./pages/login/FindPage";
 import SuccessPage from "./pages/login/SuccessPage";
+import AdminPage from "./pages/mypage/AdminPage";
+import OwnerPage from "./pages/mypage/OwnerPage";
 
 
 const Routers = () => {
@@ -17,6 +19,8 @@ const Routers = () => {
                 <Route element={<JoinPage />} path='/join' />
                 <Route element={<SuccessPage />} path='/join-success' />
                 <Route element={<MainPage />} path='/home' />
+                <Route element={<AdminPage />} path='/admin' />
+                <Route element={<OwnerPage />} path='/owner' />
             </Routes>
         </BrowserRouter>
 
