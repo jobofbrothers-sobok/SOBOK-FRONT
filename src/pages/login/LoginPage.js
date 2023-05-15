@@ -26,7 +26,7 @@ const LoginPage = () => {
     return (
         <LoginContainer>
             <div className="logo">
-                <img src={logo} alt="소복 로고 이미지" width="120px" />
+                <img src={logo} alt="소복 로고 이미지" width={"35%"} />
             </div>
             <div className="description">디저트 속 소소한 행복</div>
             <br /><br />
@@ -43,7 +43,7 @@ const LoginPage = () => {
                 <Button text="로그인" color="#FF9F74" />
                 <Button text="회원가입" color="#7F7F7F" onClick={moveJoinPage} />
             </div>
-            <p>아이디/비밀번호 찾기</p>
+            <p onClick={() => navigate('/forgot')}>아이디/비밀번호 찾기</p>
             <br />
             <hr width="100%" />
             <p className="is-owner">{isOwner ? '고객님이신가요?' : '점주님이신가요?'}</p>

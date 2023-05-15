@@ -6,10 +6,12 @@ import AgreeForm from "../../components/AgreeForm";
 import Footer from "../../components/common/Footer";
 import Button from "../../components/common/Button";
 import JoinInputForm from "../../components/JoinInputForm";
+import { useNavigate } from "react-router-dom";
 
 
 const JoinPage = () => {
 
+    const navigator = useNavigate();
     // 약관동의: false, 입력폼: true
     const [isNext, setNext] = useState(false);
 
@@ -29,7 +31,7 @@ const JoinPage = () => {
                     {isNext ?
                         <>
                             <JoinInputForm />
-                            <Button text="가입 완료" color="#FF9F74" />
+                            <Button text="가입 완료" color="#FF9F74" onClick={() => navigator('/join-success')} />
                         </> :
                         <>
                             <AgreeForm />
