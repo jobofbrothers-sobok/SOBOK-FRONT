@@ -54,6 +54,10 @@ const AgreeContainer = styled.div`
     }
 `
 
+const InputBox = styled.textarea`
+    border: 1px solid #D9D9D9;
+`
+
 const AgreeForm = () => {
     return (
         <AgreeContainer>
@@ -65,12 +69,12 @@ const AgreeForm = () => {
                 <input type="checkbox" id="checkbox" />
                 <label className="remember-me">[필수] 홈페이지 이용약관의 내용에 동의합니다.</label>
             </div>
-            <textarea className="use-term" rows="6"></textarea>
+            <InputBox rows="6"></InputBox>
             <div className="agree-box2">
                 <input type="checkbox" id="checkbox" />
                 <label className="remember-me">[선택] 광고성 정보 수신 및 마케팅 활용 동의</label>
             </div>
-            <textarea className="use-term" rows="6"></textarea>
+            <InputBox rows="6"></InputBox>
         </AgreeContainer>
     )
 
