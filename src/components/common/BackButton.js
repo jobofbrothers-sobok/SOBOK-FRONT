@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import backImg from "../../asset/images/arrow.svg";
+import { useNavigate } from "react-router-dom";
 
 const BackContainer = styled.div`
     width: 100%;
@@ -13,10 +14,12 @@ const BackContainer = styled.div`
     }
 `
 
-const BackButton = () => {
+const BackButton = (props) => {
+
+    const navigator = useNavigate();
 
     return (
-        <BackContainer>
+        <BackContainer onClick={() => navigator(-1)}>
             <img src={backImg} width="10px" alt="뒤로가기 버튼" />
             <p>뒤로가기</p>
         </BackContainer>

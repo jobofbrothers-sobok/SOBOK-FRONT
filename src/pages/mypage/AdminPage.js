@@ -3,8 +3,11 @@ import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import sobokFace from "../../asset/images/sobok-face.svg";
 import Footer from "../../components/common/Footer";
+import { useNavigate } from "react-router-dom";
 
 const AdminPage = () => {
+
+    const navigator = useNavigate();
 
     const menuList = ['점주/스템프 신규 신청 리스트', '스템프 정보', '소복 회원 정보', '소복 매니저 신청 리스트', '배송 신청 리스트', '공지글 작성하기', '문의사항 등록 리스트']
     return (
@@ -16,8 +19,11 @@ const AdminPage = () => {
                     <p><span>최고관리자</span> 마이페이지</p>
                 </div>
                 <div className="menu-list">
-                    {menuList.map(menu => (
-                        <div className='menu-item'>
+                    {menuList.map((menu, index) => (
+                        <div className='menu-item' onClick={() => {
+                            navigator(`/admin/${index}`)
+                            console.log(index)
+                        }}>
                             <p>{menu}</p>
                         </div>
                     ))}

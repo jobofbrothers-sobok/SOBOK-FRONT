@@ -10,14 +10,15 @@ const ButtonContainer = styled.button`
     font-size: 18px;
     line-height: 38px;
     letter-spacing: -0.04em;
-    color: #FFFFFF;
+    color: ${props => props.textColor};
     border: none;
+    flex: auto;
 `
 
 const Button = (props) => {
-    const { text, color, onClick } = props;
+    const { text, color, onClick, textColor } = props;
     return (
-        <ButtonContainer color={color} onClick={onClick}>
+        <ButtonContainer color={color} onClick={onClick} textColor={textColor ? textColor : "#FFFFFF"}>
             {text}
         </ButtonContainer>
     )

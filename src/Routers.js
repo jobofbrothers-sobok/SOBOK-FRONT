@@ -9,7 +9,8 @@ import SuccessPage from "./pages/login/SuccessPage";
 import AdminPage from "./pages/mypage/AdminPage";
 import OwnerPage from "./pages/mypage/OwnerPage";
 import OwnerManager from "./pages/mypage/OwnerManager";
-
+import AdminManager from "./pages/mypage/AdminManager";
+import ManagerDetail from "./pages/mypage/ManagerDetail";
 
 const Routers = () => {
     return (
@@ -21,8 +22,10 @@ const Routers = () => {
                 <Route element={<SuccessPage />} path='/join-success' />
                 <Route element={<MainPage />} path='/home' />
                 <Route element={<AdminPage />} path='/admin' />
+                <Route element={<AdminManager />} path='/admin/3' />
+                <Route element={<ManagerDetail />} path='/admin/3/detail/:id' />
                 <Route element={<OwnerPage />} path='/owner' />
-                <Route element={<OwnerManager />} path="/owner/manager" />
+                <Route element={<OwnerManager />} path="/owner/5" />
             </Routes>
         </BrowserRouter>
 

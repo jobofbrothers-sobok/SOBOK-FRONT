@@ -7,6 +7,7 @@ const NavContainer = styled.div`
     width: 100%;
     box-sizing: border-box;
     display: flex;
+    justify-content: center;
     align-items: center;
     position: fixed;
     top: 0;
@@ -21,7 +22,8 @@ const NavWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 25px;
+    max-width: 768px;
+    padding: 10px 20px;
     align-items: center;
     > button {
         border: none;
