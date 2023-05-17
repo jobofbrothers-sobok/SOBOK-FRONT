@@ -3,8 +3,12 @@ import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import sobokFace from "../../asset/images/sobok-face.svg";
 import Footer from "../../components/common/Footer";
+import { useNavigate } from "react-router-dom";
 
 const OwnerPage = () => {
+
+    const navigator = useNavigate();
+    
 
     const menuList = ['담당자 정보 수정', '매장 정보 등록/수정', '매장 소식 등록', '매장 메뉴 등록', '스토어 상품 등록', '소복 매니저']
     return (
@@ -16,8 +20,11 @@ const OwnerPage = () => {
                     <p><span>메가커피<br />고법</span> 점주님 마이페이지</p>
                 </div>
                 <div className="menu-list">
-                    {menuList.map(menu => (
-                        <div className='menu-item'>
+                    {menuList.map((menu, index) => (
+                        <div className='menu-item' onClick={() => {
+                            navigator(`/owner/${index}`)
+                            console.log(index)
+                        }}>
                             <p>{menu}</p>
                         </div>
                     ))}
