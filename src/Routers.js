@@ -11,10 +11,18 @@ import OwnerPage from "./pages/mypage/OwnerPage";
 import OwnerManager from "./pages/mypage/OwnerManager";
 import AdminManager from "./pages/mypage/AdminManager";
 import ManagerDetail from "./pages/mypage/ManagerDetail";
+import OwnerEditInfo from "./pages/mypage/OwnerEditInfo";
+import OwnerEditStoreInfo from "./pages/mypage/OwnerEditStoreInfo";
+import OwnerAddNews from "./pages/mypage/OwnerAddNews";
+import OwnerAddMenu from "./pages/mypage/OwnerAddMenu";
+import OwnerAddStore from "./pages/mypage/OwnerAddStore";
+import OwnerMenuDetail from "./pages/mypage/OwnerMenuDetail";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 const Routers = () => {
     return (
         <BrowserRouter>
+            <ScrollToTop />
             <Routes>
                 <Route element={<LoginPage />} path='/' />
                 <Route element={<FindPage />} path='/forgot' />
@@ -25,7 +33,13 @@ const Routers = () => {
                 <Route element={<AdminManager />} path='/admin/3' />
                 <Route element={<ManagerDetail />} path='/admin/3/detail/:id' />
                 <Route element={<OwnerPage />} path='/owner' />
-                <Route element={<OwnerManager />} path="/owner/5" />
+                <Route element={<OwnerMenuDetail />} path='/owner/menu/:id' />
+                {/* <Route element={<OwnerEditInfo />} path='/owner/0' />
+                <Route element={<OwnerEditStoreInfo />} path='/owner/1' />
+                <Route element={<OwnerAddNews />} path='/owner/2' />
+                <Route element={<OwnerAddMenu />} path='/owner/3' />
+                <Route element={<OwnerAddStore />} path='/owner/4' />
+                <Route element={<OwnerManager />} path="/owner/5" /> */}
             </Routes>
         </BrowserRouter>
 
