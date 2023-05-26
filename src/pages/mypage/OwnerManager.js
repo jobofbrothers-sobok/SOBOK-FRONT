@@ -6,9 +6,11 @@ import Button from "../../components/common/Button";
 import kakao from "../../asset/images/kakaoIcon.svg";
 import message from "../../asset/images/messageIcon.svg";
 import Footer from "../../components/common/Footer";
-import filterbtn from "../../asset/images/filter-arrow.svg"
+import filterbtn from "../../asset/images/filter-arrow.svg";
+import { useParams } from "react-router-dom";
 
 const OwnerManager = () => {
+
     return (
         <>
             <NavBar />
@@ -72,8 +74,8 @@ const Container = styled.div`
     }
     .title{
         text-align: center;
-        font-weight: 1000;
-        font-size: 25px;
+        font-weight: 700;
+        font-size: 23px;
         line-height: 20px;
         letter-spacing: -0.08em;
         color: #222222;            

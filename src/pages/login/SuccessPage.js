@@ -52,22 +52,22 @@ const Container = styled.div`
         gap: 20px;
         justify-content: center;
         align-items: center;
-        margin-top: 150px;
-        margin-bottom: 30px;
+        margin-top: 170px;
+        margin-bottom: 80px;
     }
     .info-title{
-        font-weight: 1000;
+        font-weight: 700;
         font-size: 22px;
         line-height: 20px;
-        letter-spacing: -0.1em;
+        letter-spacing: -0.04em;
         text-align: center;
         color: #222222;
     }
     .info-detail{
-        font-weight: 700;
+        font-weight: 500;
         font-size: 18px;
         line-height: 20px;
-        letter-spacing: -0.1em;
+        letter-spacing: -0.04em;
         text-align: center;
         color: #FF9F74;
 ;
@@ -77,7 +77,7 @@ const Container = styled.div`
         letter-spacing: -0.04em;
         text-align: center;
         color: #7F7F7F;
-        margin-bottom: 100px;
+        // margin-bottom: 100px;
     }
     > p {
         font-size: 17px;

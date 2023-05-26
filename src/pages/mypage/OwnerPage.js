@@ -3,14 +3,18 @@ import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import sobokFace from "../../asset/images/sobok-face.svg";
 import Footer from "../../components/common/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import OwnerEditInfo from "./OwnerEditInfo";
 
 const OwnerPage = () => {
 
     const navigator = useNavigate();
-    
+
 
     const menuList = ['담당자 정보 수정', '매장 정보 등록/수정', '매장 소식 등록', '매장 메뉴 등록', '스토어 상품 등록', '소복 매니저']
+
+    const menuLink = ['owner-info', 'store-info', 'news', 'menu', 'store', 'manager']
+
     return (
         <>
             <NavBar />
@@ -22,7 +26,7 @@ const OwnerPage = () => {
                 <div className="menu-list">
                     {menuList.map((menu, index) => (
                         <div className='menu-item' onClick={() => {
-                            navigator(`/owner/${index}`)
+                            navigator(`/owner/menu/${index}`)
                             console.log(index)
                         }}>
                             <p>{menu}</p>
@@ -59,12 +63,12 @@ const OwnerContainer = styled.div`
     }
     .mypage-topsection > p > span {
         font-size: 19px;
-        font-weight: 900;
+        font-weight: 700;
         color: #FF9F74;
     }
     .mypage-topsection > p {
         font-size: 19px;
-        font-weight: 900;
+        font-weight: 700;
     }
     .menu-list {
         width: 100%;
@@ -77,7 +81,7 @@ const OwnerContainer = styled.div`
     }
     .menu-item > p {
         font-size: 19px;
-        font-weight: 500;
+        font-weight: 400;
     }
     > p {
         font-size: 15px;

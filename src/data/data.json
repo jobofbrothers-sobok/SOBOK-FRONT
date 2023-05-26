@@ -42,5 +42,121 @@
             "date": "2023.01.01",
             "value": "진정한 의미에서의 디자인이란 세상을 바꾸고자 그것을 바라보는 어떤 방식을 말한다. 디자이너가 세상을 바꾸려 한다면, 지금의 세상은 물론, 될 법한 세상의 모습도 볼 줄 알아야 한다. 그들은 스케치하거나 모형을 만들어 아이디어에 구체적인 형태를 부여한다. 디자이너란 아주 희박한 일말의 가능성을 포착하여 그것을 시각화하고, 다른 사람들에게는 그것이 현실이 되도록 만드는 사람들이다. 좋은디자인이란 대체할수 없는 가치를 가지는것 이다."
         }
+    ],
+    "owner": [
+        {
+            "id": 1,
+            "name": "이효원",
+            "store": "메가커피",
+            "tel": "010-0000-0000",
+            "active": true
+        },
+        {
+            "id": 2,
+            "name": "이효원",
+            "store": "메가커피",
+            "tel": "010-0000-0000",
+            "active": false
+        },
+        {
+            "id": 9,
+            "name": "이효원",
+            "store": "메가커피",
+            "tel": "010-0000-0000",
+            "active": false
+        },
+        {
+            "id": 6,
+            "name": "이효원",
+            "store": "메가커피",
+            "tel": "010-0000-0000",
+            "active": true
+        },
+        {
+            "id": 14,
+            "name": "이효원",
+            "store": "메가커피",
+            "tel": "010-0000-0000",
+            "active": true
+        }
+    ],
+    "customer": [
+        {
+            "id": 23,
+            "nickname": "빛빛빛",
+            "name": "장한빛",
+            "email": "rhqjq123@naver.com",
+            "tel": "010-6270-1143",
+            "cupon": 3,
+            "stamp": 2,
+            "active": true
+        },
+        {
+            "id": 32,
+            "nickname": "빛빛빛",
+            "name": "장한빛",
+            "email": "rhqjq123@naver.com",
+            "tel": "010-6270-1143",
+            "cupon": 3,
+            "stamp": 2,
+            "active": true
+        },
+        {
+            "id": 5,
+            "nickname": "빛빛빛",
+            "name": "장한빛",
+            "email": "rhqjq123@naver.com",
+            "tel": "010-6270-1143",
+            "cupon": 3,
+            "stamp": 2,
+            "active": false
+        },
+        {
+            "id": 4,
+            "nickname": "빛빛빛",
+            "name": "장한빛",
+            "email": "rhqjq123@naver.com",
+            "tel": "010-6270-1143",
+            "cupon": 3,
+            "stamp": 2,
+            "active": true
+        },
+        {
+            "id": 13,
+            "nickname": "빛빛빛",
+            "name": "장한빛",
+            "email": "rhqjq123@naver.com",
+            "tel": "010-6270-1143",
+            "cupon": 3,
+            "stamp": 2,
+            "active": false
+        }
+    ],
+    "stamp": [
+        {
+            "id": 1,
+            "title": "회기역 스탬프 투어",
+            "reward": "쿠웅이 인형 선물 세트"
+        },
+        {
+            "id": 2,
+            "title": "할로윈 특집 스탬프 투어",
+            "reward": "쿠웅이 인형 선물 세트"
+        },
+        {
+            "id": 3,
+            "title": "숙대 / 용산 스탬프 투어",
+            "reward": "쿠웅이 인형 선물 세트"
+        },
+        {
+            "id": 4,
+            "title": "크리스마스 특집 스탬프 투어",
+            "reward": "쿠웅이 인형 선물 세트"
+        },
+        {
+            "id": 5,
+            "title": "부처님 오신날 스탬프 투어",
+            "reward": "쿠웅이 인형 선물 세트"
+        }
     ]
 }
