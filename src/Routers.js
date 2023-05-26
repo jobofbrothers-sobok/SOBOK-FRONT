@@ -18,6 +18,8 @@ import OwnerAddMenu from "./pages/mypage/OwnerAddMenu";
 import OwnerAddStore from "./pages/mypage/OwnerAddStore";
 import OwnerMenuDetail from "./pages/mypage/OwnerMenuDetail";
 import ScrollToTop from "./components/common/ScrollToTop";
+import AdminMenuDetail from "./pages/mypage/AdminMenuDetail";
+import MemberDetail from "./pages/mypage/MemberDetail";
 
 const Routers = () => {
     return (
@@ -30,8 +32,10 @@ const Routers = () => {
                 <Route element={<SuccessPage />} path='/join-success' />
                 <Route element={<MainPage />} path='/home' />
                 <Route element={<AdminPage />} path='/admin' />
-                <Route element={<AdminManager />} path='/admin/3' />
-                <Route element={<ManagerDetail />} path='/admin/3/detail/:id' />
+                <Route element={<AdminMenuDetail />} path='/admin/menu/:id' />
+                <Route element={<MemberDetail />} path='/admin/menu/:id/member/:id' />
+                {/* <Route element={<AdminManager />} path='/admin/3' /> */}
+                <Route element={<ManagerDetail />} path='/admin/menu/3/detail/:id' />
                 <Route element={<OwnerPage />} path='/owner' />
                 <Route element={<OwnerMenuDetail />} path='/owner/menu/:id' />
                 {/* <Route element={<OwnerEditInfo />} path='/owner/0' />

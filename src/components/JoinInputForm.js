@@ -61,7 +61,7 @@ const InputContainer = styled.div`
     flex-direction: column;
     gap: 8px;
     > p {
-        font-weight: 900;
+        font-weight: 600;
     }
     > input {
         padding: 5px 10px;
@@ -92,6 +92,6 @@ const InputContainer = styled.div`
         border: none;
         padding: 0px 10px;
         color: #FFFFFF;
-        font-size: 13px;
+        font-size: 15px;
     }
 `

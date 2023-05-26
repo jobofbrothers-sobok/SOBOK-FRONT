@@ -26,7 +26,7 @@ const LoginPage = () => {
     return (
         <LoginContainer>
             <div className="logo">
-                <img src={logo} alt="소복 로고 이미지" width={"35%"} />
+                <img src={logo} alt="소복 로고 이미지" style={{ width: "50vw", maxWidth: "200px" }} />
             </div>
             <div className="description">디저트 속 소소한 행복</div>
             <br /><br />
@@ -100,7 +100,7 @@ const LoginContainer = styled.div`
         margin-bottom: 10px;
     }
     .login-form > p {
-        font-weight: 900;
+        font-weight: 600;
     }
     > p {
         margin-top: 20px;

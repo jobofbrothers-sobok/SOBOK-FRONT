@@ -67,14 +67,14 @@ const Container = styled.div`
     }
     .title{
         text-align: center;
-        font-weight: 1000;
+        font-weight: 700;
         font-size: 23px;
         line-height: 20px;
         letter-spacing: -0.08em;
         color: #222222;            
     }
     .edit-form > p {
-        font-weight: 900;
+        font-weight: 600;
     }
     .edit-form > input {
         padding: 5px 10px;

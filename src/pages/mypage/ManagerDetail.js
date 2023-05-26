@@ -79,7 +79,7 @@ const Container = styled.div`
     margin-top: 70px;
     .title{
         text-align: center;
-        font-weight: 1000;
+        font-weight: 600;
         font-size: 23px;
         line-height: 20px;
         letter-spacing: -0.08em;
@@ -92,7 +92,7 @@ const Container = styled.div`
         gap: 15px;
     }
     .info-text{
-        font-weight: 1000;
+        font-weight: 600;
         font-size: 20px;
         line-height: 20px;
         letter-spacing: -0.08em;

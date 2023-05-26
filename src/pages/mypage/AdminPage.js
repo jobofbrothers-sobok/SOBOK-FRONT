@@ -21,7 +21,7 @@ const AdminPage = () => {
                 <div className="menu-list">
                     {menuList.map((menu, index) => (
                         <div className='menu-item' onClick={() => {
-                            navigator(`/admin/${index}`)
+                            navigator(`/admin/menu/${index}`)
                             console.log(index)
                         }}>
                             <p>{menu}</p>
@@ -58,12 +58,12 @@ const AdminContainer = styled.div`
     }
     .mypage-topsection > p > span {
         font-size: 19px;
-        font-weight: 900;
+        font-weight: 700;
         color: #FF9F74;
     }
     .mypage-topsection > p {
         font-size: 19px;
-        font-weight: 900;
+        font-weight: 700;
     }
     .menu-list {
         width: 100%;
@@ -76,7 +76,7 @@ const AdminContainer = styled.div`
     }
     .menu-item > p {
         font-size: 19px;
-        font-weight: 500;
+        font-weight: 400;
     }
     > p {
         font-size: 15px;

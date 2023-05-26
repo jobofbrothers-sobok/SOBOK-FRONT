@@ -65,10 +65,10 @@ const JoinContainer = styled.div`
     }
     .join-title{
         text-align: center;
-        font-weight: 1000;
+        font-weight: 700;
         font-size: 25px;
         line-height: 20px;
-        letter-spacing: -0.08em;
+        letter-spacing: -0.04em;
         color: #222222;            
     }
     > hr {

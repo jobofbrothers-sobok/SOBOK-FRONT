@@ -63,12 +63,12 @@ const OwnerContainer = styled.div`
     }
     .mypage-topsection > p > span {
         font-size: 19px;
-        font-weight: 900;
+        font-weight: 700;
         color: #FF9F74;
     }
     .mypage-topsection > p {
         font-size: 19px;
-        font-weight: 900;
+        font-weight: 700;
     }
     .menu-list {
         width: 100%;
@@ -81,7 +81,7 @@ const OwnerContainer = styled.div`
     }
     .menu-item > p {
         font-size: 19px;
-        font-weight: 500;
+        font-weight: 400;
     }
     > p {
         font-size: 15px;
