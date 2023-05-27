@@ -1,38 +1,34 @@
-import React from "react";
-import styled from "styled-components";
-import Button from "../../components/common/Button";
-import SearchBox from "../../components/common/SearchBox";
-import dummy from "../../data/data.json";
-import ListItem from "../../components/common/ListItem";
+import React from 'react';
+import styled from 'styled-components';
+import dummy from '../../data/data.json';
+import ListItem from '../../components/common/ListItem';
+import MoreButton from '../../components/common/MoreButton';
 
-const StampInfoList = () => {
+const InquiriesList = () => {
     return (
         <>
             <Container>
-                <p className="title">스탬프 정보 리스트</p>
+                <p className="title">문의 사항 리스트</p>
                 <br />
-                <Button text="생성하기" color="#FF9F74" />
-                <br />
-                <SearchBox />
                 <div className='apply-list'>
                     <br />
                     <hr />
-                    {dummy.stamp.map(item => (
+                    {dummy.inquiries.map(item => (
                         <ListItem
                             id={item.id}
                             title={item.title}
-                            category={item.reward}
-                            isActive={true}
-                            onClick={() => navigator(`/admin/menu/3/detail/${item.id}`)}
+                            category={item.member + " / " + item.nickname + " / " + item.tel}
+                            date={item.date}
                         />
                     ))}
                 </div>
+                <MoreButton />
             </Container>
         </>
     )
 }
 
-export default StampInfoList;
+export default InquiriesList;
 
 const Container = styled.div`
     width: 100%;
