@@ -5,6 +5,7 @@ import dummy from "../../data/data.json";
 import active from '../../asset/images/active.svg';
 import { useNavigate } from "react-router-dom";
 import MoreButton from "../../components/common/MoreButton";
+import filterbtn from "../../asset/images/filter-arrow.svg";
 
 
 const NewOwnerList = () => {
@@ -19,10 +20,10 @@ const NewOwnerList = () => {
                 <p className="title">회원 정보</p>
                 <br />
                 <div className="button-box">
-                    <SendButton onClick={() => setOwner(true)}>
+                    <SendButton color={isowner ? '#FF9F74' : '#7F7F7F'} onClick={() => setOwner(true)}>
                         <p>점주</p>
                     </SendButton>
-                    <SendButton onClick={() => setOwner(false)}>
+                    <SendButton color={isowner ? '#7F7F7F' : '#FF9F74'} onClick={() => setOwner(false)}>
                         <p>일반회원</p>
                     </SendButton>
                 </div>
@@ -30,6 +31,13 @@ const NewOwnerList = () => {
                 <SearchBox />
                 <div className='apply-list'>
                     <br />
+                    <div className="list-top-box">
+                        <p className="info-title">회원정보</p>
+                        <FilterBox name="category">
+                            <option value="event">미승인</option>
+                            <option value="new-menu">승인완료</option>
+                        </FilterBox>
+                    </div>
                     <hr />
                     {
                         isowner ?
@@ -43,12 +51,10 @@ const NewOwnerList = () => {
                             ))
                             :
                             dummy.customer.map((item, index) => (
-                                <div className='apply-item' key={item.id}>
+                                <div className='apply-item' key={item.id} onClick={() => navigator(`/admin/menu/0/member/${item.id}`)}>
                                     <div>
                                         <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.nickname}</div>
-                                        {/* <div className='item-detail'> */}
                                         <div className='item-category'>{item.name} / {item.email} / {item.tel}</div>
-                                        {/* </div> */}
                                     </div>
                                     <div className="cupon-stamp">
                                         보유쿠폰 {item.cupon}개<br />
@@ -82,14 +88,14 @@ const Container = styled.div`
         font-size: 23px;
         line-height: 20px;
         letter-spacing: -0.08em;
-        color: #222222;            
+        color: #222222;         
     }
     .button-box{
         width: 100%;
         display: flex;
         align-items: center;
         gap: 5px;
-        margin-top: 10px;    
+        margin-top: 10px;  
     }
     .apply-list{
         width: 100%;
@@ -97,6 +103,17 @@ const Container = styled.div`
     }
     .apply-list > hr {
         border: 1px solid #E0E0E0;
+    }
+    .list-top-box{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .info-title{
+        font-size: 18px;
+        font-weight: 500;
     }
     .apply-item {
         display: flex;
@@ -111,12 +128,7 @@ const Container = styled.div`
         font-size: 16px;
         line-height: 20px;
     }
-    // .item-detail{
-    //     display: flex;
-    //     color: #7F7F7F;
-    // }
     .item-category{
-        // flex: auto;
         font-size: 12px;
         color: #7F7F7F;
     }
@@ -141,7 +153,7 @@ const SendButton = styled.button`
     align-items: center;
     padding: 10px 20px;
     gap: 8px;
-    background: #7F7F7F;
+    background: ${(props) => props.color};
     border-radius: 5px;
     border: none;
     color: white;
@@ -150,3 +162,19 @@ const SendButton = styled.button`
     }
 `
 
+const FilterBox = styled.select`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 10px;
+    gap: 8px;
+    width: 100px;
+    height: 30px;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    appearance: none;
+    background:url(${filterbtn}) no-repeat right 10px center;
+    background-size: 10px;
+    font-weight: 200;
+    font-size: 13px;
+`

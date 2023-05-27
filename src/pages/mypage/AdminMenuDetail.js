@@ -5,8 +5,11 @@ import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import BackButton from "../../components/common/BackButton";
 import Footer from "../../components/common/Footer";
-import NewOwnerList from "./NewOwnerList";
-import StampInfoList from "./StampInfoList";
+import MemberInfo from "./MemberInfo";
+import StampInfo from "./StampInfo";
+import DeliveryList from "./DeliveryList";
+import AddNotice from "./AddNotice";
+import InquiriesList from "./InquiriesList";
 
 const AdminMenuDetail = () => {
 
@@ -19,12 +22,12 @@ const AdminMenuDetail = () => {
             <NavBar />
             <Container>
                 <BackButton />
-                {id === '0' ? <NewOwnerList /> :
-                    id === '1' ? <StampInfoList /> :
+                {id === '0' ? <MemberInfo /> :
+                    id === '1' ? <StampInfo /> :
                         id === '2' ? <AdminManager /> :
-                            id === '3' ? <AdminManager /> :
-                                id === '4' ? <AdminManager /> :
-                                    id === '5' ? <AdminManager /> :
+                            id === '3' ? <DeliveryList /> :
+                                id === '4' ? <AddNotice /> :
+                                    id === '5' ? <InquiriesList /> :
                                         <>no menu</>}
             </Container>
             <Footer />

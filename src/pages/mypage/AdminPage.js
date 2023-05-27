@@ -9,7 +9,7 @@ const AdminPage = () => {
 
     const navigator = useNavigate();
 
-    const menuList = ['점주/스템프 신규 신청 리스트', '스템프 정보', '소복 회원 정보', '소복 매니저 신청 리스트', '배송 신청 리스트', '공지글 작성하기', '문의사항 등록 리스트']
+    const menuList = ['소복 회원 정보', '스템프 정보', '소복 매니저 신청 리스트', '배송 신청 리스트', '공지글 작성하기', '문의사항 등록 리스트']
     return (
         <>
             <NavBar />

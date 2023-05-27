@@ -77,7 +77,6 @@ const Container = styled.div`
         letter-spacing: -0.04em;
         text-align: center;
         color: #7F7F7F;
-        // margin-bottom: 100px;
     }
     > p {
         font-size: 17px;
