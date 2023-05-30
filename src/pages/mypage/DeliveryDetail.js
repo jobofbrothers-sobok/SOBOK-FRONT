@@ -21,7 +21,7 @@ const DeliveryDetail = () => {
                 <BackButton />
                 <div className="info-form">
                     <br />
-                    <p className="title">고법짱짱123</p>
+                    <p className="title">{nickname}</p>
                     <div className="info-div">
                         <p className="info-title">배송 신청 정보</p>
                         <hr />
