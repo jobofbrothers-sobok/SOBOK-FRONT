@@ -21,6 +21,7 @@ const Routers = () => {
         <BrowserRouter>
             <ScrollToTop />
             <Routes>
+                <Route element={<MainPage />} path='/main' />
                 <Route element={<LoginPage />} path='/' />
                 <Route element={<FindPage />} path='/forgot' />
                 <Route element={<JoinPage />} path='/join' />
