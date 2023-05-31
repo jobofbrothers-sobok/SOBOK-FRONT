@@ -15,6 +15,7 @@ import AdminMenuDetail from "./pages/mypage/AdminMenuDetail";
 import MemberDetail from "./pages/mypage/MemberDetail";
 import AddStampTour from "./pages/mypage/AddStampTour";
 import DeliveryDetail from "./pages/mypage/DeliveryDetail";
+import CafeDetail from "./pages/detail/CafeDetail";
 
 const Routers = () => {
     return (
@@ -22,6 +23,7 @@ const Routers = () => {
             <ScrollToTop />
             <Routes>
                 <Route element={<MainPage />} path='/main' />
+                <Route element={<CafeDetail />} path='/detail/:id' />
                 <Route element={<LoginPage />} path='/' />
                 <Route element={<FindPage />} path='/forgot' />
                 <Route element={<JoinPage />} path='/join' />
