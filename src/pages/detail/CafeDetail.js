@@ -1,31 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import Footer from "../../components/common/Footer";
 import detailImg from "../../asset/images/detailImg.svg";
 import CafeInfo from "../../components/CafeInfo";
+import CafeNews from "../../components/CafeNews";
 
 const CafeDetail = () => {
 
     const [tabMenu, setTabMenu] = useState("정보");
-
-    useEffect(() => {
-        const { naver } = window;
-
-        const location = new naver.maps.LatLng(37.5456497, 126.967141);
-
-        const mapOptions = {
-            center: location,
-            zoom: 17,
-        };
-
-        const map = new naver.maps.Map('map', mapOptions);
-        new naver.maps.Marker({
-            map,
-            position: location,
-        });
-    }, [])
-
 
 
     return (
@@ -40,23 +23,23 @@ const CafeDetail = () => {
                     <p className="cafe-intro">2009년  오픈한 카페청파맨션은<br />스페셜티커피 전문 카페입니다.</p>
                 </div>
 
-
                 {/* menu container */}
                 <div className="menu-container">
-                    <div className="menu-item-active">
+                    <TabMenuItem className={tabMenu === '정보' ? 'active' : ''} onClick={() => setTabMenu('정보')}>
                         정보
-                    </div>
-                    <div className="menu-item">
+                    </TabMenuItem>
+                    <TabMenuItem className={tabMenu === '소식' ? 'active' : ''} onClick={() => setTabMenu('소식')}>
                         소식
-                    </div>
-                    <div className="menu-item">
+                    </TabMenuItem>
+                    <TabMenuItem className={tabMenu === '메뉴' ? 'active' : ''} onClick={() => setTabMenu('메뉴')}>
                         메뉴
-                    </div>
-                    <div className="menu-item">
+                    </TabMenuItem>
+                    <TabMenuItem className={tabMenu === '리뷰' ? 'active' : ''} onClick={() => setTabMenu('리뷰')}>
                         리뷰
-                    </div>
+                    </TabMenuItem>
                 </div>
-                <CafeInfo />
+                {tabMenu === '정보' ? <CafeInfo /> : <></>}
+                {tabMenu === '소식' ? <CafeNews /> : <></>}
             </Container >
             <Footer />
         </>
@@ -92,7 +75,7 @@ const Container = styled.div`
         gap: 4px;
     }
     .cafe-title{
-        font-size: 18px;
+        font - size: 18px;
         font-weight: 600;
     }
     .cafe-intro{
@@ -109,25 +92,20 @@ const Container = styled.div`
         border-bottom: 1px solid #CCCCCC;
         padding: 0px 10px;
     }
-    .menu-item{
-        // flex: auto;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        font-size: 16px;
-        text-align: center;
-        // border-bottom: 3px solid #FF9F74;
-        &:active{
-            color: #FF9F74;
-        }
-    }
-    .menu-item-active{
-        // flex: auto;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        font-size: 16px;
-        text-align: center;
+`
+
+const TabMenuItem = styled.div`
+    // flex: auto;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    text-align: center;
+    // border-bottom: 3px solid #FF9F74;
+    &:active,
+    &:focus,
+    &.active {
+        color: #FF9F74;
         border-bottom: 3px solid #FF9F74;
     }
 `
