@@ -8,37 +8,33 @@ const NewsItem = (props) => {
 
     console.log(itemImg)
     return (
-        <NewsContainer>
-            <div className="news-item">
-                <img src={newsImg} alt="소식이미지" />
-                <p className="title">{title}</p>
-                <p className="content">{content}</p>
-                <div className="bottom-wrapper">
-                    <div className="tag">{tag}</div>
-                    <div className="date">{date}</div>
-                </div>
+        <ItemBox>
+            <img src={newsImg} alt="소식이미지" />
+            <p className="title">{title}</p>
+            <p className="content">{content}</p>
+            <div className="bottom-wrapper">
+                <div className="tag">{tag}</div>
+                <div className="date">{date}</div>
             </div>
-        </NewsContainer>
+        </ItemBox>
     )
 }
 
 export default NewsItem;
 
-const NewsContainer = styled.div`
-    .news-item {
-        display: flex;
-        flex-direction: column;
-        padding: 0 20px;
-        gap: 10px;
-    }
-    .news-item > img {
+const ItemBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 10px;
+    > img {
         width: 100%;
     }
-    .news-item > .title {
+    .title {
         font-size: 16px;
         font-weight: 600;
     }
-    .news-item > .content {
+    .content {
         color: #7F7F7F;
     }
     .bottom-wrapper {

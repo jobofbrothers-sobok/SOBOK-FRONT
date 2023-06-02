@@ -23,6 +23,8 @@ const CafeMenu = () => {
 export default CafeMenu;
 
 const Container = styled.div`
+    width: 100%;
+    box-sizing: border-box;
     padding: 20px;
     > img {
         width: 100%;
