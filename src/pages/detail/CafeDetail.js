@@ -5,6 +5,8 @@ import Footer from "../../components/common/Footer";
 import detailImg from "../../asset/images/detailImg.svg";
 import CafeInfo from "../../components/CafeInfo";
 import CafeNews from "../../components/CafeNews";
+import CafeMenu from "../../components/CafeMenu";
+import CafeReview from "../../components/CafeReview";
 
 const CafeDetail = () => {
 
@@ -40,6 +42,8 @@ const CafeDetail = () => {
                 </div>
                 {tabMenu === '정보' ? <CafeInfo /> : <></>}
                 {tabMenu === '소식' ? <CafeNews /> : <></>}
+                {tabMenu === '메뉴' ? <CafeMenu /> : <></>}
+                {tabMenu === '리뷰' ? <CafeReview /> : <></>}
             </Container >
             <Footer />
         </>
