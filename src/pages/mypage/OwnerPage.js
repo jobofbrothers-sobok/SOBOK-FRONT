@@ -3,17 +3,13 @@ import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import sobokFace from "../../asset/images/sobok-face.svg";
 import Footer from "../../components/common/Footer";
-import { useNavigate, useParams } from "react-router-dom";
-import OwnerEditInfo from "./OwnerEditInfo";
+import { useNavigate } from "react-router-dom";
 
 const OwnerPage = () => {
 
     const navigator = useNavigate();
 
-
     const menuList = ['담당자 정보 수정', '매장 정보 등록/수정', '매장 소식 등록', '매장 메뉴 등록', '스토어 상품 등록', '소복 매니저']
-
-    const menuLink = ['owner-info', 'store-info', 'news', 'menu', 'store', 'manager']
 
     return (
         <>
@@ -89,6 +85,4 @@ const OwnerContainer = styled.div`
         text-decoration: underline;
         text-decoration-color: #7F7F7F;
     }
-
-
 `

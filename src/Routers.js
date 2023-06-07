@@ -16,6 +16,9 @@ import MemberDetail from "./pages/mypage/MemberDetail";
 import AddStampTour from "./pages/mypage/AddStampTour";
 import DeliveryDetail from "./pages/mypage/DeliveryDetail";
 import CafeDetail from "./pages/detail/CafeDetail";
+import CustomerPage from "./pages/mypage/customer/CustomerPage";
+import EditCustomerInfo from "./pages/mypage/customer/EditCustomerInfo";
+import LikedCafeList from "./pages/mypage/customer/LikedCafeList";
 
 const Routers = () => {
     return (
@@ -37,6 +40,10 @@ const Routers = () => {
                 <Route element={<AddStampTour />} path='/admin/menu/2/add-stamp-tour' />
                 <Route element={<OwnerPage />} path='/owner' />
                 <Route element={<OwnerMenuDetail />} path='/owner/menu/:id' />
+                <Route element={<CustomerPage />} path='/customer' />
+                <Route element={<EditCustomerInfo />} path='/customer/edit' />
+                <Route element={<LikedCafeList />} path='/customer/liked' />
+
             </Routes>
         </BrowserRouter>
 
