@@ -1,25 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import NavBar from "../../../components/common/NavBar";
 import Footer from "../../../components/common/Footer";
 import sobokFace from "../../../asset/images/sobok-face.svg";
-
-import cafeImg from "../../../asset/images/cafeImg.svg";
-import locMark from "../../../asset/images/locMark.svg";
-import HeartButton from "../../../components/common/HeartButton";
 import ReviewItem from "../../../components/ReviewItem";
 import { useNavigate } from "react-router-dom";
+import CafeItem from "../../../components/CafeItem";
 
 const CustomerPage = () => {
 
     // 카페 리스트 임시
-    const array = [0, 0, 0, 0, 0];
+    const array = [0, 1, 2, 3, 4];
 
     // 임시 배열
     const array1 = [0, 0, 0];
-
-    // 좋아요 버튼
-    const [like, setLike] = useState(false);
 
     const navigator = useNavigate();
 
@@ -38,32 +32,18 @@ const CustomerPage = () => {
                 <div className="category-container">
                     <div className="list-top-box">
                         <p className="category-title">내가 찜한<span className="category-title2"> 카페</span></p>
-                        <p className="show-all">전체보기+</p>
+                        <p className="show-all" onClick={() => navigator('/customer/liked')}>전체보기+</p>
                     </div>
                     <hr /><br />
                     <div className="cafe-list">
                         {array.map((item) => <>
-                            <CafeItem>
-                                <div className="imgBox" style={{ backgroundImage: `url(${cafeImg})` }}>
-                                    <HeartButton like={like} onClick={(event) => { event.stopPropagation(); setLike(!like); }} />
-                                </div>
-                                <div className="cafe-summary">
-                                    <div className="cafe-title">페이브 베이커리</div>
-                                    <div className="cafe-loc">
-                                        <img src={locMark} alt="위치아이콘" width="13px" />
-                                        55m
-                                    </div>
-                                </div>
-                                <div className="cafe-desc">흑석역 카페 뚜스뚜스 브런치도 파는 베...</div>
-                                <div className="tag-list">
-                                    <div className="tag-wrap">
-                                        큰 테이블
-                                    </div>
-                                    <div className="tag-wrap">
-                                        콘센트
-                                    </div>
-                                </div>
-                            </CafeItem>
+                            <CafeItem
+                                key={item}
+                                title="페이브 베이커리"
+                                distance='55m'
+                                intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
+                                tag={['큰 테이블', '콘센트']}
+                            />
                         </>)}
                     </div>
                 </div>
@@ -179,58 +159,5 @@ const Container = styled.div`
         display: flex;
         flex-direction: column;
         gap: 20px;
-    }
-`
-
-const CafeItem = styled.div`
-    display: flex;
-    flex: auto;
-    flex-direction: column;
-    gap: 5px;
-    // max-width: 50%;
-    >img {
-        width: 100%;
-    }
-    .imgBox{
-        width: 100%;
-        height: 180px;
-        position: relative;
-        background-image: url(${cafeImg});
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        border-radius: 5px;
-    }
-    .cafe-summary{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .cafe-title{
-        font-size: 18px;
-        font-weight: 600;
-    }
-    .cafe-loc{
-        display: flex;
-        align-items: center;
-        font-size: 15px;
-        font-weight: 600;
-    }
-    .cafe-desc{
-        display: flex;
-        flex-wrap: wrap;
-        color: #7F7F7F;
-        font-size: 16px;
-    }
-    .tag-list{
-        display: flex;
-        gap: 5px;
-    }
-    .tag-wrap{
-        background: #FF9F74;
-        border-radius: 18px;
-        color: #FFFFFF;
-        padding: 5px 10px;
-        font-size: 13px;
     }
 `

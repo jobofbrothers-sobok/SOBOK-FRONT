@@ -3,8 +3,14 @@ import NavBar from "../../../components/common/NavBar";
 import BackButton from "../../../components/common/BackButton";
 import styled from "styled-components";
 import Footer from "../../../components/common/Footer";
+import CafeItem from "../../../components/CafeItem";
+import MoreButton from "../../../components/common/MoreButton";
 
 const LikedCafeList = () => {
+
+    // 카페 리스트 임시
+    const array = [0, 1, 2, 3, 4];
+
     return (
         <>
             <NavBar />
@@ -14,7 +20,19 @@ const LikedCafeList = () => {
                     <br /><br />
                     <p className="title">내가 찜한 카페</p>
                     <br /><br />
+                    <div className="cafe-list">
+                        {array.map((item, index) => <>
+                            <CafeItem
+                                key={item}
+                                title="페이브 베이커리"
+                                distance='55m'
+                                intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
+                                tag={['큰 테이블', '콘센트']}
+                            />
+                        </>)}
+                    </div>
                 </div>
+                <MoreButton />
             </Container>
             <Footer />
         </>
@@ -46,6 +64,11 @@ const Container = styled.div`
         line-height: 20px;
         letter-spacing: -0.08em;
         color: #222222;            
+    }
+    .cafe-list{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
 `
 

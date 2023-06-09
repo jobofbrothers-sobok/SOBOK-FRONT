@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import Header from "../../components/Header";
 // import Header_Main from "../../components/HeaderMain";
 import styled from "styled-components";
@@ -46,11 +46,7 @@ const MainPage = () => {
 
 
     // 카페 리스트 임시
-    const array = [0, 0, 0, 0, 0];
-
-    // 좋아요 버튼
-    const [like, setLike] = useState(false);
-
+    const array = [0, 1, 2, 3, 4];
 
 
     return (
@@ -199,8 +195,9 @@ const MainPage = () => {
                     </div>
                     <hr /><br />
                     <div className="cafe-list">
-                        {array.map((item) => <>
+                        {array.map((item, index) => <>
                             <CafeItem
+                                key={item}
                                 title="페이브 베이커리"
                                 distance='55m'
                                 intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
