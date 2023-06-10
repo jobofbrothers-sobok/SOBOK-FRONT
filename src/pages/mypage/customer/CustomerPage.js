@@ -51,7 +51,7 @@ const CustomerPage = () => {
                 <div className="category-container">
                     <div className="list-top-box">
                         <p className="category-title">내가 작성한<span className="category-title2"> 리뷰</span></p>
-                        <p className="show-all" onClick={() => navigator('/customer/liked')}>전체보기+</p>
+                        <p className="show-all" onClick={() => navigator('/customer/reviews')}>전체보기+</p>
                     </div>
                     <hr /><br />
                     <div className="review-list">
