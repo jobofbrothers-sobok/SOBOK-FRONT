@@ -57,7 +57,7 @@ const Container = styled.div`
     }
     .info-title{
         font-weight: 700;
-        font-size: 22px;
+        font-size: 23px;
         line-height: 20px;
         letter-spacing: -0.04em;
         text-align: center;
@@ -77,18 +77,5 @@ const Container = styled.div`
         letter-spacing: -0.04em;
         text-align: center;
         color: #7F7F7F;
-    }
-    > p {
-        font-size: 17px;
-        letter-spacing: -0.04em;
-        margin-bottom: 8px;
-    }
-    > input {
-        padding: 5px 10px;
-        height: 40px;
-        background: #FFFFFF;
-        border: 1px solid #D9D9D9;
-        border-radius: 4px;
-        margin-bottom: 10%;
     }
 `

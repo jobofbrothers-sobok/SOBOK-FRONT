@@ -20,6 +20,9 @@ import CustomerPage from "./pages/mypage/customer/CustomerPage";
 import EditCustomerInfo from "./pages/mypage/customer/EditCustomerInfo";
 import LikedCafeList from "./pages/mypage/customer/LikedCafeList";
 import MyReviewList from "./pages/mypage/customer/MyReviewList";
+import StampMain from "./pages/stamp/customer/StampMain";
+import StampCode from "./pages/stamp/customer/StampCode";
+import StampCheck from "./pages/stamp/customer/StampCheck";
 
 const Routers = () => {
     return (
@@ -45,7 +48,9 @@ const Routers = () => {
                 <Route element={<EditCustomerInfo />} path='/customer/edit' />
                 <Route element={<LikedCafeList />} path='/customer/liked' />
                 <Route element={<MyReviewList />} path='/customer/reviews' />
-
+                <Route element={<StampMain />} path='/stamp/customer' />
+                <Route element={<StampCode />} path='/stamp/customer/code' />
+                <Route element={<StampCheck />} path='/stamp/customer/check' />
             </Routes>
         </BrowserRouter>
 
