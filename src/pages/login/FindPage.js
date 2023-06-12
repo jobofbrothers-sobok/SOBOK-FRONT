@@ -39,8 +39,8 @@ const Container = styled.div`
         margin-bottom: 30px;
     }
     .info-title{
-        font-weight: 1000;
-        font-size: 22px;
+        font-weight: 700;
+        font-size: 23px;
         line-height: 20px;
         letter-spacing: -0.1em;
         text-align: center;

@@ -6,8 +6,11 @@ import menu1 from "../../../asset/images/stamp_menu1.svg";
 import menu2 from "../../../asset/images/stamp_menu2.svg";
 import menu3 from "../../../asset/images/stamp_menu3.svg";
 import Footer from "../../../components/common/Footer";
+import { useNavigate } from "react-router-dom";
 
 const StampMain = () => {
+
+    const navigator = useNavigate();
     return (
         <>
             <NavBar />
@@ -16,7 +19,7 @@ const StampMain = () => {
                     <img src={heroImg} className="hero_img" alt="메인이미지" />
                 </div>
                 <MenuDiv>
-                    <div className="menu-item" style={{ backgroundColor: '#FF9F74' }}>
+                    <div className="menu-item" style={{ backgroundColor: '#FF9F74' }} onClick={() => navigator('/stamp/customer/code')}>
                         <img src={menu1} alt='메뉴1' />
                         <div className="menu-text">스탬프 적립</div>
                     </div>
