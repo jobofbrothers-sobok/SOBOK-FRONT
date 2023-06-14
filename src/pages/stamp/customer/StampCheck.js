@@ -5,6 +5,10 @@ import styled from "styled-components";
 import BackButton from "../../../components/common/BackButton";
 import stamp from "../../../asset/images/stamp.svg";
 import nostamp from "../../../asset/images/nostamp.svg";
+import completeImg from "../../../asset/images/complete-stamp.svg";
+import Modal from "../../../components/common/Modal";
+import Button from "../../../components/common/Button";
+import sobokFace from "../../../asset/images/sobok-face.svg";
 
 const StampCheck = () => {
 
@@ -14,6 +18,20 @@ const StampCheck = () => {
 
     const noStampNum = 9 - stampList.length;
     console.log(noStampNum)
+
+
+    // 모달 관련
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+    }
+
+    // 스탬프 카페 리스트 임시 배열
+    const stampCafe = ['카페 A', '카페 B', '카페 C', '카페 D'];
 
     return (
         <>
@@ -39,7 +57,7 @@ const StampCheck = () => {
                 <div className="cafe-info-box">
                     <div className="location">경희대학교 카페 투어 스탬프</div>
                     <div className="stamp-manual">리워드 : 9장 모으면, 경희대학교 한정판 선물세트</div>
-                    <button className="check-cafe-btn">참여 매장 확인</button>
+                    <button className="check-cafe-btn" onClick={openModal}>참여 매장 확인</button>
                 </div>
                 <br />
                 <StampGridBox>
@@ -59,13 +77,53 @@ const StampCheck = () => {
                         </StampItem>)
                         )}
                 </StampGridBox >
+                <div className="complete-box">
+                    <img src={completeImg} alt='10개스탬프' width="40%" />
+                    <div className="complete-text">경희대학교 카페 퉈 스탬프 완료!!<br />리워드를 신청해주세요!</div>
+                </div>
             </Container>
             <Footer />
+            <Modal open={modalOpen} close={closeModal} header="Modal heading">
+                <ContentBox>
+                    <StampCafeList>
+                        {stampCafe.map((item, index) =>
+                            <div className="stamp-cafe-item" key={index}>
+                                <img src={sobokFace} alt='소복얼굴' />
+                                <p>{item}</p>
+                            </div>
+                        )}
+                    </StampCafeList>
+                    <br />
+                    <Button text="확인완료" onClick={closeModal} />
+                </ContentBox>
+            </Modal>
         </>
     )
 }
 
 export default StampCheck;
+
+const StampCafeList = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .stamp-cafe-item{
+        display: flex;
+        box-sizing: border-box;
+        padding: 15px 0px;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        border-bottom: solid 1px #E4E4E4;
+    }
+    .stamp-cafe-item > img {
+        width: 20%;
+    }
+    .stamp-cafe-item > p {
+        font-size: 16px;
+    }
+`
 
 const StampItem = styled.div`
     width: 100%;
@@ -86,7 +144,7 @@ const StampItem = styled.div`
     }
     .time{
         color: #49637A;
-    }    
+    }
 `
 
 const StampGridBox = styled.div`
@@ -143,6 +201,20 @@ const Container = styled.div`
         letter-spacing: -0.04em;
         color: #FFFFFF;
     }
+    .complete-box{
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .complete-text{
+        text-align: center;
+        font-size: 22px;
+        font-weight: 700;
+        color: #E2764E;
+    }
 `
 
 const TagList = styled.div`
@@ -170,4 +242,31 @@ const TagButton = styled.button`
         color: #FFFFFF;
         border: none;
   }
+`
+
+const ContentBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .edit-form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .edit-form > p {
+        font-weight: 600;
+    }
+    .edit-form > input {
+        padding: 5px 10px;
+        height: 30px;
+        background: #FFFFFF;
+        border: 1px solid #D9D9D9;
+        border-radius: 4px;
+        margin-bottom: 13px;
+    }
 `

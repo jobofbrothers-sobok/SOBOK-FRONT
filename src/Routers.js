@@ -23,6 +23,8 @@ import MyReviewList from "./pages/mypage/customer/MyReviewList";
 import StampMain from "./pages/stamp/customer/StampMain";
 import StampCode from "./pages/stamp/customer/StampCode";
 import StampCheck from "./pages/stamp/customer/StampCheck";
+import StampReward from "./pages/stamp/customer/StampReward";
+import RewardForm from "./pages/stamp/customer/RewardForm";
 
 const Routers = () => {
     return (
@@ -51,6 +53,8 @@ const Routers = () => {
                 <Route element={<StampMain />} path='/stamp/customer' />
                 <Route element={<StampCode />} path='/stamp/customer/code' />
                 <Route element={<StampCheck />} path='/stamp/customer/check' />
+                <Route element={<StampReward />} path='/stamp/customer/reward' />
+                <Route element={<RewardForm />} path='/stamp/customer/reward/form' />
             </Routes>
         </BrowserRouter>
 

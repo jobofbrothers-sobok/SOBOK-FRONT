@@ -23,12 +23,12 @@ const StampMain = () => {
                         <img src={menu1} alt='메뉴1' />
                         <div className="menu-text">스탬프 적립</div>
                     </div>
-                    <div className="menu-item" style={{ backgroundColor: '#7F7F7F' }}>
-                        <img src={menu2} alt='메뉴1' />
+                    <div className="menu-item" style={{ backgroundColor: '#7F7F7F' }} onClick={() => navigator('/stamp/customer/check')}>
+                        <img src={menu2} alt='메뉴2' />
                         <div className="menu-text">적립 내역</div>
                     </div>
-                    <div className="menu-item" style={{ backgroundColor: '#E77E50' }}>
-                        <img src={menu3} alt='메뉴1' />
+                    <div className="menu-item" style={{ backgroundColor: '#E77E50' }} onClick={() => navigator('/stamp/customer/reward')}>
+                        <img src={menu3} alt='메뉴3' />
                         <div className="menu-text">스탬프 사용 신청</div>
                     </div>
                 </MenuDiv>
