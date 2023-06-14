@@ -6,6 +6,7 @@ import MoreButton from './common/MoreButton';
 import Modal from "./common/Modal";
 // import logo from '../asset/images/sobok_logo_square_jua.png';
 import InputBox from "./common/InputBox";
+import Footer from "./common/Footer";
 
 const CafeReview = () => {
 
@@ -39,7 +40,7 @@ const CafeReview = () => {
                 </div>
             </Container>
             <MoreButton />
-
+            <Footer />
             {/* 로그인 모달 */}
             {/* <Modal open={modalOpen} close={closeModal} header="Modal heading">
                 <ContentBox>
