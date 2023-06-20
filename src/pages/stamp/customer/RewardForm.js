@@ -99,7 +99,6 @@ const Container = styled.div`
         border: 1px solid #D9D9D9;
         border-radius: 4px;
         margin-bottom: 13px;
-        
     }
     .reward-name{
         font-size: 17px;
