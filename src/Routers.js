@@ -25,6 +25,9 @@ import StampCode from "./pages/stamp/customer/StampCode";
 import StampCheck from "./pages/stamp/customer/StampCheck";
 import StampReward from "./pages/stamp/customer/StampReward";
 import RewardForm from "./pages/stamp/customer/RewardForm";
+import NoApproval from "./pages/stamp/owner/NoApproval";
+import StampOwner from "./pages/stamp/owner/StampOwner";
+import InputCode from "./pages/stamp/owner/InputCode";
 
 const Routers = () => {
     return (
@@ -55,6 +58,9 @@ const Routers = () => {
                 <Route element={<StampCheck />} path='/stamp/customer/check' />
                 <Route element={<StampReward />} path='/stamp/customer/reward' />
                 <Route element={<RewardForm />} path='/stamp/customer/reward/form' />
+                <Route element={<StampOwner />} path='/stamp/owner' />
+                <Route element={<NoApproval />} path='/stamp/owner/no-approval' />
+                <Route element={<InputCode />} path='/stamp/owner/code' />
             </Routes>
         </BrowserRouter>
 

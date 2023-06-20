@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import NavBar from "../../../components/common/NavBar";
+import { useNavigate } from "react-router";
 import logo from "../../../asset/images/sobok_logo_square_jua.png";
 import Button from "../../../components/common/Button";
-import BackButton from "../../../components/common/BackButton";
 import Footer from "../../../components/common/Footer";
-import { useNavigate } from "react-router";
 
-const StampCode = () => {
+
+const NoApproval = () => {
 
     const navigator = useNavigate();
 
@@ -15,23 +15,22 @@ const StampCode = () => {
         <>
             <NavBar />
             <Container>
-                <BackButton />
                 <div className="info-box">
-                    <div className="info-title">스탬프 적립</div>
-                    <br />
-                    <img src={logo} alt="소복 로고 이미지" width={"40%"} style={{ marginBottom: "15px" }} />
-                    <div className="info-code">E1B54W3</div>
-                    <div className="info-detail2">카페 직원분에게 해당 번호를 알려주세요.</div>
+                    <br /><br />
+                    <img src={logo} alt="소복 로고 이미지" width={"40%"} />
+                    <div className="info-title">소복 무료 스탬프 서비스</div>
+                    <div className="info-detail">지역별 소상공인 무료 스탬프 서비스입니다.</div>
+                    <div className="info-detail2">스템프 서비스를 이용하고 싶으시면<br />하단의 신청 버튼을 선택해주세요.<br />(지역 확인 후 별도의 승인 절차 후 진행됩니다.)</div>
                 </div>
-                <Button text="요청완료" color="#FF9F74" onClick={() => navigator('/stamp/customer')} />
+                <Button text="신청하기" color="#FF9F74" onClick={() => navigator('/stamp/customer')} />
+                <br />
             </Container>
-            <br /><br />
             <Footer />
         </>
     )
 }
 
-export default StampCode;
+export default NoApproval;
 
 const Container = styled.div`
     width: 100%;
@@ -53,26 +52,17 @@ const Container = styled.div`
         margin-bottom: 70px;
     }
     .info-title{
+        font-size: 17px;
         font-weight: 700;
-        font-size: 23px;
-        line-height: 20px;
-        letter-spacing: -0.04em;
-        text-align: center;
-        color: #222222;
+        margin-bottom: 20px;
     }
-    .info-code{
-        font-weight: 700;
-        font-size: 38px;
-        text-align: center;
+    .info-detail{
+        font-size: 19px;
+        font-weight: 500;
         color: #FF9F74;
-;
     }
     .info-detail2{
-        font-size: 16px;
-        line-height: 20px;
-        letter-spacing: -0.04em;
         text-align: center;
         color: #7F7F7F;
     }
 `
-

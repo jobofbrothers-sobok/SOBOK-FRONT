@@ -1,35 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import NavBar from "../../../components/common/NavBar";
-import heroImg from "../../../asset/images/stamp_main.svg"
 import menu1 from "../../../asset/images/stamp_menu1.svg";
-import menu2 from "../../../asset/images/stamp_menu2.svg";
-import menu3 from "../../../asset/images/stamp_menu3.svg";
 import Footer from "../../../components/common/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
-const StampMain = () => {
+const StampOwner = () => {
 
     const navigator = useNavigate();
     return (
         <>
             <NavBar />
             <Container>
-                <div className="hero_main">
-                    <img src={heroImg} className="hero_img" alt="메인이미지" />
+                <div className="hero-section">
+                    <div className="intro-text">소복 무료 광고 신청하세요!</div>
+                    <div className="info-text">소상공인 대상 1개월 무료 배너 광고 서비스</div>
                 </div>
                 <MenuDiv>
-                    <div className="menu-item" style={{ backgroundColor: '#FF9F74' }} onClick={() => navigator('/stamp/customer/code')}>
+                    <div className="menu-item" style={{ backgroundColor: '#FF9F74' }} onClick={() => navigator('/stamp/owner/code')}>
                         <img src={menu1} alt='메뉴1' />
-                        <div className="menu-text">스탬프 적립</div>
-                    </div>
-                    <div className="menu-item" style={{ backgroundColor: '#7F7F7F' }} onClick={() => navigator('/stamp/customer/check')}>
-                        <img src={menu2} alt='메뉴2' />
-                        <div className="menu-text">적립 내역</div>
-                    </div>
-                    <div className="menu-item" style={{ backgroundColor: '#E77E50' }} onClick={() => navigator('/stamp/customer/reward')}>
-                        <img src={menu3} alt='메뉴3' />
-                        <div className="menu-text">스탬프 사용 신청</div>
+                        <div className="menu-text">스탬프 발급하기</div>
                     </div>
                 </MenuDiv>
             </Container>
@@ -38,7 +28,7 @@ const StampMain = () => {
     )
 }
 
-export default StampMain;
+export default StampOwner;
 
 const Container = styled.div`
     width: 100%;
@@ -50,14 +40,25 @@ const Container = styled.div`
     align-items: center;
     margin-top: 60px;
     gap: 30px;
-    .hero_img{
+    .hero-section{
         width: 100%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+        dispay: flex;
+        box-sizing: border-box;
+        background-color: #FF9F74;
+        padding: 35px 20px;
+    }
+    .intro-text{
+        margin-top: 50px;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .info-text{
+        color: #FFFFFF;
+        font-size: 13px;
+        font-weight: 300;
     }
 `
-
 const MenuDiv = styled.div`
     width: 100%;
     box-sizing: border-box;
@@ -65,7 +66,7 @@ const MenuDiv = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 80px;
+    margin-bottom: 270px;
     .menu-item{
         width: 100%;
         box-sizing: border-box;
@@ -87,4 +88,3 @@ const MenuDiv = styled.div`
         font-size: 20px;
     }
 `
-
