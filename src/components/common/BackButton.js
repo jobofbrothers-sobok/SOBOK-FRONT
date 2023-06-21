@@ -19,9 +19,9 @@ const BackButton = (props) => {
     const navigator = useNavigate();
 
     return (
-        <BackContainer onClick={() => navigator(-1)}>
-            <img src={backImg} width="10px" alt="뒤로가기 버튼" />
-            <p>뒤로가기</p>
+        <BackContainer >
+            <img src={backImg} width="10px" alt="뒤로가기 버튼" onClick={() => navigator(-1)} />
+            <p onClick={() => navigator(-1)}>뒤로가기</p>
         </BackContainer>
     )
 
