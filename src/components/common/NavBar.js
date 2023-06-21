@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import logo2 from "../../asset/images/sobok_logo_rect_jua.png";
 import menuImg from "../../asset/images/hamburger.svg";
+import SideBar from "./SideBar";
+import { useNavigate } from "react-router";
 
 const NavContainer = styled.div`
     width: 100%;
@@ -31,11 +33,26 @@ const NavWrapper = styled.div`
     }
 `
 const NavBar = () => {
+
+    // 모달 관련
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        console.log('클릭')
+        setModalOpen(true);
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+    }
+
+    const navigator = useNavigate();
+
     return (
         <NavContainer>
             <NavWrapper>
-                <img className="logo2Img" src={logo2} width="150px" height="auto" alt="소복 로고 이미지" />
-                <button><img className="menuImg" src={menuImg} width="30px" alt="메뉴 버튼" /></button>
+                <img className="logo2Img" src={logo2} width="150px" height="auto" alt="소복 로고 이미지" onClick={() => navigator('/main')} />
+                <button onClick={openModal}><img className="menuImg" src={menuImg} width="30px" alt="메뉴 버튼" /></button>
+                <SideBar open={modalOpen} close={closeModal} />
             </NavWrapper>
         </NavContainer >
     )

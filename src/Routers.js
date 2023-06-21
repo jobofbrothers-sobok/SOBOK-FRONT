@@ -34,30 +34,36 @@ const Routers = () => {
         <BrowserRouter>
             <ScrollToTop />
             <Routes>
+                {/* 메인페이지 */}
                 <Route element={<MainPage />} path='/main' />
                 <Route element={<CafeDetail />} path='/detail/:id' />
+                {/* 회원가입&로그인 */}
                 <Route element={<LoginPage />} path='/' />
                 <Route element={<FindPage />} path='/forgot' />
                 <Route element={<JoinPage />} path='/join' />
                 <Route element={<SuccessPage />} path='/join-success' />
-                <Route element={<MainPage />} path='/home' />
+                {/* 최고관리자 마이페이지 */}
                 <Route element={<AdminPage />} path='/admin' />
                 <Route element={<AdminMenuDetail />} path='/admin/menu/:id' />
                 <Route element={<MemberDetail />} path='/admin/menu/:id/member/:id' />
                 <Route element={<ManagerDetail />} path='/admin/menu/3/detail/:id' />
                 <Route element={<DeliveryDetail />} path='/admin/menu/4/detail/:id' />
                 <Route element={<AddStampTour />} path='/admin/menu/2/add-stamp-tour' />
+                {/* 점주 마이페이지 */}
                 <Route element={<OwnerPage />} path='/owner' />
                 <Route element={<OwnerMenuDetail />} path='/owner/menu/:id' />
+                {/* 일반 사용자 마이페이지 */}
                 <Route element={<CustomerPage />} path='/customer' />
                 <Route element={<EditCustomerInfo />} path='/customer/edit' />
                 <Route element={<LikedCafeList />} path='/customer/liked' />
                 <Route element={<MyReviewList />} path='/customer/reviews' />
+                {/* 일반 사용자 스탬프 */}
                 <Route element={<StampMain />} path='/stamp/customer' />
                 <Route element={<StampCode />} path='/stamp/customer/code' />
                 <Route element={<StampCheck />} path='/stamp/customer/check' />
                 <Route element={<StampReward />} path='/stamp/customer/reward' />
                 <Route element={<RewardForm />} path='/stamp/customer/reward/form' />
+                {/* 점주 스탬프 */}
                 <Route element={<StampOwner />} path='/stamp/owner' />
                 <Route element={<NoApproval />} path='/stamp/owner/no-approval' />
                 <Route element={<InputCode />} path='/stamp/owner/code' />
