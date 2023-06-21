@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SearchBox from "./SearchBox";
 import { useNavigate } from "react-router";
+import CafeItem from "../CafeItem";
 
 const SideBar = (props) => {
 
@@ -11,6 +12,9 @@ const SideBar = (props) => {
   const { isAdmit, setAdmit } = useState(false);
 
   const navigator = useNavigate();
+
+  // 카페 리스트 임시
+  const array = [0, 1, 2, 3, 4];
 
   return (
     <>
@@ -56,6 +60,22 @@ const SideBar = (props) => {
                 마이페이지
               </div>
             </MenuList>
+            <br />
+            {/* <ResultWrapper>
+              <p className="list-title">검색결과<span className="list-title2"> 10개의 카페</span></p>
+              <br /><hr /><br />
+              <div className="cafe-list">
+                {array.map((item, index) => <>
+                  <CafeItem
+                    key={item}
+                    title="페이브 베이커리"
+                    distance='55m'
+                    intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
+                    tag={['큰 테이블', '콘센트']}
+                  />
+                </>)}
+              </div>
+            </ResultWrapper> */}
           </SideBarWrap>
           : null
         }
@@ -65,6 +85,29 @@ const SideBar = (props) => {
 }
 
 export default SideBar;
+
+const ResultWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .cafe-list{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+  }
+  .list-title{
+      font-size: 20px;
+      font-weight: 600;
+  }
+  .list-title2{
+      font-size: 20px;
+      font-weight: 500;
+      color: #7F7F7F;
+  }
+  >hr{
+    color: #D9D9D9
+  }
+`
 
 const SideBarContainer = styled.div`
   display: flex;
@@ -83,6 +126,7 @@ const SideBarContainer = styled.div`
     right: 0;
     transition: 0.5s ease;
   }
+  overflow-y: auto;
 `
 
 const SideBarWrap = styled.div`

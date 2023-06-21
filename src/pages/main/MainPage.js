@@ -286,7 +286,6 @@ const Container = styled.div`
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
-
     }
 `
 const FilterBox = styled.select`
