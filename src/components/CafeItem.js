@@ -15,7 +15,8 @@ const CafeItem = (props) => {
 
     return (
         <ItemBox>
-            <div className="imgBox" style={{ backgroundImage: `url(${cafeImg})` }}>
+            <div className="imgBox">
+                <img className='cafe-img' src={cafeImg} alt='카페대표이미지' />
                 <HeartButton like={like} onClick={(event) => { event.stopPropagation(); setLike(!like); }} />
             </div>
             <div className="cafe-summary">
@@ -37,22 +38,15 @@ export default CafeItem;
 
 const ItemBox = styled.div`
     display: flex;
-    flex: auto;
     flex-direction: column;
     gap: 5px;
-    // max-width: 50%;
-    >img {
-        width: 100%;
-    }
     .imgBox{
         width: 100%;
-        height: 180px;
         position: relative;
-        background-image: url(${cafeImg});
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
         border-radius: 5px;
+    }
+    .cafe-img{
+        width: 100%;
     }
     .cafe-summary{
         display: flex;

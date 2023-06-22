@@ -41,13 +41,13 @@ const SideBar = (props) => {
             </SearchList>
             <br />
             <MenuList>
-              <div className="menu-item" onClick={() => navigator('/stamp/customer')}>
+              <div className="menu-item" onClick={() => navigator('/news')}>
                 카페 소식 모아보기
               </div>
               <div className="menu-item" onClick={() => navigator('/stamp/customer')}>
                 스탬프 서비스
               </div>
-              <div className="menu-item" onClick={() => navigator('/stamp/customer')}>
+              <div className="menu-item" onClick={() => navigator('/store')}>
                 소복 스토어
               </div>
               <div className="menu-item" onClick={() => navigator('/stamp/customer')}>

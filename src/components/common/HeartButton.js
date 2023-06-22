@@ -12,8 +12,10 @@ const HeartButton = ({ like, onClick }) => {
 export default HeartButton;
 
 const Heart = styled.img`
+    width: 10%;
     position: absolute;
     bottom: 0;
     right: 0;
-    margin: 10px;
+    margin-right: 10px;
+    margin-bottom: 15px;
 `
