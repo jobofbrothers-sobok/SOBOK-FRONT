@@ -28,6 +28,8 @@ import RewardForm from "./pages/stamp/customer/RewardForm";
 import NoApproval from "./pages/stamp/owner/NoApproval";
 import StampOwner from "./pages/stamp/owner/StampOwner";
 import InputCode from "./pages/stamp/owner/InputCode";
+import NewsPage from "./pages/main/NewsPage";
+import StorePage from "./pages/main/StorePage";
 
 const Routers = () => {
     return (
@@ -37,6 +39,8 @@ const Routers = () => {
                 {/* 메인페이지 */}
                 <Route element={<MainPage />} path='/main' />
                 <Route element={<CafeDetail />} path='/detail/:id' />
+                <Route element={<NewsPage />} path='/news' />
+                <Route element={<StorePage />} path='/store' />
                 {/* 회원가입&로그인 */}
                 <Route element={<LoginPage />} path='/' />
                 <Route element={<FindPage />} path='/forgot' />
