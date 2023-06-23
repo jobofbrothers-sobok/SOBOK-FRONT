@@ -30,6 +30,9 @@ import StampOwner from "./pages/stamp/owner/StampOwner";
 import InputCode from "./pages/stamp/owner/InputCode";
 import NewsPage from "./pages/main/NewsPage";
 import StorePage from "./pages/main/StorePage";
+import NoticePage from "./pages/main/NoticePage";
+import NoticeDetail from "./pages/main/NoticeDetail";
+import InquiryPage from "./pages/main/InquiryPage";
 
 const Routers = () => {
     return (
@@ -41,6 +44,9 @@ const Routers = () => {
                 <Route element={<CafeDetail />} path='/detail/:id' />
                 <Route element={<NewsPage />} path='/news' />
                 <Route element={<StorePage />} path='/store' />
+                <Route element={<NoticePage />} path='/notice' />
+                <Route element={<NoticeDetail />} path='/notice/item/:id' />
+                <Route element={<InquiryPage />} path='/inquiry' />
                 {/* 회원가입&로그인 */}
                 <Route element={<LoginPage />} path='/' />
                 <Route element={<FindPage />} path='/forgot' />
