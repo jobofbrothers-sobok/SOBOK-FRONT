@@ -50,10 +50,10 @@ const SideBar = (props) => {
               <div className="menu-item" onClick={() => navigator('/store')}>
                 소복 스토어
               </div>
-              <div className="menu-item" onClick={() => navigator('/stamp/customer')}>
+              <div className="menu-item" onClick={() => navigator('/notice')}>
                 공지사항
               </div>
-              <div className="menu-item" onClick={() => navigator('/stamp/customer')}>
+              <div className="menu-item" onClick={() => navigator('/inquiry')}>
                 문의사항
               </div>
               <div className="menu-item" onClick={() => navigator('/customer')}>
