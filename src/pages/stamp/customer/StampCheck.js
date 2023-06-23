@@ -9,6 +9,7 @@ import completeImg from "../../../asset/images/complete-stamp.svg";
 import Modal from "../../../components/common/Modal";
 import Button from "../../../components/common/Button";
 import sobokFace from "../../../asset/images/sobok-face.svg";
+import StampItem from "../../../components/StampItem";
 
 const StampCheck = () => {
 
@@ -62,19 +63,19 @@ const StampCheck = () => {
                 <br />
                 <StampGridBox>
                     {stampList.map((item, index) =>
-                        <StampItem key={index}>
-                            <img src={stamp} alt="소복스탬프" />
-                            <p className="cafe">카페 비반트</p>
-                            <p className="date">2023.01.01</p>
-                            <p className="time">12:00</p>
-                        </StampItem>
+
+                        <StampItem
+                            id={item}
+                            checked={true}
+                            cafe="카페 비반트"
+                            date="2023.01.01"
+                            time="12:00"
+                        />
                     )}
                     {Array(noStampNum)
                         .fill(0)
                         .map((_, i) =>
-                        (<StampItem>
-                            <img src={nostamp} alt="nostamp" className="nostamp" />
-                        </StampItem>)
+                            (<StampItem checked={false} />)
                         )}
                 </StampGridBox >
                 <div className="complete-box">
@@ -122,28 +123,6 @@ const StampCafeList = styled.div`
     }
     .stamp-cafe-item > p {
         font-size: 16px;
-    }
-`
-
-const StampItem = styled.div`
-    width: 100%;
-    height: 150px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: solid 1px #E4E4E4;
-    >img {
-        width: 60%;
-        margin-bottom: 10%;
-    }
-    >p{
-        font-weight: 700;
-        color: #FF9F74;
-    }
-    .time{
-        color: #49637A;
     }
 `
 
