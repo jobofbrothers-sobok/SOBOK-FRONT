@@ -4,6 +4,7 @@ import logo from "../../asset/images/sobok_logo_square_jua.png";
 import "../../asset/fonts/font.css";
 import Button from "../../components/common/Button";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
 
@@ -23,6 +24,27 @@ const LoginPage = () => {
     }
 
 
+    const [id, setId] = useState('');
+    const [passwd, setPasswd] = useState('');
+
+
+    const onHandleId = (e) => {
+        setId(e.target.value);
+        console.log(id);
+    }
+
+    const onHandlePasswd = (e) => {
+        setPasswd(e.target.value);
+        console.log(passwd);
+    }
+
+    const onClickLogin = (id, passwd) => {
+        axios.post(`/auth/singin/customer`, { loginId: id, password: passwd })
+            .then(console.log('성공'))
+            .catch(console.log('실패'))
+    }
+
+
     return (
         <LoginContainer>
             <div className="logo">
@@ -32,12 +54,12 @@ const LoginPage = () => {
             <br /><br />
             <div className="login-form">
                 <p>아이디</p>
-                <input type="text" placeholder="010-0000-0000" />
+                <input type="text" placeholder="010-0000-0000" onChange={onHandleId} />
                 <p>비밀번호</p>
-                <input type="text" placeholder="Password" />
+                <input type="text" placeholder="Password" onChange={onHandlePasswd} />
                 <div className="check">
                     <input type="checkbox" id="checkbox" />
-                    <label className="remember-me">자동 로그인</label>
+                    <label className="remember-me" onClick={onClickLogin(id, passwd)}>자동 로그인</label>
                 </div>
                 <br />
                 <Button text="로그인" color="#FF9F74" />
