@@ -38,10 +38,10 @@ const LoginPage = () => {
         console.log(passwd);
     }
 
-    const onClickLogin = (id, passwd) => {
-        axios.post(`/auth/singin/customer`, { loginId: id, password: passwd })
-            .then(console.log('성공'))
-            .catch(console.log('실패'))
+    const onClickLogin = async (id, passwd) => {
+        await axios.post(`/auth/singin/customer`, { loginId: id, password: passwd })
+            .then((res) => console.log('성공', res))
+            .catch((err) => console.log('실패', err))
     }
 
 
@@ -59,10 +59,10 @@ const LoginPage = () => {
                 <input type="text" placeholder="Password" onChange={onHandlePasswd} />
                 <div className="check">
                     <input type="checkbox" id="checkbox" />
-                    <label className="remember-me" onClick={onClickLogin(id, passwd)}>자동 로그인</label>
+                    <label className="remember-me">자동 로그인</label>
                 </div>
                 <br />
-                <Button text="로그인" color="#FF9F74" />
+                <Button text="로그인" color="#FF9F74" onClick={onClickLogin(id, passwd)} />
                 <Button text="회원가입" color="#7F7F7F" onClick={moveJoinPage} />
             </div>
             <p onClick={() => navigate('/forgot')}>아이디/비밀번호 찾기</p>
