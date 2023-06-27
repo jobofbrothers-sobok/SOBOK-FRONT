@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Button from "./common/Button";
+import { useNavigate } from "react-router";
 
 
 const JoinInputForm = () => {
 
     // 점주: true, 고객: false
     const [isOwner, setOwner] = useState(true);
+
+    const navigator = useNavigate();
 
     return (
         <InputContainer>
@@ -48,7 +52,7 @@ const JoinInputForm = () => {
                     <input type="text" placeholder="010-0000-0000" />
                 </>
             }
-
+            <Button text="가입 완료" color="#FF9F74" onClick={() => navigator('/join-success')} />
         </InputContainer >
     )
 }

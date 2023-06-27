@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import BackButton from "../../components/common/BackButton";
+import AgreeForm from "../../components/AgreeForm";
 import Footer from "../../components/common/Footer";
-import JoinInputForm from "../../components/JoinInputForm";
 import { useNavigate } from "react-router-dom";
 
 
-const JoinPage = () => {
+const AgreePage = () => {
 
     return (
         <>
@@ -17,7 +17,7 @@ const JoinPage = () => {
                 <div className="join-form">
                     <br />
                     <p className="join-title">회원가입</p>
-                    <JoinInputForm />
+                    <AgreeForm />
                 </div>
             </JoinContainer>
             <Footer />
@@ -25,7 +25,7 @@ const JoinPage = () => {
     )
 }
 
-export default JoinPage;
+export default AgreePage;
 
 const JoinContainer = styled.div`
     width: 100%;

@@ -5,10 +5,11 @@ import "../../asset/fonts/font.css";
 import Button from "../../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { customerLogin, ownerLogin } from "../../lib/api/auth";
 
 const LoginPage = () => {
 
-    const navigate = useNavigate();
+    const navigator = useNavigate();
 
     // 점주: true, 고객: false
     const [isOwner, setOwner] = useState(false);
@@ -16,11 +17,6 @@ const LoginPage = () => {
     // 점주<->고객 로그인 전환
     const handleButton = () => {
         setOwner(!isOwner)
-    }
-
-    // 회원가입 페이지 이동
-    const moveJoinPage = () => {
-        navigate('/join');
     }
 
 
@@ -38,11 +34,11 @@ const LoginPage = () => {
         console.log(passwd);
     }
 
-    const onClickLogin = async (id, passwd) => {
-        await axios.post(`/auth/singin/customer`, { loginId: id, password: passwd })
-            .then((res) => console.log('성공', res))
-            .catch((err) => console.log('실패', err))
-    }
+    // const onClickLogin = async (id, passwd) => {
+    //     await axios.post(`/auth/singin/customer`, { loginId: id, password: passwd })
+    //         .then((res) => console.log('성공', res))
+    //         .catch((err) => console.log('실패', err))
+    // }
 
 
     return (
@@ -62,10 +58,10 @@ const LoginPage = () => {
                     <label className="remember-me">자동 로그인</label>
                 </div>
                 <br />
-                <Button text="로그인" color="#FF9F74" onClick={() => onClickLogin(id, passwd)} />
-                <Button text="회원가입" color="#7F7F7F" onClick={moveJoinPage} />
+                <Button text="로그인" color="#FF9F74" onClick={isOwner ? () => ownerLogin(id, passwd) : () => customerLogin(id, passwd)} />
+                <Button text="회원가입" color="#7F7F7F" onClick={() => navigator('/agree')} />
             </div>
-            <p onClick={() => navigate('/forgot')}>아이디/비밀번호 찾기</p>
+            <p onClick={() => navigator('/forgot')}>아이디/비밀번호 찾기</p>
             <br />
             <hr width="100%" />
             <p className="is-owner">{isOwner ? '고객님이신가요?' : '점주님이신가요?'}</p>

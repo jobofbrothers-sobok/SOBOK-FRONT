@@ -30,7 +30,7 @@ const SuccessPage = () => {
                 }
 
             </div>
-            <Button text="메인페이지로" color="#FF9F74" onClick={() => navigator('/join')} />
+            <Button text="메인페이지로" color="#FF9F74" onClick={() => navigator('/main')} />
         </Container>
     )
 }

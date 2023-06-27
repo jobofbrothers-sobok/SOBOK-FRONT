@@ -33,6 +33,7 @@ import StorePage from "./pages/main/StorePage";
 import NoticePage from "./pages/main/NoticePage";
 import NoticeDetail from "./pages/main/NoticeDetail";
 import InquiryPage from "./pages/main/InquiryPage";
+import AgreePage from "./pages/login/AgreePage";
 
 const Routers = () => {
     return (
@@ -50,6 +51,7 @@ const Routers = () => {
                 {/* 회원가입&로그인 */}
                 <Route element={<LoginPage />} path='/' />
                 <Route element={<FindPage />} path='/forgot' />
+                <Route element={<AgreePage />} path='/agree' />
                 <Route element={<JoinPage />} path='/join' />
                 <Route element={<SuccessPage />} path='/join-success' />
                 {/* 최고관리자 마이페이지 */}
