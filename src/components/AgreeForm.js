@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "./common/Button";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { setCookie } from "../lib/cookie";
 
 const AgreeContainer = styled.div`
     width: 100%;
@@ -97,7 +98,7 @@ const AgreeForm = () => {
                 <label className="remember-me" >[선택] 광고성 정보 수신 및 마케팅 활용 동의</label>
             </div>
             <InputBox rows="6"></InputBox>
-            <Button text="다음으로" color="#FF9F74" onClick={() => navigator('/join')} />
+            <Button text="다음으로" color="#FF9F74" onClick={checkList.includes('essential') ? () => { navigator('/join'); setCookie('select', checkList.includes('select')) }  : console.log('필수 정보 선택 필요')} />
         </AgreeContainer>
     )
 

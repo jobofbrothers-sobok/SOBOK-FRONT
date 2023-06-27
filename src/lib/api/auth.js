@@ -1,5 +1,6 @@
 import axios from "axios";
 import { client } from "./client";
+import { async } from "q";
 
 const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
 
@@ -14,8 +15,8 @@ export const customerLogout = ({ loginId, password }) =>
     client.get(`${PROXY}/auth/signout/customer`, { loginId, password })
 
 // 고객 회원가입
-export const customerJoin = ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>
-    client.post(`${PROXY}/auth/signup/customer`, { loginId, password, name, email, phone, termsAgree, marketingAgree })
+export const customerJoin = async ({ loginId, password, name, email, phone, marketingAgree }) =>
+    await axios.post(`${PROXY}/auth/signup/customer`, { loginId, password, name, email, phone, marketingAgree })
 
 // 고객 회원탈퇴
 export const customerWithdraw = ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>
@@ -35,8 +36,8 @@ export const ownerLogout = async ({ loginId, password }) =>
         .catch((err) => console.log('실패', err))
 
 // 점주 회원가입
-export const ownerJoin = ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>
-    client.post(`${PROXY}/auth/signup/owner`, { loginId, password, name, email, phone, termsAgree, marketingAgree })
+export const ownerJoin = async ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>
+    await axios.post(`${PROXY}/auth/signup/owner`, { loginId, password, name, email, phone, termsAgree, marketingAgree })
 
 // 점주 회원탈퇴
 export const ownerWithdraw = ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>

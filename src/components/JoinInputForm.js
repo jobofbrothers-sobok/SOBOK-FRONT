@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "./common/Button";
 import { useNavigate } from "react-router";
+import { getCookie } from "../lib/cookie";
+import { ownerJoin } from "../lib/api/auth";
 
 
 const JoinInputForm = () => {
@@ -11,48 +13,93 @@ const JoinInputForm = () => {
 
     const navigator = useNavigate();
 
+    const isSelect = getCookie('select');
+    console.log(isSelect);
+
+
+    // 공통 정보
+    const [id, setId] = useState('');
+    const [pw, setPw] = useState('');
+    const [cpw, setCpw] = useState('');
+    const [name, setName] = useState('');
+    const [tel, setTel] = useState('');
+    const [email, setEmail] = useState('');
+    // 점주 정보
+    const [address, setAddress] = useState('');
+    const [detail, setDetail] = useState('');
+    const [code, setCode] = useState('');
+
+
+    const onHandleId = (e) => {
+        setId(e.target.value);
+    };
+    const onHandlePw = (e) => {
+        setPw(e.target.value);
+    };
+    const onHandleCpw = (e) => {
+        setCpw(e.target.value);
+    };
+    const onHandleName = (e) => {
+        setName(e.target.value);
+    };
+    const onHandleTel = (e) => {
+        setTel(e.target.value);
+    };
+    const onHandleEmail = (e) => {
+        setEmail(e.target.value);
+    };
+    const onHandleAddress = (e) => {
+        setAddress(e.target.value);
+    };
+    const onHandleDetail = (e) => {
+        setDetail(e.target.value);
+    };
+    const onHandleCode = (e) => {
+        setCode(e.target.value);
+    };
+
     return (
         <InputContainer>
             <p>아이디<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
             <div className="new-id-box">
-                <input type="text" /><button className="id-check-btn">중복확인</button>
+                <input type="text" onChange={onHandleId} /><button className="id-check-btn">중복확인</button>
             </div>
             <p>비밀번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-            <input type="text" placeholder="Password" />
+            <input type="text" placeholder="Password" onChange={onHandlePw} />
             <p>비밀번호 확인<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-            <input type="text" placeholder="Password" />
+            <input type="text" placeholder="Password" onChange={onHandleCpw} />
 
 
             {isOwner ?
                 <>
                     <p>담당자명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={onHandleName} />
                     <p>담당자 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={onHandleTel} />
                     <p>담당자 이메일<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={onHandleEmail} />
                     <p>가게 주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <div className="store-loc-box">
-                        <input type="text" /><button className="store-search">검색</button>
+                        <input type="text" onChange={onHandleAddress} /><button className="store-search">검색</button>
                     </div>
                     <p>상세 주소</p>
-                    <input type="text" />
+                    <input type="text" onChange={onHandleDetail} />
                     <p>사업자 등록 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={onHandleCode} />
                     <p>사업자 등록 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="file" className="file-box" />
                 </>
                 :
                 <>
                     <p>이름</p>
-                    <input type="text" />
-                    <p>이메일<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" placeholder="Email" />
+                    <input type="text" onChange={onHandleName} />
+                    <p>이메일<span style={{ color: "#EB5757", fontWeight: "900" }} >*</span></p>
+                    <input type="text" placeholder="Email" onChange={onHandleEmail} />
                     <p>핸드폰 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" placeholder="010-0000-0000" />
+                    <input type="text" placeholder="010-0000-0000" onChange={onHandleTel} />
                 </>
             }
-            <Button text="가입 완료" color="#FF9F74" onClick={() => navigator('/join-success')} />
+            <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => ownerJoin({ id, pw, cpw, name, tel, email, address, detail, code, isSelect }) : () => customerJoin({ id, pw, cpw, name, tel, email, isSelect })} />
         </InputContainer >
     )
 }
