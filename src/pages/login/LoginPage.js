@@ -6,6 +6,7 @@ import Button from "../../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { customerLogin, ownerLogin } from "../../lib/api/auth";
+import { setCookie } from "../../lib/cookie";
 
 const LoginPage = () => {
 
@@ -16,7 +17,7 @@ const LoginPage = () => {
 
     // 점주<->고객 로그인 전환
     const handleButton = () => {
-        setOwner(!isOwner)
+        setOwner(!isOwner);
     }
 
 
@@ -59,13 +60,13 @@ const LoginPage = () => {
                 </div>
                 <br />
                 <Button text="로그인" color="#FF9F74" onClick={isOwner ? () => ownerLogin(id, passwd) : () => customerLogin(id, passwd)} />
-                <Button text="회원가입" color="#7F7F7F" onClick={() => navigator('/agree')} />
+                <Button text="회원가입" color="#7F7F7F" onClick={() => { navigator('/agree'); setCookie('isOwner', isOwner); }} />
             </div>
             <p onClick={() => navigator('/forgot')}>아이디/비밀번호 찾기</p>
             <br />
             <hr width="100%" />
             <p className="is-owner">{isOwner ? '고객님이신가요?' : '점주님이신가요?'}</p>
-            <button className="is-owner-btn" onClick={handleButton}>점주 로그인</button>
+            <button className="is-owner-btn" onClick={handleButton}>{isOwner ? "고객" : "점주"} 로그인</button>
             <br />
         </LoginContainer>
     )

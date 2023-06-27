@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "./common/Button";
 import { useNavigate } from "react-router";
-import { getCookie } from "../lib/cookie";
-import { ownerJoin } from "../lib/api/auth";
+import { getCookie, setCookie } from "../lib/cookie";
+import { customerJoin, ownerJoin } from "../lib/api/auth";
 
 
 const JoinInputForm = () => {
 
     // 점주: true, 고객: false
-    const [isOwner, setOwner] = useState(true);
+    const isOwner = getCookie('isOwner');
+    console.log('isOwner', isOwner);
 
     const navigator = useNavigate();
 
@@ -70,7 +71,7 @@ const JoinInputForm = () => {
             <input type="text" placeholder="Password" onChange={onHandleCpw} />
 
 
-            {isOwner ?
+            {isOwner === 'true' ?
                 <>
                     <p>담당자명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={onHandleName} />
