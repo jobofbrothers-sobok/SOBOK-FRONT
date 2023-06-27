@@ -62,7 +62,7 @@ const LoginPage = () => {
                     <label className="remember-me">자동 로그인</label>
                 </div>
                 <br />
-                <Button text="로그인" color="#FF9F74" onClick={onClickLogin(id, passwd)} />
+                <Button text="로그인" color="#FF9F74" onClick={() => onClickLogin(id, passwd)} />
                 <Button text="회원가입" color="#7F7F7F" onClick={moveJoinPage} />
             </div>
             <p onClick={() => navigate('/forgot')}>아이디/비밀번호 찾기</p>
