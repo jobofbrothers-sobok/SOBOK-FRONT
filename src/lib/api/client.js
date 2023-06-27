@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { getCookie } from '../cookie';
 
 export const client = axios.create({
-    baseURL: "http://58.225.75.202:5000",
+    baseURL: "http://localhost:5000",
     headers: {
         'Authorization': `Bearer ${getCookie('is_login')}`,
         "Content-Type": "application/json",
