@@ -112,7 +112,7 @@ const JoinInputForm = () => {
                 </>
             }
             <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => {
-                ownerJoin({ loginId, password, name, email, phone, marketingAgree });
+                ownerJoin({ id, pw, name, email, tel, store, address, detail, code, isSelect });
                 ownerLicense({ id, isSelect });
             } : () => customerJoin({ id, pw, cpw, name, tel, email, isSelect })} />
         </InputContainer >
