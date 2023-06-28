@@ -36,8 +36,8 @@ export const ownerLogout = async ({ loginId, password }) =>
         .catch((err) => console.log('실패', err))
 
 // 점주 회원가입
-export const ownerJoin = async ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>
-    await axios.post(`${PROXY}/auth/signup/owner`, { loginId, password, name, email, phone, termsAgree, marketingAgree })
+export const ownerJoin = async ({ loginId, password, name, email, phone, marketingAgree, licenseImage }) =>
+    await axios.post(`${PROXY}/auth/signup/owner`, { loginId, password, name, email, phone, marketingAgree, licenseImage })
 
 // 점주 회원탈퇴
 export const ownerWithdraw = ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>

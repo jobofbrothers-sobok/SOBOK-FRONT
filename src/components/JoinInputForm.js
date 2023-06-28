@@ -4,6 +4,7 @@ import Button from "./common/Button";
 import { useNavigate } from "react-router";
 import { getCookie, setCookie } from "../lib/cookie";
 import { customerJoin, ownerJoin } from "../lib/api/auth";
+import axios from "axios";
 
 
 const JoinInputForm = () => {
@@ -26,9 +27,11 @@ const JoinInputForm = () => {
     const [tel, setTel] = useState('');
     const [email, setEmail] = useState('');
     // 점주 정보
+    const [store, setStore] = useState('');
     const [address, setAddress] = useState('');
     const [detail, setDetail] = useState('');
     const [code, setCode] = useState('');
+    const [image, setImage] = useState('');
 
 
     const onHandleId = (e) => {
@@ -49,6 +52,9 @@ const JoinInputForm = () => {
     const onHandleEmail = (e) => {
         setEmail(e.target.value);
     };
+    const onHandleStore = (e) => {
+        setStore(e.target.value);
+    };
     const onHandleAddress = (e) => {
         setAddress(e.target.value);
     };
@@ -58,6 +64,29 @@ const JoinInputForm = () => {
     const onHandleCode = (e) => {
         setCode(e.target.value);
     };
+    const onHandleImage = (e) => {
+        setImage(e.target.files[0]);
+    }
+
+    const ownerSignup = async () => {
+        let body = new FormData();
+        body = {
+            loginId: id,
+            password: pw,
+            store: name,
+            director: name,
+            phone: tel,
+            email: email,
+            address: address,
+            detailAddress: address,
+            licenseNumber: code,
+            termsAgree: true,
+            marketingAgree: isSelect
+        };
+        await axios.post(`/auth/signup/owner`, body)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+    }
 
     return (
         <InputContainer>
@@ -73,6 +102,8 @@ const JoinInputForm = () => {
 
             {isOwner === 'true' ?
                 <>
+                    <p>매장명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
+                    <input type="text" onChange={onHandleStore} />
                     <p>담당자명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={onHandleName} />
                     <p>담당자 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
@@ -87,8 +118,8 @@ const JoinInputForm = () => {
                     <input type="text" onChange={onHandleDetail} />
                     <p>사업자 등록 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={onHandleCode} />
-                    <p>사업자 등록 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" className="file-box" />
+                    <p>사업자 등록증<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
+                    <input type="file" className="file-box" onChange={onHandleImage} />
                 </>
                 :
                 <>
@@ -100,7 +131,7 @@ const JoinInputForm = () => {
                     <input type="text" placeholder="010-0000-0000" onChange={onHandleTel} />
                 </>
             }
-            <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => ownerJoin({ id, pw, cpw, name, tel, email, address, detail, code, isSelect }) : () => customerJoin({ id, pw, cpw, name, tel, email, isSelect })} />
+            <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => ownerSignup() : () => customerJoin({ id, pw, cpw, name, tel, email, isSelect })} />
         </InputContainer >
     )
 }
