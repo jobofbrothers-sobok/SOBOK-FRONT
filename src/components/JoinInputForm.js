@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "./common/Button";
 import { useNavigate } from "react-router";
 import { getCookie, setCookie } from "../lib/cookie";
-import { customerJoin, ownerJoin } from "../lib/api/auth";
+import { customerJoin, ownerJoin, ownerLicense } from "../lib/api/auth";
 import axios from "axios";
 
 
@@ -68,26 +68,6 @@ const JoinInputForm = () => {
         setImage(e.target.files[0]);
     }
 
-    const ownerSignup = async () => {
-        let body = new FormData();
-        body = {
-            loginId: id,
-            password: pw,
-            store: name,
-            director: name,
-            phone: tel,
-            email: email,
-            address: address,
-            detailAddress: address,
-            licenseNumber: code,
-            termsAgree: true,
-            marketingAgree: isSelect
-        };
-        await axios.post(`/auth/signup/owner`, body)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
-    }
-
     return (
         <InputContainer>
             <p>아이디<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
@@ -131,7 +111,10 @@ const JoinInputForm = () => {
                     <input type="text" placeholder="010-0000-0000" onChange={onHandleTel} />
                 </>
             }
-            <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => ownerSignup() : () => customerJoin({ id, pw, cpw, name, tel, email, isSelect })} />
+            <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => {
+                ownerJoin({ loginId, password, name, email, phone, marketingAgree });
+                ownerLicense({ id, isSelect });
+            } : () => customerJoin({ id, pw, cpw, name, tel, email, isSelect })} />
         </InputContainer >
     )
 }
