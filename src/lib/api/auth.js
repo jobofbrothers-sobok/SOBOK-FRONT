@@ -35,9 +35,19 @@ export const ownerLogout = async ({ loginId, password }) =>
         .then((res) => console.log('성공', res))
         .catch((err) => console.log('실패', err))
 
-// 점주 회원가입
-export const ownerJoin = async ({ loginId, password, name, email, phone, marketingAgree, licenseImage }) =>
-    await axios.post(`${PROXY}/auth/signup/owner`, { loginId, password, name, email, phone, marketingAgree, licenseImage })
+// 점주 회원가입 
+export const ownerJoin = async ({ loginId, password, name, email, phone, marketingAgree }) =>
+    await axios.post(`${PROXY}/auth/signup/owner`, { loginId, password, name, email, phone, marketingAgree })
+
+// 점주 사업자등록증 전송
+export const ownerLicense = async ({ loginId, licenseImage }) => {
+    let body = new FormData();
+    body = {
+        loginId: loginId,
+        marketingAgree: licenseImage
+    };
+    await axios.post(`${PROXY}/auth/signup/owner`, body)
+};
 
 // 점주 회원탈퇴
 export const ownerWithdraw = ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>
