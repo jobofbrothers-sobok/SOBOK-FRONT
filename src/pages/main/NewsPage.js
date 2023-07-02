@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import mainImg from '../../asset/images/news-main.svg';
+import mainImg from '../../asset/images/news-main.png';
 import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import Footer from "../../components/common/Footer";

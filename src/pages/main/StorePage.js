@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import mainImg from '../../asset/images/news-main.svg';
+import mainImg from '../../asset/images/news-main.png';
 import Footer from "../../components/common/Footer";
 import NavBar from "../../components/common/NavBar";
-import itemImg from "../../asset/images/store-item.svg";
+import itemImg from "../../asset/images/store-item.png";
 import MoreButton from "../../components/common/MoreButton";
 import StoreItem from "../../components/StoreItem";
 

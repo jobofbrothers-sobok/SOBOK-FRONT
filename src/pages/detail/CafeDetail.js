@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import Footer from "../../components/common/Footer";
-import detailImg from "../../asset/images/detailImg.svg";
+import detailImg from "../../asset/images/detailImg.png";
 import CafeInfo from "../../components/CafeInfo";
 import CafeNews from "../../components/CafeNews";
 import CafeMenu from "../../components/CafeMenu";

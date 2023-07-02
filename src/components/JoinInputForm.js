@@ -75,9 +75,9 @@ const JoinInputForm = () => {
                 <input type="text" onChange={onHandleId} /><button className="id-check-btn">중복확인</button>
             </div>
             <p>비밀번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-            <input type="text" placeholder="Password" onChange={onHandlePw} />
+            <input type="password" placeholder="Password" onChange={onHandlePw} />
             <p>비밀번호 확인<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-            <input type="text" placeholder="Password" onChange={onHandleCpw} />
+            <input type="password" placeholder="Password" onChange={onHandleCpw} />
 
 
             {isOwner === 'true' ?
@@ -111,10 +111,10 @@ const JoinInputForm = () => {
                     <input type="text" placeholder="010-0000-0000" onChange={onHandleTel} />
                 </>
             }
-            <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => {
+            <Button text="가입 완료" color="#FF9F74" onClick={isOwner === 'true' ? () => {
                 ownerJoin({ id, pw, name, email, tel, store, address, detail, code, isSelect });
                 ownerLicense({ id, isSelect });
-            } : () => customerJoin({ id, pw, cpw, name, tel, email, isSelect })} />
+            } : () => { console.log({ id, pw, cpw, name, tel, email, isSelect }); customerJoin({ id, pw, cpw, name, tel, email, isSelect }); }} />
         </InputContainer >
     )
 }
