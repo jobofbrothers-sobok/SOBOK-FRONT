@@ -53,7 +53,7 @@ const LoginPage = () => {
                 <p>아이디</p>
                 <input type="text" placeholder="010-0000-0000" onChange={onHandleId} />
                 <p>비밀번호</p>
-                <input type="text" placeholder="Password" onChange={onHandlePasswd} />
+                <input type="password" placeholder="Password" onChange={onHandlePasswd} />
                 <div className="check">
                     <input type="checkbox" id="checkbox" />
                     <label className="remember-me">자동 로그인</label>

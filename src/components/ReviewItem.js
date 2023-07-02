@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import newsImg from "../asset/images/news-item.svg";
+import newsImg from "../asset/images/news-item.png";
 import profileImg from "../asset/images/sobok-face.svg";
 
 const ReviewItem = (props) => {

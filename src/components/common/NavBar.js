@@ -24,6 +24,7 @@ const NavWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
     max-width: 768px;
     padding: 10px 20px;
     align-items: center;
