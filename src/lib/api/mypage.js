@@ -9,7 +9,12 @@ export const customerLogin = async ({ loginId, password }) =>
         .then((res) => console.log('성공', res))
         .catch((err) => console.log('실패', err))
 
-// 고객 로그아웃
-export const customerLogout = ({ loginId, password }) =>
-    client.get(`${PROXY}/auth/signout/customer`, { loginId, password })
 
+// 고객 회원탈퇴
+export const customerWithdraw = (config) =>
+    axios.delete(`${PROXY}/auth/customer`, config)
+
+
+// 점주 회원탈퇴
+export const ownerWithdraw = (config) =>
+    client.delete(`${PROXY}/auth/owner`, config)

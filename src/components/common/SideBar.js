@@ -3,15 +3,32 @@ import styled from "styled-components";
 import SearchBox from "./SearchBox";
 import { useNavigate } from "react-router";
 import CafeItem from "../CafeItem";
+import isLogin from "../../lib/router/isLogin";
+import Modal from "./Modal";
+import logo from '../../asset/images/sobok_logo_square_jua.png';
+import Button from "./Button";
+import { removeCookie } from "../../lib/cookie";
 
 const SideBar = (props) => {
 
   const { open, close } = props;
 
-  const { islogin, setLogin } = useState(false);
-  const { isAdmit, setAdmit } = useState(false);
-
   const navigator = useNavigate();
+
+  // 로그인 유무
+  const auth = isLogin();
+
+
+  // 로그인 모달 관련
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  }
+
 
   // 카페 리스트 임시
   const array = [0, 1, 2, 3, 4];
@@ -22,11 +39,12 @@ const SideBar = (props) => {
         {open ?
           <SideBarWrap>
             <div className="menu-header">
-              <p className="top-text" onClick={() => navigator('/login')}><span style={{ color: '#FF9F74', fontSize: '20px', fontWeight: '600' }}>로그인</span>을 해주세요</p>
+              <p className="top-text" onClick={() => navigator('/login')}><span style={{ color: '#FF9F74', fontSize: '20px', fontWeight: '600' }}>{auth ? '사용자' : '로그인'}</span>{auth ? '님 반갑습니다.' : '을 해주세요'}</p>
               <button className="close" onClick={close}>
                 &times;
               </button>
             </div>
+            {auth ? <div className="logout-btn" onClick={() => { removeCookie('token'); window.location.replace(`/`); }}>로그아웃</div> : null}
             <SearchBox />
             <br />
             <SearchList>
@@ -44,7 +62,7 @@ const SideBar = (props) => {
               <div className="menu-item" onClick={() => navigator('/news')}>
                 카페 소식 모아보기
               </div>
-              <div className="menu-item" onClick={() => navigator('/stamp/customer')}>
+              <div className="menu-item" onClick={auth ? () => { console.log('auth', auth); navigator('/stamp/customer') } : openModal}>
                 스탬프 서비스
               </div>
               <div className="menu-item" onClick={() => navigator('/store')}>
@@ -79,6 +97,14 @@ const SideBar = (props) => {
           </SideBarWrap>
           : null
         }
+        {/* 로그인 모달 */}
+        <Modal open={modalOpen} close={closeModal} header="Modal heading">
+          <ContentBox>
+            <img src={logo} alt="소복로고이미지" width="50%" />
+            <p className="title">로그인이 필요한 서비스입니다.</p><br /><br /><br />
+            <Button text="로그인" />
+          </ContentBox>
+        </Modal>
       </SideBarContainer >
     </>
   )
@@ -155,7 +181,10 @@ const SideBarWrap = styled.div`
     background-color: transparent;
     border: none;
   }
-
+  .logout-btn{
+    width: 100%;
+    margin-bottom: 10px;
+  }
 `
 const SearchList = styled.div`
   width: 100%;
@@ -198,3 +227,30 @@ const MenuList = styled.div`
     font-weight: 400;
   }
 `;
+
+const ContentBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .edit-form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .edit-form > p {
+        font-weight: 600;
+    }
+    .edit-form > input {
+        padding: 5px 10px;
+        height: 30px;
+        background: #FFFFFF;
+        border: 1px solid #D9D9D9;
+        border-radius: 4px;
+        margin-bottom: 13px;
+    }
+`

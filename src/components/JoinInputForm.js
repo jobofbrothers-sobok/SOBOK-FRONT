@@ -33,7 +33,7 @@ const JoinInputForm = () => {
     const [address, setAddress] = useState('');
     const [detail, setDetail] = useState('');
     const [code, setCode] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState();
 
 
     const onHandleId = (e) => {
@@ -68,6 +68,7 @@ const JoinInputForm = () => {
     };
     const onHandleImage = (e) => {
         setImage(e.target.files[0]);
+        console.log(image);
     }
 
     return (
@@ -114,8 +115,15 @@ const JoinInputForm = () => {
                 </>
             }
             <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => {
-                ownerJoin({ id, pw, name, email, tel, store, address, detail, code, termsAgree, isSelect });
-                ownerLicense({ id, isSelect });
+                ownerLicense(id, image)
+                    .then((res) => {
+                        console.log('등록증 성공', res);
+                        ownerJoin({ id, pw, name, email, tel, store, address, detail, code, termsAgree, isSelect })
+                            .then((res) => console.log('회원가입 성공', res))
+                            .catch((err) => console.log('회원가입 실패', err));
+                    })
+                    .catch((err) => console.log('등록증 실패', err))
+
             } : () => { console.log({ id, pw, cpw, name, tel, email, isSelect }); customerJoin({ id, pw, cpw, name, tel, email, termsAgree, isSelect }); }} />
         </InputContainer >
     )

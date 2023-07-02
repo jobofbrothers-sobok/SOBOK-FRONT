@@ -4,22 +4,19 @@ import { client } from "./client";
 const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
 
 // 고객 로그인
-export const customerLogin = async (id, pw) =>
-    await axios.post(`${PROXY}/auth/signin/customer`, { loginId: id, password: pw })
-        .then((res) => console.log('성공', res))
-        .catch((err) => console.log('실패', err))
+export const customerLogin = async (id, pw) => {
+    return await axios.post(`${PROXY}/auth/signin/customer`, { loginId: id, password: pw });
+}
 
 // 고객 로그아웃
-export const customerLogout = ({ loginId, password }) =>
-    client.get(`${PROXY}/auth/signout/customer`, { loginId, password })
+export const customerLogout = ({ loginId, password }) => {
+    return axios.get(`${PROXY}/auth/signout/customer`)
+}
 
 // 고객 회원가입
-export const customerJoin = async ({ id, pw, name, tel, email, termsAgree, isSelect }) =>
-    await axios.post(`${PROXY}/auth/signup/customer`, { loginId: id, password: pw, name: name, email: email, phone: tel, termsAgree: termsAgree, marketingAgree: isSelect })
-
-// 고객 회원탈퇴
-export const customerWithdraw = ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>
-    client.delete(`${PROXY}/auth/customer`, { loginId, password, name, email, phone, termsAgree, marketingAgree })
+export const customerJoin = async ({ id, pw, name, tel, email, termsAgree, isSelect }) => {
+    return await axios.post(`${PROXY}/auth/signup/customer`, { loginId: id, password: pw, name: name, email: email, phone: tel, termsAgree: termsAgree, marketingAgree: isSelect })
+}
 
 // 고객 비밀번호 찾기
 export const customerFindpw = ({ status, success, message, data }) =>
@@ -27,31 +24,26 @@ export const customerFindpw = ({ status, success, message, data }) =>
 
 
 // 점주 로그인
-export const ownerLogin = async ({ loginId, password }) =>
-    await axios.post(`${PROXY}/auth/signin/owner`, { loginId, password })
-        .then((res) => console.log('성공', res))
-        .catch((err) => console.log('실패', err))
+export const ownerLogin = async (id, pw) => {
+    return await axios.post(`${PROXY}/auth/signin/owner`, { loginId: id, password: pw })
+}
+
 
 // 점주 로그아웃
-export const ownerLogout = async ({ loginId, password }) =>
-    await axios.post(`${PROXY}/auth/signout/owner`, { loginId, password })
-        .then((res) => console.log('성공', res))
-        .catch((err) => console.log('실패', err))
+export const ownerLogout = async ({ loginId, password }) => {
+    return await axios.get(`${PROXY}/auth/signout/owner`)
+}
 
 // 점주 회원가입 
 export const ownerJoin = async ({ id, pw, name, email, tel, store, address, detail, code, termsAgree, isSelect }) =>
-    await axios.post(`${PROXY}/auth/signup/owner`, { loginId: id, password: pw, store: store, director: name, email: email, phone: tel, address: address, detailAddress: detail, licenseNumber: code, termsAgree: termsAgree, marketingAgree: isSelect })
+    await axios.patch(`${PROXY}/auth/signup/owner`, { loginId: id, password: pw, store: store, director: name, email: email, phone: tel, address: address, detailAddress: detail, licenseNumber: code, termsAgree: termsAgree, marketingAgree: isSelect })
+
 
 // 점주 사업자등록증 전송
-export const ownerLicense = async ({ id, isSelect }) => {
-    let body = new FormData();
-    body = {
-        loginId: id,
-        marketingAgree: isSelect
-    };
-    await axios.post(`${PROXY}/auth/signup/owner`, body)
+export const ownerLicense = async (id, image) => {
+    let formData = new FormData();
+    formData.append('loginId', id);
+    formData.append('file', image);
+    return await axios.post(`${PROXY}/auth/signup/owner`, formData);
 };
 
-// 점주 회원탈퇴
-export const ownerWithdraw = ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>
-    client.delete(`${PROXY}/auth/owner`, { loginId, password, name, email, phone, termsAgree, marketingAgree })

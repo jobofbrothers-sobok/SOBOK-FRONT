@@ -31,11 +31,13 @@ import MoreButton from "../../components/common/MoreButton";
 import filterbtn from "../../asset/images/filter-arrow.svg";
 // 카페 예시 대표 이미지
 import CafeItem from "../../components/CafeItem";
+import { useNavigate } from "react-router-dom";
 
 
 
 const MainPage = () => {
 
+    const navigator = useNavigate();
 
     const onHandleCategory = (event) => {
         const { name, value, checked } = event.target;
@@ -202,6 +204,7 @@ const MainPage = () => {
                                 distance='55m'
                                 intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
                                 tag={['큰 테이블', '콘센트']}
+                                onClick={() => navigator(`/detail/${item}`)}
                             />
                         </>)}
                     </div>

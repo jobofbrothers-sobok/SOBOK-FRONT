@@ -7,14 +7,14 @@ import locMark from "../asset/images/locMark.svg";
 
 const CafeItem = (props) => {
 
-    const { title, distance, intro, tag } = props;
+    const { title, distance, intro, tag, onClick } = props;
 
     // 좋아요 버튼
     const [like, setLike] = useState(false);
 
 
     return (
-        <ItemBox>
+        <ItemBox onClick={onClick}>
             <div className="imgBox">
                 <img className='cafe-img' src={cafeImg} alt='카페대표이미지' />
                 <HeartButton like={like} onClick={(event) => { event.stopPropagation(); setLike(!like); }} />

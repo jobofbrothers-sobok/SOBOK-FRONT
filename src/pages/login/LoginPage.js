@@ -4,7 +4,6 @@ import logo from "../../asset/images/sobok_logo_square_jua.png";
 import "../../asset/fonts/font.css";
 import Button from "../../components/common/Button";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { customerLogin, ownerLogin } from "../../lib/api/auth";
 import { setCookie } from "../../lib/cookie";
 import NavBar from "../../components/common/NavBar";
@@ -36,13 +35,6 @@ const LoginPage = () => {
         console.log(pw);
     }
 
-    // const onClickLogin = async (id, passwd) => {
-    //     await axios.post(`/auth/singin/customer`, { loginId: id, password: passwd })
-    //         .then((res) => console.log('성공', res))
-    //         .catch((err) => console.log('실패', err))
-    // }
-
-
     return (
         <>
             <NavBar />
@@ -63,7 +55,14 @@ const LoginPage = () => {
                         <label className="remember-me">자동 로그인</label>
                     </div>
                     <br />
-                    <Button text="로그인" color="#FF9F74" onClick={isOwner ? () => ownerLogin(id, pw) : () => customerLogin(id, pw)} />
+                    <Button text="로그인" color="#FF9F74" onClick={isOwner ?
+                        () => ownerLogin(id, pw)
+                            .then((res) => { console.log('성공', res); setCookie('token', res.data.data.accessToken); navigator('/') })
+                            .catch((err) => { console.log('실패', err); alert('로그인 실패'); })
+                        :
+                        () => customerLogin(id, pw)
+                            .then((res) => { console.log('성공', res); setCookie('token', res.data.data.accessToken); navigator('/') })
+                            .catch((err) => { console.log('실패', err); alert('로그인 실패'); })} />
                     <Button text="회원가입" color="#7F7F7F" onClick={() => { navigator('/agree'); setCookie('isOwner', isOwner); }} />
                 </div>
                 <p onClick={() => navigator('/forgot')}>아이디/비밀번호 찾기</p>

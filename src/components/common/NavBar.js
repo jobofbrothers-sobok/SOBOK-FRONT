@@ -7,7 +7,6 @@ import { useNavigate } from "react-router";
 
 const NavContainer = styled.div`
     width: 100%;
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,7 +50,7 @@ const NavBar = () => {
     return (
         <NavContainer>
             <NavWrapper>
-                <img className="logo2Img" src={logo2} width="150px" height="auto" alt="소복 로고 이미지" onClick={() => navigator('/main')} />
+                <img className="logo2Img" src={logo2} width="150px" height="auto" alt="소복 로고 이미지" onClick={() => navigator('/')} />
                 <button onClick={openModal}><img className="menuImg" src={menuImg} width="30px" alt="메뉴 버튼" /></button>
                 <SideBar open={modalOpen} close={closeModal} />
             </NavWrapper>

@@ -4,11 +4,15 @@ import Button from "./common/Button";
 import ReviewItem from "./ReviewItem";
 import MoreButton from './common/MoreButton';
 import Modal from "./common/Modal";
-// import logo from '../asset/images/sobok_logo_square_jua.png';
+import logo from '../asset/images/sobok_logo_square_jua.png';
 import InputBox from "./common/InputBox";
 import Footer from "./common/Footer";
+import isLogin from "../lib/router/isLogin";
 
 const CafeReview = () => {
+
+    // 로그인 유무
+    const auth = isLogin();
 
     // 임시 배열
     const array1 = [0, 0, 0];
@@ -41,17 +45,9 @@ const CafeReview = () => {
             </Container>
             <MoreButton />
             <Footer />
-            {/* 로그인 모달 */}
-            {/* <Modal open={modalOpen} close={closeModal} header="Modal heading">
-                <ContentBox>
-                    <img src={logo} alt="소복로고이미지" width="50%" />
-                    <p className="title">로그인이 필요한 서비스입니다.</p><br /><br /><br />
-                    <Button text="로그인" />
-                </ContentBox>
-            </Modal> */}
-
             {/* 리뷰 작성 모달 */}
-            <Modal open={modalOpen} close={closeModal} header="Modal heading">
+            {/* 로그인 모달 */}
+            {auth ? <Modal open={modalOpen} close={closeModal} header="Modal heading">
                 <ContentBox>
                     <p className="title">리뷰 작성하기</p>
                     <br />
@@ -67,7 +63,13 @@ const CafeReview = () => {
                     </div>
                     <Button text="작성완료" />
                 </ContentBox>
-            </Modal>
+            </Modal> : <Modal open={modalOpen} close={closeModal} header="Modal heading">
+                <ContentBox>
+                    <img src={logo} alt="소복로고이미지" width="50%" />
+                    <p className="title">로그인이 필요한 서비스입니다.</p><br /><br /><br />
+                    <Button text="로그인" />
+                </ContentBox>
+            </Modal>}
         </>
     )
 }
