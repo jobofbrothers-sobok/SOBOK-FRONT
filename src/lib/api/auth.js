@@ -4,8 +4,8 @@ import { client } from "./client";
 const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
 
 // 고객 로그인
-export const customerLogin = async ({ loginId, password }) =>
-    await axios.post(`${PROXY}/auth/signin/customer`, { loginId, password })
+export const customerLogin = async (id, pw) =>
+    await axios.post(`${PROXY}/auth/signin/customer`, { loginId: id, password: pw })
         .then((res) => console.log('성공', res))
         .catch((err) => console.log('실패', err))
 
@@ -14,8 +14,8 @@ export const customerLogout = ({ loginId, password }) =>
     client.get(`${PROXY}/auth/signout/customer`, { loginId, password })
 
 // 고객 회원가입
-export const customerJoin = async ({ loginId, password, name, email, phone, marketingAgree }) =>
-    await axios.post(`${PROXY}/auth/signup/customer`, { loginId, password, name, email, phone, marketingAgree })
+export const customerJoin = async ({ id, pw, name, tel, email, termsAgree, isSelect }) =>
+    await axios.post(`${PROXY}/auth/signup/customer`, { loginId: id, password: pw, name: name, email: email, phone: tel, termsAgree: termsAgree, marketingAgree: isSelect })
 
 // 고객 회원탈퇴
 export const customerWithdraw = ({ loginId, password, name, email, phone, termsAgree, marketingAgree }) =>
@@ -39,8 +39,8 @@ export const ownerLogout = async ({ loginId, password }) =>
         .catch((err) => console.log('실패', err))
 
 // 점주 회원가입 
-export const ownerJoin = async ({ id, pw, name, email, tel, store, address, detail, code, isSelect }) =>
-    await axios.post(`${PROXY}/auth/signup/owner`, { loginId: id, password: pw, store: store, director: name, email: email, phone: tel, address: address, detailAddress: detail, licenseNumber: code, marketingAgree: isSelect })
+export const ownerJoin = async ({ id, pw, name, email, tel, store, address, detail, code, termsAgree, isSelect }) =>
+    await axios.post(`${PROXY}/auth/signup/owner`, { loginId: id, password: pw, store: store, director: name, email: email, phone: tel, address: address, detailAddress: detail, licenseNumber: code, termsAgree: termsAgree, marketingAgree: isSelect })
 
 // 점주 사업자등록증 전송
 export const ownerLicense = async ({ id, isSelect }) => {

@@ -10,13 +10,14 @@ import axios from "axios";
 const JoinInputForm = () => {
 
     // 점주: true, 고객: false
-    const isOwner = getCookie('isOwner');
+    const isOwner = getCookie('isOwner') === 'true' ? true : false;
     console.log('isOwner', isOwner);
 
     const navigator = useNavigate();
 
-    const isSelect = getCookie('select');
+    const isSelect = getCookie('select') === 'true' ? true : false;
     console.log(isSelect);
+    console.log(typeof (isSelect));
 
 
     // 공통 정보
@@ -26,6 +27,7 @@ const JoinInputForm = () => {
     const [name, setName] = useState('');
     const [tel, setTel] = useState('');
     const [email, setEmail] = useState('');
+    const termsAgree = true;
     // 점주 정보
     const [store, setStore] = useState('');
     const [address, setAddress] = useState('');
@@ -80,7 +82,7 @@ const JoinInputForm = () => {
             <input type="password" placeholder="Password" onChange={onHandleCpw} />
 
 
-            {isOwner === 'true' ?
+            {isOwner ?
                 <>
                     <p>매장명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={onHandleStore} />
@@ -111,10 +113,10 @@ const JoinInputForm = () => {
                     <input type="text" placeholder="010-0000-0000" onChange={onHandleTel} />
                 </>
             }
-            <Button text="가입 완료" color="#FF9F74" onClick={isOwner === 'true' ? () => {
-                ownerJoin({ id, pw, name, email, tel, store, address, detail, code, isSelect });
+            <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => {
+                ownerJoin({ id, pw, name, email, tel, store, address, detail, code, termsAgree, isSelect });
                 ownerLicense({ id, isSelect });
-            } : () => { console.log({ id, pw, cpw, name, tel, email, isSelect }); customerJoin({ id, pw, cpw, name, tel, email, isSelect }); }} />
+            } : () => { console.log({ id, pw, cpw, name, tel, email, isSelect }); customerJoin({ id, pw, cpw, name, tel, email, termsAgree, isSelect }); }} />
         </InputContainer >
     )
 }

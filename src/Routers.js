@@ -41,7 +41,7 @@ const Routers = () => {
             <ScrollToTop />
             <Routes>
                 {/* 메인페이지 */}
-                <Route element={<MainPage />} path='/main' />
+                <Route element={<MainPage />} path='/' />
                 <Route element={<CafeDetail />} path='/detail/:id' />
                 <Route element={<NewsPage />} path='/news' />
                 <Route element={<StorePage />} path='/store' />
@@ -49,7 +49,7 @@ const Routers = () => {
                 <Route element={<NoticeDetail />} path='/notice/item/:id' />
                 <Route element={<InquiryPage />} path='/inquiry' />
                 {/* 회원가입&로그인 */}
-                <Route element={<LoginPage />} path='/' />
+                <Route element={<LoginPage />} path='/login' />
                 <Route element={<FindPage />} path='/forgot' />
                 <Route element={<AgreePage />} path='/agree' />
                 <Route element={<JoinPage />} path='/join' />

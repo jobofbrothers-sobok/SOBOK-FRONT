@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { customerLogin, ownerLogin } from "../../lib/api/auth";
 import { setCookie } from "../../lib/cookie";
+import NavBar from "../../components/common/NavBar";
 
 const LoginPage = () => {
 
@@ -22,7 +23,7 @@ const LoginPage = () => {
 
 
     const [id, setId] = useState('');
-    const [passwd, setPasswd] = useState('');
+    const [pw, setPasswd] = useState('');
 
 
     const onHandleId = (e) => {
@@ -32,7 +33,7 @@ const LoginPage = () => {
 
     const onHandlePasswd = (e) => {
         setPasswd(e.target.value);
-        console.log(passwd);
+        console.log(pw);
     }
 
     // const onClickLogin = async (id, passwd) => {
@@ -43,32 +44,36 @@ const LoginPage = () => {
 
 
     return (
-        <LoginContainer>
-            <div className="logo">
-                <img src={logo} alt="소복 로고 이미지" style={{ width: "50vw", maxWidth: "200px" }} />
-            </div>
-            <div className="description">디저트 속 소소한 행복</div>
-            <br /><br />
-            <div className="login-form">
-                <p>아이디</p>
-                <input type="text" placeholder="010-0000-0000" onChange={onHandleId} />
-                <p>비밀번호</p>
-                <input type="password" placeholder="Password" onChange={onHandlePasswd} />
-                <div className="check">
-                    <input type="checkbox" id="checkbox" />
-                    <label className="remember-me">자동 로그인</label>
-                </div>
+        <>
+            <NavBar />
+            <LoginContainer>
                 <br />
-                <Button text="로그인" color="#FF9F74" onClick={isOwner ? () => ownerLogin(id, passwd) : () => customerLogin(id, passwd)} />
-                <Button text="회원가입" color="#7F7F7F" onClick={() => { navigator('/agree'); setCookie('isOwner', isOwner); }} />
-            </div>
-            <p onClick={() => navigator('/forgot')}>아이디/비밀번호 찾기</p>
-            <br />
-            <hr width="100%" />
-            <p className="is-owner">{isOwner ? '고객님이신가요?' : '점주님이신가요?'}</p>
-            <button className="is-owner-btn" onClick={handleButton}>{isOwner ? "고객" : "점주"} 로그인</button>
-            <br />
-        </LoginContainer>
+                <div className="logo">
+                    <img src={logo} alt="소복 로고 이미지" style={{ width: "35vw", maxWidth: "200px" }} />
+                </div>
+                <div className="description">디저트 속 소소한 행복</div>
+                <br /><br />
+                <div className="login-form">
+                    <p>아이디</p>
+                    <input type="text" placeholder="010-0000-0000" onChange={onHandleId} />
+                    <p>비밀번호</p>
+                    <input type="password" placeholder="Password" onChange={onHandlePasswd} />
+                    <div className="check">
+                        <input type="checkbox" id="checkbox" />
+                        <label className="remember-me">자동 로그인</label>
+                    </div>
+                    <br />
+                    <Button text="로그인" color="#FF9F74" onClick={isOwner ? () => ownerLogin(id, pw) : () => customerLogin(id, pw)} />
+                    <Button text="회원가입" color="#7F7F7F" onClick={() => { navigator('/agree'); setCookie('isOwner', isOwner); }} />
+                </div>
+                <p onClick={() => navigator('/forgot')}>아이디/비밀번호 찾기</p>
+                <br />
+                <hr width="100%" />
+                <p className="is-owner">{isOwner ? '고객님이신가요?' : '점주님이신가요?'}</p>
+                <button className="is-owner-btn" onClick={handleButton}>{isOwner ? "고객" : "점주"} 로그인</button>
+                <br />
+            </LoginContainer>
+        </>
     )
 }
 
@@ -83,7 +88,7 @@ const LoginContainer = styled.div`
     margin: 0 auto;
     justify-content: center;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 70px;
     .logo{
         display: flex;
         align-items: center;
