@@ -7,6 +7,12 @@ import CafeInfo from "../../components/CafeInfo";
 import CafeNews from "../../components/CafeNews";
 import CafeMenu from "../../components/CafeMenu";
 import CafeReview from "../../components/CafeReview";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar } from "swiper";
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+import 'swiper/components/navigation/navigation.min.css'
+import 'swiper/components/pagination/pagination.min.css'
 
 const CafeDetail = () => {
 
@@ -17,9 +23,17 @@ const CafeDetail = () => {
         <>
             <NavBar />
             <Container>
-                {/* <div className="hero_main"> */}
-                <img src={detailImg} className="hero_img" alt="메인이미지" />
-                {/* </div> */}
+                <Swiper
+                    className="swiper"
+                    modules={[Navigation, Pagination, Scrollbar]}
+                    slidesPerView={1}
+                    pagination={{ clickable: true }}
+                >
+                    <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
+                    <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
+                    <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
+                </Swiper>
+                {/* <img src={detailImg} className="hero_img" alt="메인이미지" /> */}
                 <div className="intro-box">
                     <p className="cafe-title">청파맨션</p>
                     <p className="cafe-intro">2009년  오픈한 카페청파맨션은<br />스페셜티커피 전문 카페입니다.</p>
@@ -61,6 +75,9 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 60px;
+    .swiper{
+        width: 100%;
+    }
     .hero_img{
         width: 100%;
         height: 100%;

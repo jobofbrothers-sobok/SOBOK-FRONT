@@ -1,5 +1,14 @@
 import axios from "axios";
 import { client } from "./client";
+import { getCookie } from "../cookie";
+
+const config = {
+    headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${getCookie('token')}`,
+        'withCredentials': true,
+    }
+}
 
 const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
 
@@ -11,10 +20,12 @@ export const customerLogin = async ({ loginId, password }) =>
 
 
 // 고객 회원탈퇴
-export const customerWithdraw = (config) =>
-    axios.delete(`${PROXY}/auth/customer`, config)
+export const customerWithdraw = (config) => {
+    return axios.delete(`${PROXY}/auth/customer`, config)
+}
 
 
 // 점주 회원탈퇴
-export const ownerWithdraw = (config) =>
-    client.delete(`${PROXY}/auth/owner`, config)
+export const ownerWithdraw = () => {
+    return axios.delete(`${PROXY}/auth/owner`, config)
+}
