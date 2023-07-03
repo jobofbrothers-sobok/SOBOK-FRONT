@@ -1,20 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../../asset/images/sobok_logo_square_jua.png"
 import Button from "../../components/common/Button";
+import { customerFindpw } from "../../lib/api/mypage";
+import NavBar from "../../components/common/NavBar";
 
 const FindPage = () => {
+
+    const [email, setEmail] = useState('');
+
+    const onHandleEmail = (e) => {
+        setEmail(e.target.value);
+        console.log(email);
+    }
+
     return (
-        <Container>
-            <div className="info-box">
-                <img src={logo} alt="소복 로고 이미지" width={"40%"} />
-                <div className="info-title">회원정보 찾기</div>
-                <div className="info-detail">회원가입 시 등록하신 이메일 주소를 입력해 주세요.<br />해당 이메일로 아이디와 비밀번호 정보를 보내드립니다.</div>
-            </div>
-            <p>E-mail 주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-            <input type="text" placeholder="Email" />
-            <Button text="인증메일 보내기" color="#FF9F74" />
-        </Container>
+        <>
+            <NavBar />
+            <Container>
+                <div className="info-box">
+                    <img src={logo} alt="소복 로고 이미지" width={"40%"} />
+                    <div className="info-title">회원정보 찾기</div>
+                    <div className="info-detail">회원가입 시 등록하신 이메일 주소를 입력해 주세요.<br />해당 이메일로 아이디와 비밀번호 정보를 보내드립니다.</div>
+                </div>
+                <p>E-mail 주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
+                <input type="text" placeholder="Email" onChange={onHandleEmail} />
+                <Button text="인증메일 보내기" color="#FF9F74" onClick={() => customerFindpw(email)
+                    .then((res) => { console.log(res); alert('전송된 이메일을 확인해주세요.'); })
+                    .catch((err) => { console.log(err); alert('이메일 전송에 실패했습니다.'); })} />
+            </Container>
+        </>
     )
 }
 

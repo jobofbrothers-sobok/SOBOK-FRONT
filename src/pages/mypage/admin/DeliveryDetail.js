@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import dummy from "../../data/data.json";
+import dummy from "../../../data/data.json";
 import styled from "styled-components";
-import NavBar from "../../components/common/NavBar";
-import BackButton from "../../components/common/BackButton";
-import Button from "../../components/common/Button";
-import Footer from "../../components/common/Footer";
+import NavBar from "../../../components/common/NavBar";
+import BackButton from "../../../components/common/BackButton";
+import Button from "../../../components/common/Button";
+import Footer from "../../../components/common/Footer";
 
 const DeliveryDetail = () => {
 

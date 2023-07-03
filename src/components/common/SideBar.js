@@ -39,7 +39,7 @@ const SideBar = (props) => {
         {open ?
           <SideBarWrap>
             <div className="menu-header">
-              <p className="top-text" onClick={() => navigator('/login')}><span style={{ color: '#FF9F74', fontSize: '20px', fontWeight: '600' }}>{auth ? '사용자' : '로그인'}</span>{auth ? '님 반갑습니다.' : '을 해주세요'}</p>
+              <p className="top-text" onClick={auth ? null : () => navigator('/login')}><span style={{ color: '#FF9F74', fontSize: '20px', fontWeight: '600' }}>{auth ? '사용자' : '로그인'}</span>{auth ? '님 반갑습니다.' : '을 해주세요'}</p>
               <button className="close" onClick={close}>
                 &times;
               </button>

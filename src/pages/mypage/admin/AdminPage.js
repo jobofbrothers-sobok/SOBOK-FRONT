@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import NavBar from "../../components/common/NavBar";
-import sobokFace from "../../asset/images/sobok-face.svg";
-import Footer from "../../components/common/Footer";
+import NavBar from "../../../components/common/NavBar";
+import sobokFace from "../../../asset/images/sobok-face.svg";
+import Footer from "../../../components/common/Footer";
 import { useNavigate } from "react-router-dom";
 
 const AdminPage = () => {

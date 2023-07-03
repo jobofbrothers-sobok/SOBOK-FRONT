@@ -1,24 +1,34 @@
-import React from 'react';
-import styled from 'styled-components';
-import dummy from '../../data/data.json';
-import ListItem from '../../components/common/ListItem';
-import MoreButton from '../../components/common/MoreButton';
+import React from "react";
+import styled from "styled-components";
+import Button from "../../../components/common/Button";
+import SearchBox from "../../../components/common/SearchBox";
+import dummy from "../../../data/data.json";
+import ListItem from "../../../components/common/ListItem";
+import MoreButton from "../../../components/common/MoreButton";
+import { useNavigate } from "react-router-dom";
 
-const InquiriesList = () => {
+const StampInfoList = () => {
+
+    const navigator = useNavigate();
+
     return (
         <>
             <Container>
-                <p className="title">문의 사항 리스트</p>
+                <p className="title">스탬프 정보 리스트</p>
                 <br />
+                <Button text="생성하기" color="#FF9F74" radius="5px" height="50px" onClick={() => navigator('/admin/menu/2/add-stamp-tour')} />
+                <br />
+                <SearchBox />
                 <div className='apply-list'>
                     <br />
                     <hr />
-                    {dummy.inquiries.map(item => (
+                    {dummy.stamp.map(item => (
                         <ListItem
                             id={item.id}
                             title={item.title}
-                            category={item.member + " / " + item.nickname + " / " + item.tel}
-                            date={item.date}
+                            category={item.reward}
+                            isActive={true}
+                            onClick={() => navigator(`/admin/menu/3/detail/${item.id}`)}
                         />
                     ))}
                 </div>
@@ -28,7 +38,7 @@ const InquiriesList = () => {
     )
 }
 
-export default InquiriesList;
+export default StampInfoList;
 
 const Container = styled.div`
     width: 100%;

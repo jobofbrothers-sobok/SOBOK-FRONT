@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import NavBar from "../../components/common/NavBar";
-import BackButton from "../../components/common/BackButton";
-import SearchBox from "../../components/common/SearchBox";
-import Button from "../../components/common/Button";
-import Footer from "../../components/common/Footer";
+import NavBar from "../../../components/common/NavBar";
+import BackButton from "../../../components/common/BackButton";
+import SearchBox from "../../../components/common/SearchBox";
+import Button from "../../../components/common/Button";
+import Footer from "../../../components/common/Footer";
 
 const AddStampTour = () => {
     return (

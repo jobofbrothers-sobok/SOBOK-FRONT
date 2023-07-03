@@ -1,30 +1,33 @@
-import React from "react";
-import styled from "styled-components";
-import SearchBox from "../../components/common/SearchBox";
-import ListItem from "../../components/common/ListItem";
-import dummy from "../../data/data.json";
-import MoreButton from "../../components/common/MoreButton";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import dummy from '../../../data/data.json';
+import SearchBox from '../../../components/common/SearchBox';
+import MoreButton from '../../../components/common/MoreButton';
+import { useNavigate } from 'react-router-dom';
+import ListItem from '../../../components/common/ListItem';
 
-const DeliveryList = () => {
+const AdminManager = () => {
+
     const navigator = useNavigate();
+
 
     return (
         <>
             <Container>
-                <p className="title">배송 신청 리스트</p>
+                <p className="title">소복 매니저</p>
                 <br />
                 <SearchBox />
                 <div className='apply-list'>
                     <br />
                     <hr />
-                    {dummy.delivery.map(item => (
+                    {dummy.manager.map(item => (
                         <ListItem
                             id={item.id}
-                            title={item.nickname}
-                            category={item.date}
-                            isActive={false}
-                            onClick={() => navigator(`/admin/menu/4/detail/${item.id}`)}
+                            title={item.title}
+                            category={item.category}
+                            date={item.date}
+                            isActive={true}
+                            onClick={() => navigator(`/admin/menu/3/detail/${item.id}`)}
                         />
                     ))}
                 </div>
@@ -34,7 +37,7 @@ const DeliveryList = () => {
     )
 }
 
-export default DeliveryList;
+export default AdminManager;
 
 const Container = styled.div`
     width: 100%;
@@ -52,7 +55,7 @@ const Container = styled.div`
         font-size: 23px;
         line-height: 20px;
         letter-spacing: -0.08em;
-        color: #222222;         
+        color: #222222;            
     }
     .apply-list{
         width: 100%;

@@ -1,18 +1,12 @@
 import React from "react";
-import NavBar from "../../components/common/NavBar";
-import BackButton from "../../components/common/BackButton";
 import styled from "styled-components";
-import Footer from "../../components/common/Footer";
-import Button from "../../components/common/Button";
+import Button from "../../../components/common/Button";
 
 const OwnerEditInfo = () => {
     return (
         <>
-            <NavBar />
             <Container>
-                <BackButton />
                 <div className="edit-form">
-                    <br /><br />
                     <p className="title">담당자 정보수정</p>
                     <br /><br />
                     <p>프로필 이미지 등록하기<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
@@ -42,7 +36,6 @@ const OwnerEditInfo = () => {
                     <Button text="수정완료" color="#FF9F74" />
                 </div>
             </Container>
-            <Footer />
         </>
     )
 }
@@ -51,14 +44,14 @@ export default OwnerEditInfo;
 
 const Container = styled.div`
     width: 100%;
-    padding: 0 20px 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    aling-items: center;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 40px;
     .edit-form{
         width: 100%;
         display: flex;

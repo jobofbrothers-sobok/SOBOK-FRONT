@@ -1,33 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import dummy from '../../data/data.json';
-import SearchBox from '../../components/common/SearchBox';
-import MoreButton from '../../components/common/MoreButton';
-import { useNavigate } from 'react-router-dom';
-import ListItem from '../../components/common/ListItem';
+import dummy from '../../../data/data.json';
+import ListItem from '../../../components/common/ListItem';
+import MoreButton from '../../../components/common/MoreButton';
 
-const AdminManager = () => {
-
-    const navigator = useNavigate();
-
-
+const InquiriesList = () => {
     return (
         <>
             <Container>
-                <p className="title">소복 매니저</p>
+                <p className="title">문의 사항 리스트</p>
                 <br />
-                <SearchBox />
                 <div className='apply-list'>
                     <br />
                     <hr />
-                    {dummy.manager.map(item => (
+                    {dummy.inquiries.map(item => (
                         <ListItem
                             id={item.id}
                             title={item.title}
-                            category={item.category}
+                            category={item.member + " / " + item.nickname + " / " + item.tel}
                             date={item.date}
-                            isActive={true}
-                            onClick={() => navigator(`/admin/menu/3/detail/${item.id}`)}
                         />
                     ))}
                 </div>
@@ -37,7 +28,7 @@ const AdminManager = () => {
     )
 }
 
-export default AdminManager;
+export default InquiriesList;
 
 const Container = styled.div`
     width: 100%;

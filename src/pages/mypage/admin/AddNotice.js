@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import InputBox from "../../components/common/InputBox";
-import Button from "../../components/common/Button";
+import InputBox from "../../../components/common/InputBox";
+import Button from "../../../components/common/Button";
 
 const AddNotice = () => {
     return (

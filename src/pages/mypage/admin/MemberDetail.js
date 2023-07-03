@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Button from "../../components/common/Button";
-import NavBar from "../../components/common/NavBar";
-import BackButton from "../../components/common/BackButton";
-import Footer from "../../components/common/Footer";
+import Button from "../../../components/common/Button";
+import NavBar from "../../../components/common/NavBar";
+import BackButton from "../../../components/common/BackButton";
+import Footer from "../../../components/common/Footer";
 
 const MemberDetail = () => {
 

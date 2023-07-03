@@ -1,23 +1,16 @@
 import React from "react";
-import NavBar from "../../components/common/NavBar";
-import BackButton from "../../components/common/BackButton";
 import styled from "styled-components";
-import Button from "../../components/common/Button";
-import kakao from "../../asset/images/kakaoIcon.svg";
-import message from "../../asset/images/messageIcon.svg";
-import Footer from "../../components/common/Footer";
-import filterbtn from "../../asset/images/filter-arrow.svg";
-import { useParams } from "react-router-dom";
+import Button from "../../../components/common/Button";
+import kakao from "../../../asset/images/kakaoIcon.svg";
+import message from "../../../asset/images/messageIcon.svg";
+import filterbtn from "../../../asset/images/filter-arrow.svg";
 
 const OwnerManager = () => {
 
     return (
         <>
-            <NavBar />
             <Container>
-                <BackButton />
                 <div className="manager-form">
-                    <br />
                     <p className="title">소복 매니저</p>
                     <div className="button-box">
                         <SendButton>
@@ -42,7 +35,6 @@ const OwnerManager = () => {
                 <p className="bottom-text">최고관리자 확인 후 스탬프 이용고객에게<br />
                     일괄 전송 됩니다.</p>
             </Container>
-            <Footer />
         </>
     )
 }
@@ -51,14 +43,14 @@ export default OwnerManager;
 
 const Container = styled.div`
     width: 100%;
-    padding: 0 20px 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    aling-items: center;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 40px;
     .manager-form{
         width: 100%;
         display: flex;

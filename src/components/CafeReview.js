@@ -44,7 +44,6 @@ const CafeReview = () => {
                 </div>
             </Container>
             <MoreButton />
-            <Footer />
             {/* 리뷰 작성 모달 */}
             {/* 로그인 모달 */}
             {auth ? <Modal open={modalOpen} close={closeModal} header="Modal heading">

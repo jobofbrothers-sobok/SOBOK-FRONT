@@ -1,18 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import NavBar from "../../components/common/NavBar";
-import BackButton from "../../components/common/BackButton";
-import Button from "../../components/common/Button";
-import Footer from "../../components/common/Footer";
+import Button from "../../../components/common/Button";
 
 const OwnerAddMenu = () => {
     return (
         <>
-            <NavBar />
             <Container>
-                <BackButton />
                 <div className="edit-form">
-                    <br /><br />
                     <p className="title">매장 메뉴 등록</p>
                     <br /><br />
                     <p>제목<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
@@ -26,7 +20,6 @@ const OwnerAddMenu = () => {
                     <Button text="등록하기" color="#FF9F74" />
                 </div>
             </Container>
-            <Footer />
         </>
     )
 }
@@ -35,14 +28,14 @@ export default OwnerAddMenu;
 
 const Container = styled.div`
     width: 100%;
-    padding: 0 20px 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    aling-items: center;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 40px;
     .edit-form{
         width: 100%;
         display: flex;

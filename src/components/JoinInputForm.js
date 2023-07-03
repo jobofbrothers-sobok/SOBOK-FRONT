@@ -119,12 +119,16 @@ const JoinInputForm = () => {
                     .then((res) => {
                         console.log('등록증 성공', res);
                         ownerJoin({ id, pw, name, email, tel, store, address, detail, code, termsAgree, isSelect })
-                            .then((res) => console.log('회원가입 성공', res))
-                            .catch((err) => console.log('회원가입 실패', err));
+                            .then((res) => { console.log('회원가입 성공', res); alert('회원가입 성공'); navigator('/login'); })
+                            .catch((err) => { console.log('회원가입 실패', err); alert('회원가입 실패'); });
                     })
-                    .catch((err) => console.log('등록증 실패', err))
+                    .catch((err) => { console.log('등록증 실패', err); alert('회원가입 실패'); })
 
-            } : () => { console.log({ id, pw, cpw, name, tel, email, isSelect }); customerJoin({ id, pw, cpw, name, tel, email, termsAgree, isSelect }); }} />
+            } : () => {
+                customerJoin({ id, pw, cpw, name, tel, email, termsAgree, isSelect })
+                    .then((res) => { console.log('회원가입 성공', res); alert('회원가입 성공'); navigator('/login'); })
+                    .catch((err) => { console.log('회원가입 실패', err); alert('회원가입 실패'); });
+            }} />
         </InputContainer >
     )
 }

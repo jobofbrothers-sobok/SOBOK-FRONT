@@ -1,30 +1,27 @@
 import React from "react";
-import NavBar from "../../components/common/NavBar";
-import BackButton from "../../components/common/BackButton";
 import styled from "styled-components";
-import Footer from "../../components/common/Footer";
-import Button from "../../components/common/Button";
+import Button from "../../../components/common/Button";
 // 카테고리 이미지
-import all from "../../asset/images/category/all.svg";
-import all2 from "../../asset/images/category/all2.svg";
-import concent from "../../asset/images/category/concent.svg";
-import concent2 from "../../asset/images/category/concent2.svg";
-import table from "../../asset/images/category/table.svg";
-import table2 from "../../asset/images/category/table2.svg";
-import park from "../../asset/images/category/park.svg";
-import park2 from "../../asset/images/category/park2.svg";
-import dog from "../../asset/images/category/dog.svg";
-import dog2 from "../../asset/images/category/dog2.svg";
-import window from "../../asset/images/category/window.svg";
-import window2 from "../../asset/images/category/window2.svg";
-import ciagrette from "../../asset/images/category/cigarette.svg";
-import ciagrette2 from "../../asset/images/category/cigarette2.svg";
-import nokids from "../../asset/images/category/nokids.svg";
-import nokids2 from "../../asset/images/category/nokids2.svg";
-import sofa from "../../asset/images/category/sofa.svg";
-import sofa2 from "../../asset/images/category/sofa2.svg";
-import rooftop from "../../asset/images/category/rooftop.svg";
-import rooftop2 from "../../asset/images/category/rooftop2.svg";
+import all from "../../../asset/images/category/all.svg";
+import all2 from "../../../asset/images/category/all2.svg";
+import concent from "../../../asset/images/category/concent.svg";
+import concent2 from "../../../asset/images/category/concent2.svg";
+import table from "../../../asset/images/category/table.svg";
+import table2 from "../../../asset/images/category/table2.svg";
+import park from "../../../asset/images/category/park.svg";
+import park2 from "../../../asset/images/category/park2.svg";
+import dog from "../../../asset/images/category/dog.svg";
+import dog2 from "../../../asset/images/category/dog2.svg";
+import window from "../../../asset/images/category/window.svg";
+import window2 from "../../../asset/images/category/window2.svg";
+import ciagrette from "../../../asset/images/category/cigarette.svg";
+import ciagrette2 from "../../../asset/images/category/cigarette2.svg";
+import nokids from "../../../asset/images/category/nokids.svg";
+import nokids2 from "../../../asset/images/category/nokids2.svg";
+import sofa from "../../../asset/images/category/sofa.svg";
+import sofa2 from "../../../asset/images/category/sofa2.svg";
+import rooftop from "../../../asset/images/category/rooftop.svg";
+import rooftop2 from "../../../asset/images/category/rooftop2.svg";
 
 
 const OwnerEditStoreInfo = () => {
@@ -39,11 +36,8 @@ const OwnerEditStoreInfo = () => {
 
     return (
         <>
-            <NavBar />
             <Container>
-                <BackButton />
                 <div className="edit-form">
-                    <br /><br />
                     <p className="title">매장 정보 등록/수정</p>
                     <br /><br />
                     <p>매장명<span style={{ color: "#EB5757", fontWeight: "900" }}></span></p>
@@ -188,7 +182,6 @@ const OwnerEditStoreInfo = () => {
                     <Button text="신청하기" color="#FF9F74" />
                 </div>
             </Container>
-            <Footer />
         </>
     )
 }
@@ -197,14 +190,14 @@ export default OwnerEditStoreInfo;
 
 const Container = styled.div`
     width: 100%;
-    padding: 0 20px 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    aling-items: center;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 40px;
     .edit-form{
         width: 100%;
         display: flex;
