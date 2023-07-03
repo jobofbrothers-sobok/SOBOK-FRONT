@@ -4,9 +4,18 @@ import BackButton from "../../../components/common/BackButton";
 import NavBar from "../../../components/common/NavBar";
 import Footer from "../../../components/common/Footer";
 import styled from "styled-components";
-
+import { customerWithdraw } from "../../../lib/api/mypage";
+import { getCookie } from "../../../lib/cookie";
 
 const EditCustomerInfo = () => {
+    let config = {
+        headers: {
+            'Content-Type': `multipart/form-data`,
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+
     return (
         <>
             <NavBar />
@@ -36,8 +45,10 @@ const EditCustomerInfo = () => {
                     <Button text="수정완료" color="#FF9F74" />
                 </div>
                 <br />
-                <p>회원탈퇴</p>
-            </Container>
+                <p onClick={() => customerWithdraw(config)
+                    .then((res) => console.log(res))
+                    .catch((err) => console.log(err))}>회원탈퇴</p>
+            </Container >
             <Footer />
         </>
     )
