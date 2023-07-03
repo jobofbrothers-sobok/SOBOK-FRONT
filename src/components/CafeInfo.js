@@ -118,6 +118,7 @@ const Container = styled.div`
         color: #7F7F7F;
     }
     .map-container{
+        z-index: 0;
         width: 100%;
         height: 250px;
         border-top: 1px solid #CCCCCC;

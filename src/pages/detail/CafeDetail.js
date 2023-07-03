@@ -77,6 +77,7 @@ const Container = styled.div`
     margin-top: 60px;
     .swiper{
         width: 100%;
+        z-index: 0;
     }
     .hero_img{
         width: 100%;
