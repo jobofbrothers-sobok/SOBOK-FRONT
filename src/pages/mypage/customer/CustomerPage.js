@@ -6,6 +6,7 @@ import sobokFace from "../../../asset/images/sobok-face.svg";
 import ReviewItem from "../../../components/ReviewItem";
 import { useNavigate } from "react-router-dom";
 import CafeItem from "../../../components/CafeItem";
+import { getCookie } from "../../../lib/cookie";
 
 const CustomerPage = () => {
 
@@ -17,6 +18,8 @@ const CustomerPage = () => {
 
     const navigator = useNavigate();
 
+    const name = getCookie('name');
+
     return (
         <>
             <NavBar />
@@ -24,7 +27,7 @@ const CustomerPage = () => {
                 <div className="mypage-topsection">
                     <img src={sobokFace} alt="소복 얼굴 이미지" width="60px" />
                     <div className="text-div">
-                        <p className="name-text"><span>고법</span>님 마이페이지</p>
+                        <p className="name-text"><span>{name}</span>님 마이페이지</p>
                         <p className="edit-text" onClick={() => navigator('/customer/edit')}>회원정보 수정하기</p>
                     </div>
                 </div>

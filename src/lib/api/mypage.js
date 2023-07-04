@@ -12,12 +12,15 @@ const config = {
 const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
 
 // 고객 회원 정보 수정
-export const customerLogin = async ({ loginId, password }) => {
-    return await axios.post(`${PROXY}/auth/signin/customer`, { loginId, password })
-        .then((res) => console.log('성공', res))
-        .catch((err) => console.log('실패', err))
+export const customerEdit = async (pw, name, email, phone, file) => {
+    let formData = new FormData();
+    formData.append('password', pw);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('file', file);
+    return await axios.post(`${PROXY}/auth/update/customer`, formData, config)
 }
-
 
 // 고객 회원탈퇴
 export const customerWithdraw = async (config) => {
@@ -30,6 +33,21 @@ export const customerFindpw = async (email) => {
 }
 
 // 점주 회원탈퇴
-export const ownerWithdraw = () => {
-    return axios.delete(`${PROXY}/auth/owner`, config)
+export const ownerWithdraw = async () => {
+    return await axios.delete(`${PROXY}/auth/owner`, config)
+}
+
+// 점주 회원 정보 수정
+export const ownerEdit = async (pw, name, email, phone, address, detail, code, licenseImg, profile, config) => {
+    let formData = new FormData();
+    formData.append('password', pw);
+    formData.append('director', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('address', address);
+    formData.append('detailAddress', detail);
+    formData.append('licenseNumber', code);
+    formData.append('file1', licenseImg);
+    formData.append('file2', profile);
+    return await axios.post(`${PROXY}/auth/update/owner`, formData, config)
 }
