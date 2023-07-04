@@ -60,6 +60,7 @@ const LoginPage = () => {
                             .then((res) => {
                                 console.log('성공', res); setCookie('token', res.data.data.accessToken);
                                 setCookie('who', res.data.data.who);
+                                setCookie('id', res.data.data.id);
                                 setCookie('loginId', res.data.data.loginId);
                                 setCookie('store', res.data.data.store);
                                 setCookie('name', res.data.data.director); navigator('/');

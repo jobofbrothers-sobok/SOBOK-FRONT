@@ -18,10 +18,10 @@ export const customerJoin = async ({ id, pw, name, tel, email, termsAgree, isSel
     return await axios.post(`${PROXY}/auth/signup/customer`, { loginId: id, password: pw, name: name, email: email, phone: tel, termsAgree: termsAgree, marketingAgree: isSelect })
 }
 
-// 고객 비밀번호 찾기
-export const customerFindpw = ({ status, success, message, data }) =>
-    client.post(`${PROXY}/auth/find/customer`, { status, success, message, data })
-
+// 고객 회원정보 찾기 및 비밀번호 초기화 api 명세
+export const customerFindpw = async (email) => {
+    return await axios.post(`${PROXY}/auth/find/customer`, { email: email });
+}
 
 // 점주 로그인
 export const ownerLogin = async (id, pw) => {
@@ -47,3 +47,7 @@ export const ownerLicense = async (id, image) => {
     return await axios.post(`${PROXY}/auth/signup/owner`, formData);
 };
 
+// 점주 회원정보 찾기 및 비밀번호 초기화 api 명세
+export const ownerFindpw = async (email) => {
+    return await axios.post(`${PROXY}/auth/find/owner`, { email: email });
+}
