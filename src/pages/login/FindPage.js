@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../../asset/images/sobok_logo_square_jua.png"
 import Button from "../../components/common/Button";
-import { customerFindpw } from "../../lib/api/mypage";
+import { customerFindpw, ownerFindpw } from "../../lib/api/auth";
 import NavBar from "../../components/common/NavBar";
+import { getCookie } from "../../lib/cookie";
 
 const FindPage = () => {
 
     const [email, setEmail] = useState('');
+
+    const isOwner = getCookie('isOwner') === 'true' ? true : false;
 
     const onHandleEmail = (e) => {
         setEmail(e.target.value);
@@ -25,9 +28,13 @@ const FindPage = () => {
                 </div>
                 <p>E-mail 주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                 <input type="text" placeholder="Email" onChange={onHandleEmail} />
-                <Button text="인증메일 보내기" color="#FF9F74" onClick={() => customerFindpw(email)
-                    .then((res) => { console.log(res); alert('전송된 이메일을 확인해주세요.'); })
-                    .catch((err) => { console.log(err); alert('이메일 전송에 실패했습니다.'); })} />
+                <Button text="인증메일 보내기" color="#FF9F74" onClick={isOwner ?
+                    () => ownerFindpw(email)
+                        .then((res) => { console.log(res); alert('전송된 이메일을 확인해주세요.'); })
+                        .catch((err) => { console.log(err); alert('이메일 전송에 실패했습니다.'); }) :
+                    () => customerFindpw(email)
+                        .then((res) => { console.log(res); alert('전송된 이메일을 확인해주세요.'); })
+                        .catch((err) => { console.log(err); alert('이메일 전송에 실패했습니다.'); })} />
             </Container>
         </>
     )

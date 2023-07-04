@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import filterbtn from "../../../asset/images/filter-arrow.svg";
 import Button from "../../../components/common/Button";
+import { ownerAddProduct } from "../../../lib/api/mypage";
 
 const OwnerAddStore = () => {
+
+    const [category, setStore] = useState('');
+    const [name, setSummary] = useState('');
+    const [price, setTime] = useState('');
+    const [discountPrice, setDayoff] = useState('');
+    const [url, setLink] = useState('');
+    const [file, setImage] = useState('');
+
+    const onAddProduct = () => {
+        ownerAddProduct(category, name, price, discountPrice, url, file)
+        .then((res) => console.log(res))
+    }
+
     return (
         <>
             <Container>

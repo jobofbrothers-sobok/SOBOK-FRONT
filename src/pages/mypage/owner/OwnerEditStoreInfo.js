@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../../../components/common/Button";
 // 카테고리 이미지
@@ -22,16 +22,50 @@ import sofa from "../../../asset/images/category/sofa.svg";
 import sofa2 from "../../../asset/images/category/sofa2.svg";
 import rooftop from "../../../asset/images/category/rooftop.svg";
 import rooftop2 from "../../../asset/images/category/rooftop2.svg";
+import { ownerAddStore } from "../../../lib/api/mypage";
+import { getCookie, setCookie } from "../../../lib/cookie";
 
 
 const OwnerEditStoreInfo = () => {
 
+    const [store, setStore] = useState('');
+    const [summary, setSummary] = useState('');
+    const [time, setTime] = useState('');
+    const [dayOff, setDayoff] = useState('');
+    const [link, setLink] = useState('');
+    const [image, setImage] = useState('');
 
-    const onHandleCategory = (event) => {
-        const { name, value, checked } = event.target;
 
-        console.log(name, value, checked);
-        // console.log(checked)
+    const [checkList, setCheckList] = useState([]);
+
+    const checkAll = (e) => {
+        console.log(e.target.checked);
+        e.target.checked
+            ? setCheckList(['concent', 'table', 'park', 'dog', 'rooftop', 'sofa', 'nokids', 'window', 'ciagrette'])
+            : setCheckList([]);
+    }
+
+    const check = (e) => {
+        console.log(e.target.checked);
+        e.target.checked
+            ? setCheckList([...checkList, e.target.value])
+            : setCheckList(checkList.filter((choice) => choice !== e.target.value))
+    }
+
+
+    const onAddStore = () => {
+        let config = {
+            headers: {
+                'Content-Type': `multipart/form-data`,
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        }
+        let checkString = checkList.join();
+        console.log(checkString);
+        ownerAddStore(store, summary, time, dayOff, link, image, checkString, config)
+            .then((res) => { console.log(res); alert('매장이 성공적으로 등록되었습니다.'); })
+            .catch((err) => { console.log(err); alert('매장 등록에 실패하였습니다.') })
     }
 
     return (
@@ -41,17 +75,17 @@ const OwnerEditStoreInfo = () => {
                     <p className="title">매장 정보 등록/수정</p>
                     <br /><br />
                     <p>매장명<span style={{ color: "#EB5757", fontWeight: "900" }}></span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setStore(e.target.value)} />
                     <p>매장설명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setSummary(e.target.value)} />
                     <p>영업시간<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setTime(e.target.value)} />
                     <p>휴무일<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setDayoff(e.target.value)} />
                     <p>홈페이지<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setLink(e.target.value)} />
                     <p>매장 썸네일 이미지<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" />
+                    <input type="file" onChange={(e) => setImage(e.target.files[0])} />
                     <div className="category-container">
                         <p className="category-title">카테고리 <span className="category-title2">설정</span></p>
                         <hr />
@@ -61,19 +95,21 @@ const OwnerEditStoreInfo = () => {
                                 id="icon1"
                                 name="category"
                                 value="all"
-                                onClick={onHandleCategory}
+                                onChange={checkAll}
+                                checked={checkList.length === 9 ? true : false}
                             />
                             <label htmlFor="icon1">
                                 <img src={all} alt="all" className="icon" />
                                 <img src={all2} alt="all2" className="icon_active" />
-                                <p>all</p>
+                                <p>전체</p>
                             </label>
                             <input
                                 type="checkbox"
                                 id="icon2"
                                 name="category"
                                 value="concent"
-                                onClick={onHandleCategory}
+                                onChange={check}
+                                checked={checkList.includes('concent') ? true : false}
                             />
                             <label htmlFor="icon2">
                                 <img src={concent} alt="concent" className="icon" />
@@ -85,7 +121,8 @@ const OwnerEditStoreInfo = () => {
                                 id="icon3"
                                 name="category"
                                 value="table"
-                                onClick={onHandleCategory}
+                                onChange={check}
+                                checked={checkList.includes('table') ? true : false}
                             />
                             <label htmlFor="icon3">
                                 <img src={table} alt="table" className="icon" />
@@ -97,7 +134,8 @@ const OwnerEditStoreInfo = () => {
                                 id="icon4"
                                 name="category"
                                 value="park"
-                                onClick={onHandleCategory}
+                                onChange={check}
+                                checked={checkList.includes('park') ? true : false}
                             />
                             <label htmlFor="icon4">
                                 <img src={park} alt="park" className="icon" />
@@ -109,7 +147,8 @@ const OwnerEditStoreInfo = () => {
                                 id="icon5"
                                 name="category"
                                 value="dog"
-                                onClick={onHandleCategory}
+                                onChange={check}
+                                checked={checkList.includes('dog') ? true : false}
                             />
                             <label htmlFor="icon5">
                                 <img src={dog} alt="dog" className="icon" />
@@ -121,7 +160,8 @@ const OwnerEditStoreInfo = () => {
                                 id="icon6"
                                 name="category"
                                 value="window"
-                                onClick={onHandleCategory}
+                                onChange={check}
+                                checked={checkList.includes('window') ? true : false}
                             />
                             <label htmlFor="icon6">
                                 <img src={window} alt="window" className="icon" />
@@ -133,7 +173,8 @@ const OwnerEditStoreInfo = () => {
                                 id="icon7"
                                 name="category"
                                 value="ciagrette"
-                                onClick={onHandleCategory}
+                                onChange={check}
+                                checked={checkList.includes('ciagrette') ? true : false}
                             />
                             <label htmlFor="icon7">
                                 <img src={ciagrette} alt="ciagrette" className="icon" />
@@ -145,7 +186,8 @@ const OwnerEditStoreInfo = () => {
                                 id="icon8"
                                 name="category"
                                 value="nokids"
-                                onClick={onHandleCategory}
+                                onChange={check}
+                                checked={checkList.includes('nokids') ? true : false}
                             />
                             <label htmlFor="icon8">
                                 <img src={nokids} alt="nokids" className="icon" />
@@ -157,7 +199,8 @@ const OwnerEditStoreInfo = () => {
                                 id="icon9"
                                 name="category"
                                 value="sofa"
-                                onClick={onHandleCategory}
+                                onChange={check}
+                                checked={checkList.includes('sofa') ? true : false}
                             />
                             <label htmlFor="icon9">
                                 <img src={sofa} alt="sofa" className="icon" />
@@ -169,7 +212,8 @@ const OwnerEditStoreInfo = () => {
                                 id="icon10"
                                 name="category"
                                 value="rooftop"
-                                onClick={onHandleCategory}
+                                onChange={check}
+                                checked={checkList.includes('rooftop') ? true : false}
                             />
                             <label htmlFor="icon10">
                                 <img src={rooftop} alt="rooftop" className="icon" />
@@ -179,7 +223,7 @@ const OwnerEditStoreInfo = () => {
                         </div>
                     </div>
                     <br />
-                    <Button text="신청하기" color="#FF9F74" />
+                    <Button text="신청하기" color="#FF9F74" onClick={onAddStore} />
                 </div>
             </Container>
         </>
