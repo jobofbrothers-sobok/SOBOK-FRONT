@@ -4,12 +4,16 @@ import NavBar from "../../../components/common/NavBar";
 import sobokFace from "../../../asset/images/sobok-face.svg";
 import Footer from "../../../components/common/Footer";
 import { useNavigate } from "react-router-dom";
+import { getCookie } from "../../../lib/cookie";
 
 const OwnerPage = () => {
 
     const navigator = useNavigate();
 
-    const menuList = ['담당자 정보 수정', '매장 정보 등록/수정', '매장 소식 등록', '매장 메뉴 등록', '스토어 상품 등록', '소복 매니저']
+    const menuList = ['담당자 정보 수정', '매장 정보 등록/수정', '매장 소식 등록', '매장 메뉴 등록', '스토어 상품 등록', '소복 매니저'];
+
+    const name = getCookie('name');
+    const store = getCookie('store');
 
     return (
         <>
@@ -17,7 +21,7 @@ const OwnerPage = () => {
             <OwnerContainer>
                 <div className="mypage-topsection">
                     <img src={sobokFace} alt="소복 얼굴 이미지" width="60px" />
-                    <p><span>메가커피<br />고법</span> 점주님 마이페이지</p>
+                    <p><span>{store}<br />{name}</span> 점주님 마이페이지</p>
                 </div>
                 <div className="menu-list">
                     {menuList.map((menu, index) => (

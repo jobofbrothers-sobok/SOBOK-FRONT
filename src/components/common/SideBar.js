@@ -7,7 +7,7 @@ import isLogin from "../../lib/router/isLogin";
 import Modal from "./Modal";
 import logo from '../../asset/images/sobok_logo_square_jua.png';
 import Button from "./Button";
-import { removeCookie } from "../../lib/cookie";
+import { getCookie, removeCookie } from "../../lib/cookie";
 
 const SideBar = (props) => {
 
@@ -17,6 +17,8 @@ const SideBar = (props) => {
 
   // 로그인 유무
   const auth = isLogin();
+  const who = getCookie('who');
+  const name = getCookie('name');
 
 
   // 로그인 모달 관련
@@ -39,7 +41,7 @@ const SideBar = (props) => {
         {open ?
           <SideBarWrap>
             <div className="menu-header">
-              <p className="top-text" onClick={auth ? null : () => navigator('/login')}><span style={{ color: '#FF9F74', fontSize: '20px', fontWeight: '600' }}>{auth ? '사용자' : '로그인'}</span>{auth ? '님 반갑습니다.' : '을 해주세요'}</p>
+              <p className="top-text" onClick={auth ? null : () => navigator('/login')}><span style={{ color: '#FF9F74', fontSize: '20px', fontWeight: '600' }}>{auth ? name : '로그인'}</span>{auth ? '님 반갑습니다.' : '을 해주세요'}</p>
               <button className="close" onClick={close}>
                 &times;
               </button>
@@ -74,7 +76,7 @@ const SideBar = (props) => {
               <div className="menu-item" onClick={() => navigator('/inquiry')}>
                 문의사항
               </div>
-              <div className="menu-item" onClick={() => navigator('/customer')}>
+              <div className="menu-item" onClick={who === 'manager' ? () => navigator('/admin') : who === 'owner' ? () => navigator('/owner') : () => navigator('/customer')}>
                 마이페이지
               </div>
             </MenuList>

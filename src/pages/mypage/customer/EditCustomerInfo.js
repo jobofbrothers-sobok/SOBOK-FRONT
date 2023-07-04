@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../../components/common/Button";
 import BackButton from "../../../components/common/BackButton";
 import NavBar from "../../../components/common/NavBar";
 import Footer from "../../../components/common/Footer";
 import styled from "styled-components";
-import { customerWithdraw } from "../../../lib/api/mypage";
-import { getCookie } from "../../../lib/cookie";
+import { customerEdit, customerWithdraw } from "../../../lib/api/mypage";
+import { getCookie, setCookie } from "../../../lib/cookie";
 
 const EditCustomerInfo = () => {
     let config = {
@@ -15,6 +15,21 @@ const EditCustomerInfo = () => {
             'withCredentials': true,
         }
     }
+
+    const id = getCookie('loginId');
+    const [pw, setPw] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [file, setFile] = useState('');
+
+
+    const onEditInfo = async () => {
+        await customerEdit(pw, name, email, phone, file)
+            .then((res) => { console.log(res); alert('회원정보가 성공적으로 수정되었습니다.'); setCookie('name', name); })
+            .catch((err) => { alert(err, '회원가입 실패'); })
+    }
+
 
     return (
         <>
@@ -27,26 +42,26 @@ const EditCustomerInfo = () => {
                     <br /><br />
                     <p>프로필 이미지 등록하기<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <br />
-                    <input type="file" />
+                    <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                     <hr /><br />
                     <p>아이디<span style={{ color: "#EB5757", fontWeight: "900" }}></span></p>
-                    <p>sean42</p><br />
+                    <p>{id}</p><br />
                     <p>비밀번호<span style={{ color: "#EB5757", fontWeight: "900" }}></span></p>
-                    <input type="password" />
+                    <input type="password" onChange={(e) => setPw(e.target.value)} />
                     <p>비밀번호 확인<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="password" />
                     <p>이름<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
-                    <p>담당자 이메일<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setName(e.target.value)} />
+                    <p>이메일<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
+                    <input type="email" onChange={(e) => setEmail(e.target.value)} />
                     <p>핸드폰 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="tel" onChange={(e) => setPhone(e.target.value)} />
                     <br />
-                    <Button text="수정완료" color="#FF9F74" />
+                    <Button text="수정완료" color="#FF9F74" onClick={onEditInfo} />
                 </div>
                 <br />
                 <p onClick={() => customerWithdraw(config)
-                    .then((res) => console.log(res))
+                    .then((res) => { console.log(res); alert('회원탈퇴가 성공적으로 완료되었습니다.') })
                     .catch((err) => console.log(err))}>회원탈퇴</p>
             </Container >
             <Footer />

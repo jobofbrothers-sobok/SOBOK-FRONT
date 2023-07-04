@@ -1,8 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../../../components/common/Button";
+import { getCookie, setCookie } from "../../../lib/cookie";
+import { ownerEdit } from "../../../lib/api/mypage";
 
 const OwnerEditInfo = () => {
+
+    const id = getCookie('loginId');
+    const [pw, setPw] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [detail, setDetail] = useState('');
+    const [code, setCode] = useState('');
+    const [licenseImg, setLicenseImg] = useState();
+    const [profile, setProfile] = useState();
+
+
+    const onEditInfo = async () => {
+        let config = {
+            headers: {
+                'Content-Type': `multipart/form-data`,
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        }
+        await ownerEdit(pw, name, email, phone, address, detail, code, licenseImg, profile, config)
+            .then((res) => { console.log(res); alert('회원정보가 성공적으로 수정되었습니다.'); setCookie('name', name) })
+            .catch((err) => { alert(err, '회원가입 실패'); })
+    }
+
     return (
         <>
             <Container>
@@ -10,30 +38,32 @@ const OwnerEditInfo = () => {
                     <p className="title">담당자 정보수정</p>
                     <br /><br />
                     <p>프로필 이미지 등록하기<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" />
+                    <input type="file" onChange={(e) => setProfile(e.target.files[0])} />
                     <hr /><br />
                     <p>아이디<span style={{ color: "#EB5757", fontWeight: "900" }}></span></p>
-                    <p>sean42</p><br />
+                    <p>{id}</p><br />
                     <p>비밀번호<span style={{ color: "#EB5757", fontWeight: "900" }}></span></p>
-                    <input type="password" />
+                    <input type="password" onChange={(e) => setPw(e.target.value)} />
                     <p>비밀번호 확인<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="password" />
+                    <input type="password" onChange={(e) => setPw(e.target.value)} />
                     <p>담당자명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setName(e.target.value)} />
                     <p>담당자 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="tel" onChange={(e) => setPhone(e.target.value)} />
                     <p>담당자 이메일<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="email" onChange={(e) => setEmail(e.target.value)} />
                     <p>가게 주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <div className="store-loc-box">
-                        <input type="text" /><button className="store-search">검색</button>
+                        <input type="text" onChange={(e) => setAddress(e.target.value)} /><button className="store-search">검색</button>
                     </div>
                     <p>상세 주소</p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setDetail(e.target.value)} />
                     <p>사업자 등록 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" />
+                    <input type="text" onChange={(e) => setCode(e.target.value)} />
+                    <p>사업자 등록증<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
+                    <input type="file" onChange={(e) => setLicenseImg(e.target.files[0])} />
                     <br />
-                    <Button text="수정완료" color="#FF9F74" />
+                    <Button text="수정완료" color="#FF9F74" onClick={onEditInfo} />
                 </div>
             </Container>
         </>

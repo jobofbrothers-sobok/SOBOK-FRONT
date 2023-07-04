@@ -57,11 +57,22 @@ const LoginPage = () => {
                     <br />
                     <Button text="로그인" color="#FF9F74" onClick={isOwner ?
                         () => ownerLogin(id, pw)
-                            .then((res) => { console.log('성공', res); setCookie('token', res.data.data.accessToken); navigator('/') })
+                            .then((res) => {
+                                console.log('성공', res); setCookie('token', res.data.data.accessToken);
+                                setCookie('who', res.data.data.who);
+                                setCookie('loginId', res.data.data.loginId);
+                                setCookie('store', res.data.data.store);
+                                setCookie('name', res.data.data.director); navigator('/');
+                            })
                             .catch((err) => { console.log('실패', err); alert('로그인 실패'); })
                         :
                         () => customerLogin(id, pw)
-                            .then((res) => { console.log('성공', res); setCookie('token', res.data.data.accessToken); navigator('/') })
+                            .then((res) => {
+                                console.log('성공', res); setCookie('token', res.data.data.accessToken);
+                                setCookie('who', res.data.data.who);
+                                setCookie('loginId', res.data.data.loginId);
+                                setCookie('name', res.data.data.name); navigator('/');
+                            })
                             .catch((err) => { console.log('실패', err); alert('로그인 실패'); })} />
                     <Button text="회원가입" color="#7F7F7F" onClick={() => { navigator('/agree'); setCookie('isOwner', isOwner); }} />
                 </div>
