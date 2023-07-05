@@ -62,7 +62,7 @@ export const ownerAddStore = async (store, summary, time, dayOff, link, image, c
 
 
 // 점주 매장 소식 등록
-export const ownerAddNews = async (id, category, title, content, file) => {
+export const ownerAddNews = async (id, category, title, content, file, config) => {
     let formData = new FormData();
     formData.append('category', category);
     formData.append('title', title);
@@ -72,7 +72,7 @@ export const ownerAddNews = async (id, category, title, content, file) => {
 }
 
 // 점주 매장 메뉴 등록
-export const ownerAddMenu = async (id, title, content, file) => {
+export const ownerAddMenu = async (id, title, content, file, config) => {
     let formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
@@ -81,7 +81,7 @@ export const ownerAddMenu = async (id, title, content, file) => {
 }
 
 // 점주 매장 스토어 상품 등록
-export const ownerAddProduct = async (id, category, name, price, discountPrice, url, file) => {
+export const ownerAddProduct = async (id, category, name, price, discountPrice, url, file, config) => {
     let formData = new FormData();
     formData.append('category', category);
     formData.append('name', name);
@@ -89,7 +89,7 @@ export const ownerAddProduct = async (id, category, name, price, discountPrice, 
     formData.append('discountPrice', discountPrice);
     formData.append('url', url);
     formData.append('file', file);
-    return await axios.post(`${PROXY}/owner/store/menu/${id}`, formData, config);
+    return await axios.post(`${PROXY}/owner/store/product/${id}`, formData, config);
 }
 
 // 점주 소복 매니저 신청
