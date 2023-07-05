@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../../../components/common/Button";
+import { getCookie } from "../../../lib/cookie";
+import { ownerAddMenu } from "../../../lib/api/mypage";
 
 const OwnerAddMenu = () => {
+
+    const id = getCookie('storeId');
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [file, setFile] = useState();
+    console.log(id);
+
+
+    const onAddMenu = () => {
+        console.log('클릭');
+        let config = {
+            headers: {
+                'Content-Type': `multipart/form-data`,
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        };
+        console.log('클릭2');
+        ownerAddMenu(id, title, content, file, config)
+            .then((res) => { console.log(res); alert('메뉴를 성공적으로 등록하였습니다.') })
+            .catch((err) => { console.log(err); alert('메뉴 등록에 실패하였습니다.') })
+        console.log('클릭3');
+    }
+
     return (
         <>
             <Container>
@@ -10,14 +36,13 @@ const OwnerAddMenu = () => {
                     <p className="title">매장 메뉴 등록</p>
                     <br /><br />
                     <p>제목<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => { setTitle(e.target.value); console.log(title) }} />
                     <p>내용<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <InputBox rows="15">
-                    </InputBox>
+                    <InputBox rows="15" onChange={(e) => { setContent(e.target.value); console.log(content) }} />
                     <br />
                     <p>메뉴 이미지<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" />
-                    <Button text="등록하기" color="#FF9F74" />
+                    <input type="file" onChange={(e) => { setFile(e.target); console.log(file); }} />
+                    <Button text="등록하기" color="#FF9F74" onClick={onAddMenu} />
                 </div>
             </Container>
         </>

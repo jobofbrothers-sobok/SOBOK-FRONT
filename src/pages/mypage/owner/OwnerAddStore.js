@@ -3,19 +3,30 @@ import styled from "styled-components";
 import filterbtn from "../../../asset/images/filter-arrow.svg";
 import Button from "../../../components/common/Button";
 import { ownerAddProduct } from "../../../lib/api/mypage";
+import { getCookie, setCookie } from "../../../lib/cookie";
 
 const OwnerAddStore = () => {
 
-    const [category, setStore] = useState('');
-    const [name, setSummary] = useState('');
-    const [price, setTime] = useState('');
-    const [discountPrice, setDayoff] = useState('');
-    const [url, setLink] = useState('');
-    const [file, setImage] = useState('');
+
+    const id = getCookie('storeId');
+    const [category, setCategory] = useState('커피원두');
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
+    const [discountPrice, setDiscount] = useState('');
+    const [url, setUrl] = useState('');
+    const [file, setFile] = useState('');
 
     const onAddProduct = () => {
-        ownerAddProduct(category, name, price, discountPrice, url, file)
-        .then((res) => console.log(res))
+        let config = {
+            headers: {
+                'Content-Type': `multipart/form-data`,
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        };
+        ownerAddProduct(id, category, name, price, discountPrice, url, file, config)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err))
     }
 
     return (
@@ -25,23 +36,23 @@ const OwnerAddStore = () => {
                     <p className="title">스토어 상품 등록</p>
                     <br /><br />
                     <p>카테고리<span style={{ color: "#EB5757", fontWeight: "900" }}></span></p>
-                    <FilterBox name="category">
-                        <option value="new-menu">커피원두</option>
-                        <option value="event">디저트</option>
+                    <FilterBox name="category" onChange={(e) => setCategory(e.target.value)}>
+                        <option value="커피원두">커피원두</option>
+                        <option value="디저트">디저트</option>
                     </FilterBox>
                     <br />
                     <p>상품명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setName(e.target.value)} />
                     <p>가격<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setPrice(e.target.value)} />
                     <p>할인가<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setDiscount(e.target.value)} />
                     <p>판매중인 상품 URL<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setUrl(e.target.value)} />
                     <p>상품 이미지<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" />
+                    <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                     <br />
-                    <Button text="등록하기" color="#FF9F74" />
+                    <Button text="등록하기" color="#FF9F74" onClick={onAddProduct} />
                 </div>
             </Container>
         </>

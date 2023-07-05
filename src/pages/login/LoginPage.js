@@ -58,9 +58,11 @@ const LoginPage = () => {
                     <Button text="로그인" color="#FF9F74" onClick={isOwner ?
                         () => ownerLogin(id, pw)
                             .then((res) => {
-                                console.log('성공', res); setCookie('token', res.data.data.accessToken);
+                                console.log('성공', res);
+                                setCookie('token', res.data.data.accessToken);
                                 setCookie('who', res.data.data.who);
                                 setCookie('id', res.data.data.id);
+                                setCookie('storeId', res.data.data.storeId);
                                 setCookie('loginId', res.data.data.loginId);
                                 setCookie('store', res.data.data.store);
                                 setCookie('name', res.data.data.director); navigator('/');

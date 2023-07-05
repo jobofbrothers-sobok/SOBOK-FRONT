@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import filterbtn from "../../../asset/images/filter-arrow.svg";
 import Button from "../../../components/common/Button";
-import { ownerAddMenu, ownerAddNews } from "../../../lib/api/mypage";
+import { ownerAddNews } from "../../../lib/api/mypage";
 import { getCookie } from "../../../lib/cookie";
 
 const OwnerAddNews = () => {
 
-    const id = getCookie('id');
-    const [category, setCategory] = useState('');
+    const id = getCookie('storeId');
+    const [category, setCategory] = useState('신메뉴 홍보');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [image, setImage] = useState();
@@ -34,8 +34,8 @@ const OwnerAddNews = () => {
                     <br /><br />
                     <p className="input-name">카테고리<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <FilterBox name="category" onChange={(e) => setCategory(e.target.value)}>
-                        <option value="new-menu">신메뉴 홍보</option>
-                        <option value="event-notice">이벤트 공지</option>
+                        <option value="신메뉴 홍보">신메뉴 홍보</option>
+                        <option value="이벤트 공지">이벤트 공지</option>
                     </FilterBox>
                     <br />
                     <p>제목<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
