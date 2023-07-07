@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBox from "../../../components/common/SearchBox";
 import styled from "styled-components";
 import dummy from "../../../data/data.json";
@@ -6,13 +6,51 @@ import active from '../../../asset/images/active.svg';
 import { useNavigate } from "react-router-dom";
 import MoreButton from "../../../components/common/MoreButton";
 import filterbtn from "../../../asset/images/filter-arrow.svg";
+import { readAllClient, readAllOwner } from "../../../lib/api/admin";
+import { getCookie, setCookie } from "../../../lib/cookie";
 
 
 const NewOwnerList = () => {
 
-    const [isowner, setOwner] = useState(true);
+    const [isowner, setOwner] = useState(getCookie('isowner') === 'true' ? true : false);
 
     const navigator = useNavigate();
+
+
+    const [sort, setSort] = useState('all');
+
+    const [ownerList, setOwnerList] = useState([]);
+    const [clientList, setClientList] = useState([]);
+
+    let config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+
+    const getAllOwner = async () => {
+        const json = await readAllOwner(sort, config);
+        setOwnerList(json.data.data);
+    };
+
+    const getAllClient = async () => {
+        const json = await readAllClient(config);
+        setClientList(json.data.data);
+    };
+
+    useEffect(() => {
+        if (isowner) {
+            getAllOwner();
+            setCookie('isowner', isowner);
+        }
+        else {
+            getAllClient();
+            setCookie('isowner', isowner);
+        }
+    }, [sort, isowner]);
+
 
     return (
         <>
@@ -33,28 +71,29 @@ const NewOwnerList = () => {
                     <br />
                     <div className="list-top-box">
                         <p className="info-title">회원정보</p>
-                        <FilterBox name="category">
-                            <option value="event">미승인</option>
-                            <option value="new-menu">승인완료</option>
-                        </FilterBox>
+                        {isowner ? <FilterBox name="category" onChange={(e) => setSort(e.target.value)}>
+                            <option value="all">전체</option>
+                            <option value="pending">미승인</option>
+                            <option value="auth">승인완료</option>
+                        </FilterBox> : <></>}
                     </div>
                     <hr />
                     {
                         isowner ?
-                            dummy.owner.map((item, index) => (
+                            ownerList.map((item, index) => (
                                 <div className='apply-item' key={item.id} onClick={() => navigator(`/admin/menu/0/member/${item.id}`)}>
                                     <div>
-                                        <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.name}</div>
-                                        <div className='item-category'>{item.store} / {item.tel}</div>
+                                        <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.director}</div>
+                                        <div className='item-category'>{item.store} / {item.phone}</div>
                                     </div>
                                 </div>
                             ))
                             :
-                            dummy.customer.map((item, index) => (
+                            clientList.map((item, index) => (
                                 <div className='apply-item' key={item.id} onClick={() => navigator(`/admin/menu/0/member/${item.id}`)}>
                                     <div>
-                                        <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.nickname}</div>
-                                        <div className='item-category'>{item.name} / {item.email} / {item.tel}</div>
+                                        <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.loginId}</div>
+                                        <div className='item-category'>{item.name} / {item.email} / {item.phone}</div>
                                     </div>
                                     <div className="cupon-stamp">
                                         보유쿠폰 {item.cupon}개<br />
