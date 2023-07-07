@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SearchBox from "../../../components/common/SearchBox";
 import ListItem from "../../../components/common/ListItem";
 import dummy from "../../../data/data.json";
 import MoreButton from "../../../components/common/MoreButton";
 import { useNavigate } from "react-router-dom";
+import { getDeliveryList } from "../../../lib/api/admin";
+import { getCookie } from "../../../lib/cookie";
 
 const DeliveryList = () => {
     const navigator = useNavigate();
+
+    const [deliveryList, setDeliveryList] = useState([]);
+
+    let config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+
+    const showDeliveryList = async () => {
+        const json = await getDeliveryList(config);
+        setDeliveryList(json.data.data);
+    };
+
+    useEffect(() => {
+        showDeliveryList();
+        console.log(deliveryList);
+    }, []);
 
     return (
         <>
@@ -18,12 +40,11 @@ const DeliveryList = () => {
                 <div className='apply-list'>
                     <br />
                     <hr />
-                    {dummy.delivery.map(item => (
+                    {deliveryList.map(item => (
                         <ListItem
                             id={item.id}
-                            title={item.nickname}
-                            category={item.date}
-                            isActive={false}
+                            title={item.customer}
+                            category={item.reward}
                             onClick={() => navigator(`/admin/menu/4/detail/${item.id}`)}
                         />
                     ))}
