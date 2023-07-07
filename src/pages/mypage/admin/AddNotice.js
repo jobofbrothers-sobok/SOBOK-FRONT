@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import InputBox from "../../../components/common/InputBox";
 import Button from "../../../components/common/Button";
+import { postNotice } from "../../../lib/api/admin";
+import { getCookie } from "../../../lib/cookie";
 
 const AddNotice = () => {
+
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [file, setFile] = useState('');
+
+    let config = {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+    const postNoticeForm = async () => {
+        await postNotice(title, content, file, config)
+            .then((res) => { console.log(res); alert('공지글을 성공적으로 등록하였습니다.') })
+            .catch((err) => { console.log(err); alert('공지글을 등록에 실패하였습니다.') })
+    }
+
     return (
         <>
             <Container>
@@ -11,13 +31,13 @@ const AddNotice = () => {
                 <br />
                 <div className="info-div">
                     <p>제목</p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setTitle(e.target.value)} />
                     <p>내용<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <InputBox rows="8" />
+                    <InputBox rows="8" onChange={(e) => setContent(e.target.value)} />
                     <p>이미지 첨부<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" />
+                    <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                 </div>
-                <Button text="작성완료" />
+                <Button text="작성완료" onClick={postNoticeForm} />
             </Container>
         </>
     )

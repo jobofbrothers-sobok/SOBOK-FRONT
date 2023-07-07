@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../../components/common/NavBar";
 import BackButton from "../../../components/common/BackButton";
@@ -7,12 +7,19 @@ import Button from "../../../components/common/Button";
 import Footer from "../../../components/common/Footer";
 
 const AddStampTour = () => {
+
+    const [keyword, setKeyword] = useState('');
+    const [title, setTitle] = useState('');
+    const [reward, setReward] = useState('');
+    const [file, setFile] = useState('');
+
+
     return (
         <>
             <NavBar />
             <Container>
                 <BackButton />
-                <p className="title">스템프 투어 추가</p>
+                <p className="title">스탬프 투어 추가</p>
                 <div className="info-div">
                     <p>투어 키워드<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" />

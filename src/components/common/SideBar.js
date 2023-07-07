@@ -73,12 +73,12 @@ const SideBar = (props) => {
               <div className="menu-item" onClick={() => navigator('/notice')}>
                 공지사항
               </div>
-              <div className="menu-item" onClick={() => navigator('/inquiry')}>
+              <div className="menu-item" onClick={auth ? () => navigator('/inquiry') : openModal}>
                 문의사항
               </div>
-              <div className="menu-item" onClick={who === 'manager' ? () => navigator('/admin') : who === 'owner' ? () => navigator('/owner') : () => navigator('/customer')}>
+              {auth ? <div className="menu-item" onClick={who === 'manager' ? () => navigator('/admin') : who === 'owner' ? () => navigator('/owner') : () => navigator('/customer')}>
                 마이페이지
-              </div>
+              </div> : null}
             </MenuList>
             <br />
             {/* <ResultWrapper>

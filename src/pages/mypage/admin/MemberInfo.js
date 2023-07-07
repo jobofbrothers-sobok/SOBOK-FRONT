@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SearchBox from "../../../components/common/SearchBox";
 import styled from "styled-components";
-import dummy from "../../../data/data.json";
 import active from '../../../asset/images/active.svg';
 import { useNavigate } from "react-router-dom";
 import MoreButton from "../../../components/common/MoreButton";

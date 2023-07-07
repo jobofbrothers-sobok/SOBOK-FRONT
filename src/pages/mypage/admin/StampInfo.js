@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../../../components/common/Button";
 import SearchBox from "../../../components/common/SearchBox";
-import dummy from "../../../data/data.json";
 import ListItem from "../../../components/common/ListItem";
 import MoreButton from "../../../components/common/MoreButton";
 import { useNavigate } from "react-router-dom";
+import { getAllStampTour } from "../../../lib/api/admin";
+import { getCookie } from "../../../lib/cookie";
 
 const StampInfoList = () => {
 
     const navigator = useNavigate();
+
+    const [tourList, setTourList] = useState([]);
+
+    let config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+
+    const showTourList = async () => {
+        const json = await getAllStampTour(config);
+        setTourList(json.data.data);
+    };
+
+    useEffect(() => {
+        showTourList();
+        console.log(tourList);
+    }, []);
 
     return (
         <>
@@ -22,13 +43,12 @@ const StampInfoList = () => {
                 <div className='apply-list'>
                     <br />
                     <hr />
-                    {dummy.stamp.map(item => (
+                    {tourList.map(item => (
                         <ListItem
                             id={item.id}
                             title={item.title}
                             category={item.reward}
                             isActive={true}
-                            onClick={() => navigator(`/admin/menu/3/detail/${item.id}`)}
                         />
                     ))}
                 </div>

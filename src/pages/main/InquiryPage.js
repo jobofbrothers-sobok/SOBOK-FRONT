@@ -10,18 +10,18 @@ import logo from "../../asset/images/sobok_logo_square_jua.png";
 
 const InquiryPage = () => {
 
-    // 로그인 여부
-    const [notlogin, setLogin] = useState(true);
+    // // 로그인 여부
+    // const [notlogin, setLogin] = useState(true);
 
-    // 모달 관련
-    const [modalOpen, setModalOpen] = useState(notlogin);
+    // // 모달 관련
+    // const [modalOpen, setModalOpen] = useState(notlogin);
 
-    const openModal = () => {
-        setModalOpen(true);
-    };
-    const closeModal = () => {
-        setModalOpen(false);
-    }
+    // const openModal = () => {
+    //     setModalOpen(true);
+    // };
+    // const closeModal = () => {
+    //     setModalOpen(false);
+    // }
 
     return (
         <>
@@ -43,13 +43,13 @@ const InquiryPage = () => {
                 <div className='info'>최고관리자 확인 후 등록된 번호로<br />개별 연락드리겠습니다.</div>
             </Container>
             <Footer />
-            <Modal open={modalOpen} close={closeModal} header="Modal heading">
+            {/* <Modal open={modalOpen} close={closeModal} header="Modal heading">
                 <ContentBox>
                     <img src={logo} alt="소복로고이미지" width="50%" />
                     <p className="title">로그인이 필요한 서비스입니다.</p><br /><br /><br />
                     <Button text="다시입력" onClick={() => navigator('/')} />
                 </ContentBox>
-            </Modal>
+            </Modal> */}
         </>
     )
 }

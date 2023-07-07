@@ -1,18 +1,40 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import dummy from "../../../data/data.json";
 import styled from "styled-components";
 import NavBar from "../../../components/common/NavBar";
 import BackButton from "../../../components/common/BackButton";
 import Button from "../../../components/common/Button";
 import Footer from "../../../components/common/Footer";
+import { getDeliveryInfo } from "../../../lib/api/admin";
+import { getCookie } from "../../../lib/cookie";
 
 const DeliveryDetail = () => {
 
     const { id } = useParams();
     console.log(id);
 
-    const { nickname, reward, name, tel, address, ps } = dummy.delivery.find((x) => x.id == id)
+    const [deliveryInfo, setDeliveryInfo] = useState('');
+
+    const { reward, customer, phone, address, detailAddress, message } = deliveryInfo;
+
+
+    // 고객 상세 정보 조회
+    const showDeliveryInfo = async (id) => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        }
+        const json = await getDeliveryInfo(id, config);
+        setDeliveryInfo(json.data.data);
+    };
+
+    useEffect(() => {
+        showDeliveryInfo(id);
+    }, []);
 
     return (
         <>
@@ -21,7 +43,7 @@ const DeliveryDetail = () => {
                 <BackButton />
                 <div className="info-form">
                     <br />
-                    <p className="title">{nickname}</p>
+                    <p className="title">{customer}</p>
                     <div className="info-div">
                         <p className="info-title">배송 신청 정보</p>
                         <hr />
@@ -31,19 +53,19 @@ const DeliveryDetail = () => {
                         </div>
                         <div className="info-item">
                             <p className="info-name">주문자 이름</p>
-                            <p className="info-value">{name}</p>
+                            <p className="info-value">{customer}</p>
                         </div>
                         <div className="info-item">
                             <p className="info-name">핸드폰 번호</p>
-                            <p className="info-value">{tel}</p>
+                            <p className="info-value">{phone}</p>
                         </div>
                         <div className="info-item">
                             <p className="info-name">주소</p>
-                            <p className="info-value">{address}</p>
+                            <p className="info-value">{address}<br />{detailAddress}</p>
                         </div>
                         <div className="info-item">
                             <p className="info-name">배송시 남기실 말씀</p>
-                            <p className="info-value">{ps}</p>
+                            <p className="info-value">{message}</p>
                         </div>
                     </div>
                 </div>
