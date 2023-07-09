@@ -43,7 +43,18 @@ export const getAllStampTour = async (config) => {
 
 // 스탬프 투어 등록
 export const postStampTour = async (keyword, title, reward, cafeList, file, config) => {
-    return await axios.post(`${PROXY}/manager/tour`, config);
+    let formData = new FormData();
+    formData.append('keyword', keyword);
+    formData.append('title', title);
+    formData.append('reward', reward);
+    formData.append('cafeList', cafeList);
+    formData.append('file', file);
+    return await axios.post(`${PROXY}/manager/tour`, formData, config);
+}
+
+// 스탬프 투어 등록시 매장 검색
+export const searchStore = async (keyword, config) => {
+    return await axios.get(`${PROXY}/manager/tour/search`, { storeName: keyword }, config);
 }
 
 // 배송 신청 전체 조회
@@ -65,3 +76,17 @@ export const postNotice = async (title, content, file, config) => {
     return await axios.post(`${PROXY}/manager`, formData, config);
 }
 
+// 스탬프 사용 회원 전체 조회
+export const getAllStampMember = async (config) => {
+    return await axios.get(`${PROXY}/manager/stamp`, config);
+}
+
+// 스탬프 사용 회원 상세 조회
+export const getStampMemberDetail = async (id, config) => {
+    return await axios.get(`${PROXY}/manager/stamp/${id}`, config);
+}
+
+// 점주 회원가입 승인
+export const postStampApproval = async (id, config) => {
+    return await axios.post(`${PROXY}/manager/stamp/${id}`, {}, config);
+}
