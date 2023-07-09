@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import Header from "../../components/Header";
 // import Header_Main from "../../components/HeaderMain";
 import styled from "styled-components";
@@ -37,7 +37,45 @@ import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
 
-    const navigator = useNavigate();
+
+    // 현재 위치 위도, 경도 가져오기
+    const [lat, setLatitude] = useState(null);
+    const [long, setLongitude] = useState(null);
+
+
+    console.log({ lat, long });
+
+    const getLocation = () => {
+        // 위치 권한 허용시
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLatitude(position.coords.latitude);
+                    setLongitude(position.coords.longitude);
+                },
+                (err) => {
+                    console.log(err);
+                },
+                {
+                    enableHighAccuracy: false,
+                    maximumAge: 0,
+                    timeout: Infinity,
+                },
+            );
+        }
+        // 위치 권한 차단시
+        else {
+            alert('위치 설정 권한을 허용해주세요.');
+            return;
+        }
+    }
+
+    const navigation = useNavigate();
+
+    useEffect(() => {
+        getLocation();
+    }, []);
+
 
     const onHandleCategory = (event) => {
         const { name, value, checked } = event.target;
@@ -204,7 +242,7 @@ const MainPage = () => {
                                 distance='55m'
                                 intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
                                 tag={['큰 테이블', '콘센트']}
-                                onClick={() => navigator(`/detail/${item}`)}
+                                onClick={() => navigation(`/detail/${item}`)}
                             />
                         </>)}
                     </div>
