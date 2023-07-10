@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../../components/common/NavBar";
 import logo from "../../../asset/images/sobok_logo_square_jua.png";
@@ -6,10 +6,30 @@ import Button from "../../../components/common/Button";
 import BackButton from "../../../components/common/BackButton";
 import Footer from "../../../components/common/Footer";
 import { useNavigate } from "react-router";
+import { getCode } from "../../../lib/api/stamp";
+import { getCookie } from "../../../lib/cookie";
 
 const StampCode = () => {
 
     const navigator = useNavigate();
+
+    const [code, setCode] = useState('');
+
+    const getStampCode = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        }
+        const json = await getCode(config);
+        setCode(json.data.data.randNum);
+    };
+
+    useEffect(() => {
+        getStampCode();
+    }, [])
 
     return (
         <>
@@ -20,7 +40,7 @@ const StampCode = () => {
                     <div className="info-title">스탬프 적립</div>
                     <br />
                     <img src={logo} alt="소복 로고 이미지" width={"40%"} style={{ marginBottom: "15px" }} />
-                    <div className="info-code">E1B54W3</div>
+                    <div className="info-code">{code}</div>
                     <div className="info-detail2">카페 직원분에게 해당 번호를 알려주세요.</div>
                 </div>
                 <Button text="요청완료" color="#FF9F74" onClick={() => navigator('/stamp/customer')} />

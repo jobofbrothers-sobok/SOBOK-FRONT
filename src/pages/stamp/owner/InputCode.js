@@ -6,6 +6,9 @@ import Button from "../../../components/common/Button";
 import Footer from "../../../components/common/Footer";
 import BackButton from "../../../components/common/BackButton";
 import Modal from "../../../components/common/Modal";
+import { getCookie } from "../../../lib/cookie";
+import { postCodeApproval } from "../../../lib/api/stamp";
+
 
 
 const InputCode = () => {
@@ -18,6 +21,27 @@ const InputCode = () => {
     };
     const closeModal = () => {
         setModalOpen(false);
+    }
+
+
+    const [code, setCode] = useState('');
+
+    console.log(code);
+
+    let config = {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    };
+
+    const approveStamp = async () => {
+        console.log('클릭1');
+        await postCodeApproval(code, config)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err))
+        console.log('클릭2');
     }
 
     return (
@@ -33,19 +57,19 @@ const InputCode = () => {
                 </div>
                 <div className="edit-form">
                     <p>고객 생성 번호 입력<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type='text' />
+                    <input type='text' onChange={(e) => setCode(e.target.value)} />
                 </div>
-                <Button text="적립완료" color="#FF9F74" onClick={openModal} />
+                <Button text="적립완료" color="#FF9F74" onClick={approveStamp} />
                 <br />
             </Container>
             <Footer />
-            <Modal open={modalOpen} close={closeModal} header="Modal heading">
+            {/* <Modal open={modalOpen} close={closeModal} header="Modal heading">
                 <ContentBox>
                     <img src={logo} alt="소복로고이미지" width="50%" />
                     <p className="title">스탬프 적립이 완료되었습니다.</p><br /><br /><br />
                     <Button text="뒤로가기" onClick={closeModal} />
                 </ContentBox>
-            </Modal>
+            </Modal> */}
             {/* <Modal open={modalOpen} close={closeModal} header="Modal heading">
                 <ContentBox>
                     <img src={logo} alt="소복로고이미지" width="50%" />
