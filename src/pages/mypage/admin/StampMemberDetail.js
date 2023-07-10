@@ -4,7 +4,7 @@ import Button from "../../../components/common/Button";
 import NavBar from "../../../components/common/NavBar";
 import BackButton from "../../../components/common/BackButton";
 import Footer from "../../../components/common/Footer";
-import { getStampMemberDetail, postOwnerApproval, postStampApproval } from "../../../lib/api/admin";
+import { getStampMemberDetail, postStampApproval } from "../../../lib/api/admin";
 import { getCookie } from "../../../lib/cookie";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -88,7 +88,7 @@ const StampMemberDetail = () => {
                         </div>
 
                     </div>
-                    <Button text="목록으로" color="#FF9F74" onClick={() => navigator('/admin/menu/0')} />
+                    <Button text="목록으로" color="#FF9F74" onClick={() => navigator('/admin/menu/6')} />
                 </div>
             </Container>
             <Footer />
