@@ -31,6 +31,6 @@ export const checkStampStore = async (tag, config) => {
 };
 
 // 배송 신청
-export const postDelivery = async (password, name, email, phone, file, config) => {
-    return await axios.get(`${PROXY}/customer/delivery`, { password, name, email, phone, file }, config);
+export const postDelivery = async (reward, name, tel, address, detail, message, config) => {
+    return await axios.post(`${PROXY}/customer/delivery`, { reward: reward, customer: name, phone: tel, address: address, detailAddress: detail, message: message }, config);
 };

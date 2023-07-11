@@ -77,7 +77,7 @@ const Routers = () => {
                 <Route element={<StampCode />} path='/stamp/customer/code' />
                 <Route element={<StampCheck />} path='/stamp/customer/check' />
                 <Route element={<StampReward />} path='/stamp/customer/reward' />
-                <Route element={<RewardForm />} path='/stamp/customer/reward/form' />
+                <Route element={<RewardForm />} path='/stamp/customer/reward/form/:tag' />
                 {/* 점주 스탬프 */}
                 <Route element={<StampOwner />} path='/stamp/owner' />
                 <Route element={<NoApproval />} path='/stamp/owner/no-approval' />

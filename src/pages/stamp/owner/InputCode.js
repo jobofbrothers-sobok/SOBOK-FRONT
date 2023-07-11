@@ -14,10 +14,10 @@ import { postCodeApproval } from "../../../lib/api/stamp";
 const InputCode = () => {
 
     // 모달 관련
-    const [modalOpen, setModalOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState('');
 
-    const openModal = () => {
-        setModalOpen(true);
+    const openModal = (value) => {
+        setModalOpen(value);
     };
     const closeModal = () => {
         setModalOpen(false);
@@ -28,20 +28,19 @@ const InputCode = () => {
 
     console.log(code);
 
-    let config = {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${getCookie('token')}`,
-            'withCredentials': true,
-        }
-    };
+
 
     const approveStamp = async () => {
-        console.log('클릭1');
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        };
         await postCodeApproval(code, config)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err))
-        console.log('클릭2');
+            .then((res) => { console.log(res); openModal('yes'); })
+            .catch((err) => { console.log(err); openModal('no'); })
     }
 
     return (
@@ -63,20 +62,20 @@ const InputCode = () => {
                 <br />
             </Container>
             <Footer />
-            {/* <Modal open={modalOpen} close={closeModal} header="Modal heading">
+            <Modal open={modalOpen === 'yes'} close={closeModal} header="Modal heading">
                 <ContentBox>
                     <img src={logo} alt="소복로고이미지" width="50%" />
                     <p className="title">스탬프 적립이 완료되었습니다.</p><br /><br /><br />
                     <Button text="뒤로가기" onClick={closeModal} />
                 </ContentBox>
-            </Modal> */}
-            {/* <Modal open={modalOpen} close={closeModal} header="Modal heading">
+            </Modal>
+            <Modal open={modalOpen === 'no'} close={closeModal} header="Modal heading">
                 <ContentBox>
                     <img src={logo} alt="소복로고이미지" width="50%" />
                     <p className="title">다른 번호를 입력해주셨습니다.</p><br /><br /><br />
                     <Button text="다시입력" onClick={() => navigator('/stamp/customer')} />
                 </ContentBox>
-            </Modal> */}
+            </Modal>
         </>
     )
 }
