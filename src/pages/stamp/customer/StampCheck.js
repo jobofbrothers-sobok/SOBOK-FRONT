@@ -18,9 +18,7 @@ const StampCheck = () => {
     const [stampList, setStamp] = useState([]);
     const [stampCafe, setStampCafe] = useState([]);
 
-    console.log(stampCafe)
     const noStampNum = 9 - stampList.length;
-    console.log(noStampNum)
 
     let config = {
         headers: {
@@ -54,9 +52,6 @@ const StampCheck = () => {
         setModalOpen(false);
     }
 
-    // 스탬프 카페 리스트 임시 배열
-    // const stampCafe = ['카페 A', '카페 B', '카페 C', '카페 D'];
-
     return (
         <>
             <NavBar />
@@ -88,11 +83,11 @@ const StampCheck = () => {
                     {stampList.map((item, index) =>
 
                         <StampItem
-                            id={item}
+                            id={item.id}
                             checked={true}
-                            cafe="카페 비반트"
-                            date="2023.01.01"
-                            time="12:00"
+                            cafe={item.store}
+                            date={item.timestamp.substr(0, 10)}
+                            time={item.timestamp.substr(11, 5)}
                         />
                     )}
                     {Array(noStampNum)

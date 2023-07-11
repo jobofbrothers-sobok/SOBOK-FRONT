@@ -34,15 +34,15 @@ const StampReward = () => {
                         일상
                     </TagButton>
                 </TagList>
-                <br /><br />
+                <br />
                 <div className="cafe-info-box">
-                    <div className="location">경희대학교 카페 투어 스탬프</div>
-                    <div className="stamp-manual">리워드 : 경희대학교 한정판 선물세트</div>
+                    <div className="location">{tag} 카페 투어 스탬프</div>
+                    <div className="stamp-manual">리워드 : {tag} 한정판 선물세트</div>
                 </div>
                 <br />
                 <img src={rewardImg} alt="리워드이미지" />
                 <br />
-                <Button text='리워드 신청하기' color='#7F7F7F' onClick={() => navigator('/stamp/customer/reward/form')} />
+                <Button text='리워드 신청하기' color='#7F7F7F' onClick={() => navigator(`/stamp/customer/reward/form/${tag}`)} />
             </Container>
             <Footer />
         </>

@@ -7,9 +7,14 @@ import Footer from "../../../components/common/Footer";
 import InputBox from "../../../components/common/InputBox";
 import Modal from "../../../components/common/Modal";
 import logo from "../../../asset/images/sobok_logo_square_jua.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { postDelivery } from "../../../lib/api/stamp";
+import { getCookie } from "../../../lib/cookie";
 
 const RewardForm = () => {
+
+    const { tag } = useParams();
+    console.log(tag);
 
     // 모달 관련
     const [modalOpen, setModalOpen] = useState(false);
@@ -23,6 +28,26 @@ const RewardForm = () => {
 
     const navigator = useNavigate();
 
+
+    const reward = `${tag} 카페 투어 스탬프`
+    const [name, setName] = useState('');
+    const [tel, setTel] = useState('');
+    const [address, setAddress] = useState('');
+    const [detail, setDetail] = useState('');
+    const [message, setMessage] = useState('');
+
+    let config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+    const postRewardForm = () => {
+        postDelivery(reward, name, tel, address, detail, message, config)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+    }
     return (
         <>
             <NavBar />
@@ -33,22 +58,22 @@ const RewardForm = () => {
                 <br /><br />
                 <div className="edit-form">
                     <p>리워드명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <p className="reward-name">경희대학교 카페 투어 스탬프</p>
+                    <p className="reward-name">{tag} 카페 투어 스탬프</p>
                     <hr /><br />
                     <p>주문자 이름<span style={{ color: "#EB5757", fontWeight: "900" }}></span></p>
-                    <input type='text' />
+                    <input type='text' onChange={(e) => setName(e.target.value)} />
                     <p>전화번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="tel" placeholder="010-0000-0000" />
+                    <input type="tel" placeholder="010-0000-0000" onChange={(e) => setTel(e.target.value)} />
                     <p>주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <div className="address-box">
-                        <input type="text" /><button className="address-search-btn">주소검색</button>
+                        <input type="text" onChange={(e) => setAddress(e.target.value)} /><button className="address-search-btn">주소검색</button>
                     </div>
                     <p>상세주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setDetail(e.target.value)} />
                     <p>배송시 남기실 말씀<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <InputBox rows="7" />
+                    <InputBox rows="7" onChange={(e) => setMessage(e.target.value)} />
                     <br />
-                    <Button text="신청완료" color="#FF9F74" onClick={openModal} />
+                    <Button text="신청완료" color="#FF9F74" onClick={postRewardForm} />
                 </div>
             </Container>
             <Footer />
