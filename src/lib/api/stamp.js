@@ -21,13 +21,13 @@ export const postCodeApproval = async (code, config) => {
 };
 
 // 스탬프 적립 내역 확인
-export const checkStamp = async (sort, config) => {
-    return await axios.get(`${PROXY}/customer/stamp/${sort}`, {}, config);
+export const checkStamp = async (tag, config) => {
+    return await axios.get(`${PROXY}/customer/stamp?sort=${tag}`, config);
 };
 
 // 스탬프 참여 매장 조회
-export const checkStampStore = async (sort, config) => {
-    return await axios.get(`${PROXY}/customer/tour/${sort}`, {}, config);
+export const checkStampStore = async (tag, config) => {
+    return await axios.get(`${PROXY}/customer/tour?sort=${tag}`, config);
 };
 
 // 배송 신청
