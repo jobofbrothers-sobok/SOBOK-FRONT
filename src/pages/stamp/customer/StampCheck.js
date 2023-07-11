@@ -1,25 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../../components/common/NavBar";
 import Footer from "../../../components/common/Footer";
 import styled from "styled-components";
 import BackButton from "../../../components/common/BackButton";
-import stamp from "../../../asset/images/stamp.svg";
-import nostamp from "../../../asset/images/nostamp.svg";
 import completeImg from "../../../asset/images/complete-stamp.svg";
 import Modal from "../../../components/common/Modal";
 import Button from "../../../components/common/Button";
 import sobokFace from "../../../asset/images/sobok-face.svg";
 import StampItem from "../../../components/StampItem";
+import { checkStamp, checkStampStore } from "../../../lib/api/stamp";
+import { getCookie } from "../../../lib/cookie";
 
 const StampCheck = () => {
 
-    const [tag, setTag] = useState('회기역');
+    const [tag, setTag] = useState('hoegi');
 
-    const [stampList, setStamp] = useState([0, 1, 2, 3]);
+    const [stampList, setStamp] = useState([]);
+    const [stampCafe, setStampCafe] = useState([]);
 
     const noStampNum = 9 - stampList.length;
-    console.log(noStampNum)
 
+    let config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+
+    const getStampList = async () => {
+        const json = await checkStamp(tag, config);
+        setStamp(json.data.data);
+    };
+
+    const getTourCafeList = async () => {
+        const json = await checkStampStore(tag, config);
+        setStampCafe(json.data.data);
+    }
+    useEffect(() => {
+        getStampList();
+        getTourCafeList();
+    }, [tag])
 
     // 모달 관련
     const [modalOpen, setModalOpen] = useState(false);
@@ -31,9 +52,6 @@ const StampCheck = () => {
         setModalOpen(false);
     }
 
-    // 스탬프 카페 리스트 임시 배열
-    const stampCafe = ['카페 A', '카페 B', '카페 C', '카페 D'];
-
     return (
         <>
             <NavBar />
@@ -42,16 +60,16 @@ const StampCheck = () => {
                 <br /><br />
                 <div className="info-title">스탬프 적립 내역</div>
                 <TagList>
-                    <TagButton className={tag === '회기역' ? 'active' : ''} onClick={() => setTag('회기역')}>
+                    <TagButton className={tag === 'hoegi' ? 'active' : ''} onClick={() => setTag('hoegi')}>
                         회기역
                     </TagButton>
-                    <TagButton className={tag === '할로윈 특집' ? 'active' : ''} onClick={() => setTag('할로윈 특집')}>
+                    <TagButton className={tag === 'halloween' ? 'active' : ''} onClick={() => setTag('halloween')}>
                         할로윈 특집
                     </TagButton>
-                    <TagButton className={tag === '숙대입구파티' ? 'active' : ''} onClick={() => setTag('숙대입구파티')}>
+                    <TagButton className={tag === 'sookmyung' ? 'active' : ''} onClick={() => setTag('sookmyung')}>
                         숙대입구파티
                     </TagButton>
-                    <TagButton className={tag === '일상' ? 'active' : ''} onClick={() => setTag('일상')}>
+                    <TagButton className={tag === 'xmas' ? 'active' : ''} onClick={() => setTag('xmas')}>
                         일상
                     </TagButton>
                 </TagList>
@@ -65,11 +83,11 @@ const StampCheck = () => {
                     {stampList.map((item, index) =>
 
                         <StampItem
-                            id={item}
+                            id={item.id}
                             checked={true}
-                            cafe="카페 비반트"
-                            date="2023.01.01"
-                            time="12:00"
+                            cafe={item.store}
+                            date={item.timestamp.substr(0, 10)}
+                            time={item.timestamp.substr(11, 5)}
                         />
                     )}
                     {Array(noStampNum)
@@ -90,7 +108,7 @@ const StampCheck = () => {
                         {stampCafe.map((item, index) =>
                             <div className="stamp-cafe-item" key={index}>
                                 <img src={sobokFace} alt='소복얼굴' />
-                                <p>{item}</p>
+                                <p>{item.storeName}</p>
                             </div>
                         )}
                     </StampCafeList>

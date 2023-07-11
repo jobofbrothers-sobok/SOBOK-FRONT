@@ -64,7 +64,7 @@ const SideBar = (props) => {
               <div className="menu-item" onClick={() => navigator('/news')}>
                 카페 소식 모아보기
               </div>
-              <div className="menu-item" onClick={auth ? () => { console.log('auth', auth); navigator('/stamp/customer') } : openModal}>
+              <div className="menu-item" onClick={auth ? () => { console.log('auth', auth); who === 'customer' ? navigator('/stamp/customer') : navigator('/stamp/owner') } : openModal}>
                 스탬프 서비스
               </div>
               <div className="menu-item" onClick={() => navigator('/store')}>

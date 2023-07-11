@@ -10,6 +10,7 @@ import StampInfo from "./StampInfo";
 import DeliveryList from "./DeliveryList";
 import AddNotice from "./AddNotice";
 import InquiriesList from "./InquiriesList";
+import StampMemberInfo from "./StampMemberInfo";
 
 const AdminMenuDetail = () => {
 
@@ -28,7 +29,8 @@ const AdminMenuDetail = () => {
                             id === '3' ? <DeliveryList /> :
                                 id === '4' ? <AddNotice /> :
                                     id === '5' ? <InquiriesList /> :
-                                        <>no menu</>}
+                                        id === '6' ? <StampMemberInfo /> :
+                                            <>no menu</>}
             </Container>
             <Footer />
         </>

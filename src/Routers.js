@@ -34,6 +34,7 @@ import NoticePage from "./pages/main/NoticePage";
 import NoticeDetail from "./pages/main/NoticeDetail";
 import InquiryPage from "./pages/main/InquiryPage";
 import AgreePage from "./pages/login/AgreePage";
+import StampMemberDetail from "./pages/mypage/admin/StampMemberDetail";
 
 const Routers = () => {
     return (
@@ -57,10 +58,12 @@ const Routers = () => {
                 {/* 최고관리자 마이페이지 */}
                 <Route element={<AdminPage />} path='/admin' />
                 <Route element={<AdminMenuDetail />} path='/admin/menu/:id' />
-                <Route element={<MemberDetail />} path='/admin/menu/:id/member/:id' />
+                <Route element={<MemberDetail />} path='/admin/menu/0/member/:id' />
+                <Route element={<AddStampTour />} path='/admin/menu/2/add-stamp-tour' />
                 <Route element={<ManagerDetail />} path='/admin/menu/3/detail/:id' />
                 <Route element={<DeliveryDetail />} path='/admin/menu/4/detail/:id' />
-                <Route element={<AddStampTour />} path='/admin/menu/2/add-stamp-tour' />
+                <Route element={<StampMemberDetail />} path='/admin/menu/6/member/:id' />
+
                 {/* 점주 마이페이지 */}
                 <Route element={<OwnerPage />} path='/owner' />
                 <Route element={<OwnerMenuDetail />} path='/owner/menu/:id' />
@@ -74,7 +77,7 @@ const Routers = () => {
                 <Route element={<StampCode />} path='/stamp/customer/code' />
                 <Route element={<StampCheck />} path='/stamp/customer/check' />
                 <Route element={<StampReward />} path='/stamp/customer/reward' />
-                <Route element={<RewardForm />} path='/stamp/customer/reward/form' />
+                <Route element={<RewardForm />} path='/stamp/customer/reward/form/:tag' />
                 {/* 점주 스탬프 */}
                 <Route element={<StampOwner />} path='/stamp/owner' />
                 <Route element={<NoApproval />} path='/stamp/owner/no-approval' />

@@ -5,21 +5,17 @@ import active from '../../../asset/images/active.svg';
 import { useNavigate } from "react-router-dom";
 import MoreButton from "../../../components/common/MoreButton";
 import filterbtn from "../../../asset/images/filter-arrow.svg";
-import { readAllClient, readAllOwner } from "../../../lib/api/admin";
+import { getAllStampMember, getStampMemberDetail, readAllClient, readAllOwner } from "../../../lib/api/admin";
 import { getCookie, setCookie } from "../../../lib/cookie";
 
 
-const MemberInfo = () => {
-
-    const [isowner, setOwner] = useState(getCookie('isowner') === 'true' ? true : false);
+const StampMemberInfo = () => {
 
     const navigator = useNavigate();
 
-
-    const [sort, setSort] = useState('all');
+    // const [sort, setSort] = useState('all');
 
     const [ownerList, setOwnerList] = useState([]);
-    const [clientList, setClientList] = useState([]);
 
     let config = {
         headers: {
@@ -29,77 +25,38 @@ const MemberInfo = () => {
         }
     }
 
-    const getAllOwner = async () => {
-        const json = await readAllOwner(sort, config);
+    const getStampMember = async () => {
+        const json = await getAllStampMember(config);
         setOwnerList(json.data.data);
     };
 
-    const getAllClient = async () => {
-        const json = await readAllClient(config);
-        setClientList(json.data.data);
-    };
-
     useEffect(() => {
-        if (isowner) {
-            getAllOwner();
-            setCookie('isowner', isowner);
-        }
-        else {
-            getAllClient();
-            setCookie('isowner', isowner);
-        }
-    }, [sort, isowner]);
+        getStampMember();
+    }, []);
 
 
     return (
         <>
             <Container>
-                <p className="title">회원 정보</p>
+                <p className="title">점주 스탬프 승인</p>
                 <br />
-                <div className="button-box">
-                    <SendButton color={isowner ? '#FF9F74' : '#7F7F7F'} onClick={() => setOwner(true)}>
-                        <p>점주</p>
-                    </SendButton>
-                    <SendButton color={isowner ? '#7F7F7F' : '#FF9F74'} onClick={() => setOwner(false)}>
-                        <p>일반회원</p>
-                    </SendButton>
-                </div>
                 <br />
                 <SearchBox />
                 <div className='apply-list'>
                     <br />
                     <div className="list-top-box">
                         <p className="info-title">회원정보</p>
-                        {isowner ? <FilterBox name="category" onChange={(e) => setSort(e.target.value)}>
-                            <option value="all">전체</option>
-                            <option value="pending">미승인</option>
-                            <option value="auth">승인완료</option>
-                        </FilterBox> : <></>}
                     </div>
                     <hr />
                     {
-                        isowner ?
-                            ownerList.map((item, index) => (
-                                <div className='apply-item' key={item.id} onClick={() => navigator(`/admin/menu/0/member/${item.id}`)}>
-                                    <div>
-                                        <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.director}</div>
-                                        <div className='item-category'>{item.store} / {item.phone}</div>
-                                    </div>
+                        ownerList.map((item, index) => (
+                            <div className='apply-item' key={item.id} onClick={() => navigator(`/admin/menu/6/member/${item.id}`)}>
+                                <div>
+                                    <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.director}</div>
+                                    <div className='item-category'>{item.store} / {item.phone}</div>
                                 </div>
-                            ))
-                            :
-                            clientList.map((item, index) => (
-                                <div className='apply-item' key={item.id} onClick={() => navigator(`/admin/menu/0/member/${item.id}`)}>
-                                    <div>
-                                        <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.loginId}</div>
-                                        <div className='item-category'>{item.name} / {item.email} / {item.phone}</div>
-                                    </div>
-                                    <div className="cupon-stamp">
-                                        보유쿠폰 {item.cupon}개<br />
-                                        스탬프 {item.stamp}개
-                                    </div>
-                                </div>
-                            ))
+                            </div>
+                        ))
                     }
                 </div>
                 <MoreButton />
@@ -108,7 +65,7 @@ const MemberInfo = () => {
     )
 }
 
-export default MemberInfo;
+export default StampMemberInfo;
 
 const Container = styled.div`
     width: 100%;
