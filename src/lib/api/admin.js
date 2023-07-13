@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getCookie } from "../cookie";
 
-const PROXY = window.location.hostname === 'localhost' ? '' : '/proxy';
+const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
 
 const config = {
     headers: {
