@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
+// const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
+const PROXY = '/api';
 
 // 카페 찜하기
 export const postLike = async (storeId, config) => {
