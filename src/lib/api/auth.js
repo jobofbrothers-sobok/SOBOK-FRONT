@@ -1,7 +1,8 @@
 import axios from "axios";
 import { client } from "./client";
 
-const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
+// const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
+const PROXY = '/api';
 
 // 고객 로그인
 export const customerLogin = async (id, pw) => {

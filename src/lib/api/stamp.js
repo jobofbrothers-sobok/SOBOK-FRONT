@@ -8,7 +8,8 @@ const config = {
     }
 }
 
-const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
+// const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
+const PROXY = '/api';
 
 // 고객 스탬프 적립 코드 생성
 export const getCode = async (config) => {
