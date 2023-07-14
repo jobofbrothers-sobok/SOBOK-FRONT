@@ -12,6 +12,11 @@ const config = {
 // const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
 const PROXY = '/api';
 
+// 찜한 카페 및 작성한 리뷰 조회
+export const getCustomerActivity = async (config) => {
+    return await axios.get(`${PROXY}/main/mypage`, config)
+}
+
 // 고객 회원 정보 수정
 export const customerEdit = async (pw, name, email, phone, file) => {
     let formData = new FormData();

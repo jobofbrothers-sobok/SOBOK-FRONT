@@ -32,18 +32,38 @@ import filterbtn from "../../asset/images/filter-arrow.svg";
 // 카페 예시 대표 이미지
 import CafeItem from "../../components/CafeItem";
 import { useNavigate } from "react-router-dom";
+import { getAllCafe } from "../../lib/api/main";
 
 
 
 const MainPage = () => {
 
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
 
     // 현재 위치 위도, 경도 가져오기
     const [lat, setLatitude] = useState(null);
-    const [long, setLongitude] = useState(null);
+    const [lon, setLongitude] = useState(null);
+    console.log({ lat, lon });
 
+    const [checkList, setCheckList] = useState([]);
 
-    console.log({ lat, long });
+    const checkAll = (e) => {
+        console.log(e.target.checked);
+        e.target.checked
+            ? setCheckList(['concent', 'table', 'park', 'dog', 'rooftop', 'sofa', 'nokids', 'window', 'ciagrette'])
+            : setCheckList([]);
+    }
+
+    const check = (e) => {
+        console.log(e.target.checked);
+        e.target.checked
+            ? setCheckList([...checkList, e.target.value])
+            : setCheckList(checkList.filter((choice) => choice !== e.target.value))
+    }
 
     const getLocation = () => {
         // 위치 권한 허용시
@@ -70,19 +90,28 @@ const MainPage = () => {
         }
     }
 
+    const [cafeList, setCafeList] = useState([]);
+
+    console.log('카페 리스트', cafeList)
+
     const navigation = useNavigate();
 
     useEffect(() => {
         getLocation();
-    }, []);
+        if (lat !== null && lon !== null) {
+            console.log(lat, lon, checkList)
+            let config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }
+            getAllCafe(parseFloat(lat), parseFloat(lon), checkList, config)
+                .then((res) => { console.log(res); setCafeList(cafeList); })
+                .catch((err) => { console.log(err); })
+        }
+    }, [checkList]);
 
-
-    const onHandleCategory = (event) => {
-        const { name, value, checked } = event.target;
-
-        console.log(name, value, checked);
-        // console.log(checked)
-    }
+    console.log(cafeList)
 
 
     // 카페 리스트 임시
@@ -106,7 +135,8 @@ const MainPage = () => {
                             id="icon1"
                             name="category"
                             value="all"
-                            onClick={onHandleCategory}
+                            onChange={checkAll}
+                            checked={checkList.length === 9 ? true : false}
                         />
                         <label htmlFor="icon1">
                             <img src={all} alt="all" className="icon" />
@@ -118,7 +148,8 @@ const MainPage = () => {
                             id="icon2"
                             name="category"
                             value="concent"
-                            onClick={onHandleCategory}
+                            onChange={check}
+                            checked={checkList.includes('concent') ? true : false}
                         />
                         <label htmlFor="icon2">
                             <img src={concent} alt="concent" className="icon" />
@@ -130,7 +161,8 @@ const MainPage = () => {
                             id="icon3"
                             name="category"
                             value="table"
-                            onClick={onHandleCategory}
+                            onChange={check}
+                            checked={checkList.includes('table') ? true : false}
                         />
                         <label htmlFor="icon3">
                             <img src={table} alt="table" className="icon" />
@@ -142,7 +174,8 @@ const MainPage = () => {
                             id="icon4"
                             name="category"
                             value="park"
-                            onClick={onHandleCategory}
+                            onChange={check}
+                            checked={checkList.includes('park') ? true : false}
                         />
                         <label htmlFor="icon4">
                             <img src={park} alt="park" className="icon" />
@@ -154,7 +187,8 @@ const MainPage = () => {
                             id="icon5"
                             name="category"
                             value="dog"
-                            onClick={onHandleCategory}
+                            onChange={check}
+                            checked={checkList.includes('dog') ? true : false}
                         />
                         <label htmlFor="icon5">
                             <img src={dog} alt="dog" className="icon" />
@@ -166,7 +200,8 @@ const MainPage = () => {
                             id="icon6"
                             name="category"
                             value="window"
-                            onClick={onHandleCategory}
+                            onChange={check}
+                            checked={checkList.includes('window') ? true : false}
                         />
                         <label htmlFor="icon6">
                             <img src={window} alt="window" className="icon" />
@@ -178,7 +213,8 @@ const MainPage = () => {
                             id="icon7"
                             name="category"
                             value="ciagrette"
-                            onClick={onHandleCategory}
+                            onChange={check}
+                            checked={checkList.includes('ciagrette') ? true : false}
                         />
                         <label htmlFor="icon7">
                             <img src={ciagrette} alt="ciagrette" className="icon" />
@@ -190,7 +226,8 @@ const MainPage = () => {
                             id="icon8"
                             name="category"
                             value="nokids"
-                            onClick={onHandleCategory}
+                            onChange={check}
+                            checked={checkList.includes('nokids') ? true : false}
                         />
                         <label htmlFor="icon8">
                             <img src={nokids} alt="nokids" className="icon" />
@@ -202,7 +239,8 @@ const MainPage = () => {
                             id="icon9"
                             name="category"
                             value="sofa"
-                            onClick={onHandleCategory}
+                            onChange={check}
+                            checked={checkList.includes('sofa') ? true : false}
                         />
                         <label htmlFor="icon9">
                             <img src={sofa} alt="sofa" className="icon" />
@@ -214,7 +252,8 @@ const MainPage = () => {
                             id="icon10"
                             name="category"
                             value="rooftop"
-                            onClick={onHandleCategory}
+                            onChange={check}
+                            checked={checkList.includes('rooftop') ? true : false}
                         />
                         <label htmlFor="icon10">
                             <img src={rooftop} alt="rooftop" className="icon" />

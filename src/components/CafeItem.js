@@ -3,21 +3,52 @@ import HeartButton from "./common/HeartButton";
 import styled from "styled-components";
 import cafeImg from "../asset/images/cafeImg.svg";
 import locMark from "../asset/images/locMark.svg";
+import { deleteLike, postLike } from "../lib/api/main";
+import { getCookie } from "../lib/cookie";
 
 
 const CafeItem = (props) => {
 
-    const { title, distance, intro, tag, onClick } = props;
+    const { id, title, distance, intro, tag, onClick, image } = props;
 
     // 좋아요 버튼
     const [like, setLike] = useState(false);
 
+    // 대체 이미지 설정
+    const handleImgError = (e) => {
+        e.target.src = cafeImg
+    }
+
+    // 찜 버튼 클릭시 DB 저장
+    const handleHeartButton = () => {
+        let config = {
+            headers: {
+                'Content-Type': `multipart/form-data`,
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        };
+        // 찜 True일 때, 찜 해제
+        if (like) {
+            setLike(!like);
+            deleteLike(id, config)
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err))
+        }
+        // 찜 False일 때, 찜 등록
+        else {
+            setLike(!like);
+            postLike(id, config)
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
+        }
+    }
 
     return (
         <ItemBox onClick={onClick}>
             <div className="imgBox">
-                <img className='cafe-img' src={cafeImg} alt='카페대표이미지' />
-                <HeartButton like={like} onClick={(event) => { event.stopPropagation(); setLike(!like); }} />
+                <img className='cafe-img' src={image ? image : cafeImg} alt='카페대표이미지' onError={handleImgError} />
+                <HeartButton like={like} onClick={(event) => { event.stopPropagation(); handleHeartButton() }} />
             </div>
             <div className="cafe-summary">
                 <div className="cafe-title">{title}</div>

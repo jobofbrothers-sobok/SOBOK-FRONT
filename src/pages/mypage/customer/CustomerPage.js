@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../../components/common/NavBar";
 import Footer from "../../../components/common/Footer";
@@ -7,8 +7,12 @@ import ReviewItem from "../../../components/ReviewItem";
 import { useNavigate } from "react-router-dom";
 import CafeItem from "../../../components/CafeItem";
 import { getCookie } from "../../../lib/cookie";
+import { getCustomerActivity } from "../../../lib/api/mypage";
 
 const CustomerPage = () => {
+
+    const [likedCafe, setLikedCafe] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     // 카페 리스트 임시
     const array = [0, 1, 2, 3, 4];
@@ -19,6 +23,26 @@ const CustomerPage = () => {
     const navigator = useNavigate();
 
     const name = getCookie('name');
+
+    const getActivity = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        }
+        const json = await getCustomerActivity(config);
+        console.log(json);
+        setLikedCafe(json.data.data.allLikeCafe);
+        setReviews(json.data.data.allStoreReview);
+    };
+
+    useEffect(() => {
+        getActivity();
+    }, []);
+
+
 
     return (
         <>
@@ -39,13 +63,15 @@ const CustomerPage = () => {
                     </div>
                     <hr /><br />
                     <div className="cafe-list">
-                        {array.map((item) => <>
+                        {likedCafe.map((item) => <>
                             <CafeItem
-                                key={item}
-                                title="페이브 베이커리"
+                                id={item.id}
+                                key={item.id}
+                                image={`http://58.225.75.202:5000/${item.image}`}
+                                title={item.storeName}
                                 distance='55m'
-                                intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
-                                tag={['큰 테이블', '콘센트']}
+                                intro={item.description}
+                                tag={item.category}
                             />
                         </>)}
                     </div>
@@ -58,12 +84,12 @@ const CustomerPage = () => {
                     </div>
                     <hr /><br />
                     <div className="review-list">
-                        {array1.map((item, index) =>
+                        {reviews.map((item, index) =>
                             <ReviewItem
-                                key={index}
-                                nickname='고법123'
-                                content='분위기가 좋고 앙버터를 좋아하시는 분들 추천드립니다. 딸기 시즌이라서 딸기 제품이 나왔는대 정말 맜있었고 만약에 다시 방문한다면 유기농이라서 몸이 덜 해로워서 건강하지 않고 오늘 따라 라면이'
-                                date='2023-01-01'
+                                key={item.id}
+                                nickname={name}
+                                content={item.content}
+                                date={item.timestamp.substr(0, 10)}
                             />
                         )}
                     </div>
