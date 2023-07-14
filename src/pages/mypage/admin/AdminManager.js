@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dummy from '../../../data/data.json';
 import SearchBox from '../../../components/common/SearchBox';
 import MoreButton from '../../../components/common/MoreButton';
 import { useNavigate } from 'react-router-dom';
 import ListItem from '../../../components/common/ListItem';
+import { getAllManager } from '../../../lib/api/admin';
+import { getCookie } from '../../../lib/cookie';
 
 const AdminManager = () => {
 
     const navigator = useNavigate();
 
+    const [managers, setManagers] = useState([]);
+
+    let config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+
+    const getManagerList = async () => {
+        const json = await getAllManager(config);
+        setManagers(json.data.data);
+    };
+
+    useEffect(() => {
+        getManagerList();
+    }, []);
 
     return (
         <>
@@ -20,12 +40,12 @@ const AdminManager = () => {
                 <div className='apply-list'>
                     <br />
                     <hr />
-                    {dummy.manager.map(item => (
+                    {managers.map(item => (
                         <ListItem
                             id={item.id}
-                            title={item.title}
-                            category={item.category}
-                            date={item.date}
+                            title={item.content.substr(0, 10)}
+                            category={(item.isMessage ? '문자' : '카톡') + ' / ' + item.category}
+                            date={item.timestamp.substr(0, 10)}
                             isActive={true}
                             onClick={() => navigator(`/admin/menu/3/detail/${item.id}`)}
                         />

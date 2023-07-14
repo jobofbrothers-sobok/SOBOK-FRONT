@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import InputBox from "../../../components/common/InputBox";
 import Button from "../../../components/common/Button";
@@ -7,24 +7,47 @@ import BackButton from "../../../components/common/BackButton";
 import Footer from "../../../components/common/Footer";
 import { useParams } from "react-router-dom";
 import dummy from "../../../data/data.json";
+import { getCookie } from "../../../lib/cookie";
+import { getManagerDetail } from "../../../lib/api/admin";
 
 const ManagerDetail = () => {
 
     const [isSend, setSend] = useState(false);
+    const [manager, setManager] = useState('');
+    const [contents, setContents] = useState('');
 
     const { id } = useParams();
     console.log(id);
 
-    const { title, category, value } = dummy.manager.find((x) => x.id == id)
+    const { category, content, isMessage } = manager;
+    console.log(content)
 
+    let config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+
+    // 매니저 상세 조회
+    const getManagerInfo = async () => {
+        const json = await getManagerDetail(id, config);
+        setManager(json.data.data);
+    };
+
+    useEffect(() => {
+        getManagerInfo()
+        setContents(content)
+    }, []);
 
     const goSendPage = () => {
         setSend(!isSend);
     }
 
-    const [content, setContent] = useState(value);
+
     const editContent = (e) => {
-        setContent(e.target.value);
+        setContents(e.target.value);
     }
 
     return (
@@ -33,7 +56,7 @@ const ManagerDetail = () => {
             <Container>
                 <BackButton />
                 <br /><br />
-                <p className="title">{title}</p>
+                <p className="title">{isMessage ? '문자' : '카톡'}서비스 신청</p>
                 <br /><br />
                 <div className="detail-box">
                     <p className="info-text">요청 정보</p>
@@ -44,7 +67,7 @@ const ManagerDetail = () => {
                     <p className="detail-text">내용</p>
                     {isSend ?
                         <>
-                            <p>{content}</p>
+                            <p>{contents}</p>
                             <br />
                             <div className="button-box">
                                 <Button text="문자 일괄전송" color="#FF9F74" /><Button text="카톡 일괄전송" color="#FEE500" textColor="#3D1B1A" />
@@ -52,7 +75,7 @@ const ManagerDetail = () => {
                         </>
                         :
                         <>
-                            <InputBox rows="10" value={content} onChange={editContent} />
+                            <InputBox rows="10" value={contents} onChange={editContent} />
                             <br />
                         </>
                     }

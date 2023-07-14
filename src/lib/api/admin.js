@@ -91,3 +91,13 @@ export const getStampMemberDetail = async (id, config) => {
 export const postStampApproval = async (id, config) => {
     return await axios.post(`${PROXY}/manager/stamp/${id}`, {}, config);
 }
+
+// 소복매니저 신청 리스트 전체 조회
+export const getAllManager = async (config) => {
+    return await axios.get(`${PROXY}/manager/alim`, config);
+}
+
+// 소복매니저 신청 리스트 전체 조회
+export const getManagerDetail = async (id, config) => {
+    return await axios.get(`${PROXY}/manager/alim/${id}`, config);
+}
