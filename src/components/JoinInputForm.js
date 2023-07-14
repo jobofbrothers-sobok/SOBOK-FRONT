@@ -166,7 +166,7 @@ const InputContainer = styled.div`
         flex: auto;
     }
     .id-check-btn, .store-search {
-        width: 25%;
+        // width: 25%;
         height: 50px;
         background: #7F7F7F;
         border: none;

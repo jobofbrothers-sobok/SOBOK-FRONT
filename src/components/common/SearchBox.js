@@ -24,7 +24,7 @@ const Container = styled.div`
     background: #EBEBEB;
     opacity: 0.6;
     border-radius: 5px;
-    gap: 20px;
+    // gap: 20px;
     > input {
         flex: auto;
         border: none;
@@ -32,6 +32,7 @@ const Container = styled.div`
         outline: none;
     }
     > button {
+        // flex: auto;
         border: none;
         background: none;
     }
