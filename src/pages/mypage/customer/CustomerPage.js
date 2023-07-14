@@ -20,7 +20,7 @@ const CustomerPage = () => {
     // 임시 배열
     const array1 = [0, 0, 0];
 
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     const name = getCookie('name');
 
@@ -72,6 +72,7 @@ const CustomerPage = () => {
                                 distance='55m'
                                 intro={item.description}
                                 tag={item.category}
+                                onClick={() => navigation(`/detail/${item.id}`)}
                             />
                         </>)}
                     </div>

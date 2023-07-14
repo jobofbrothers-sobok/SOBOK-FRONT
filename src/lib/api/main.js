@@ -38,28 +38,28 @@ export const deleteLike = async (id, config) => {
 };
 
 // 카페 상세 정보 조회
-export const getCafeInfo = async (storeId, config) => {
-    return await axios.get(`${PROXY}/main/store/info/${storeId}`, {}, config);
+export const getCafeInfo = async (id, config) => {
+    return await axios.get(`${PROXY}/main/store/info/${id}`, {}, config);
 };
 
 // 카페 상세 소식 조회
-export const getCafeNews = async (storeId, query, config) => {
-    return await axios.get(`${PROXY}/main/store/notice/${storeId}?query=${query}`, {}, config);
+export const getCafeNews = async (id, tag, config) => {
+    return await axios.get(`${PROXY}/main/store/notice/${id}?query=${tag}`, {}, config);
 };
 
 // 카페 상세 메뉴 조회
-export const getCafeMenu = async (storeId, config) => {
-    return await axios.get(`${PROXY}/main/store/menu/${storeId}`, {}, config);
+export const getCafeMenu = async (id, config) => {
+    return await axios.get(`${PROXY}/main/store/menu/${id}`, {}, config);
 };
 
 // 카페 상세 리뷰 조회
-export const getCafeReviews = async (storeId, config) => {
-    return await axios.get(`${PROXY}/main/store/review/${storeId}`, {}, config);
+export const getCafeReviews = async (id, config) => {
+    return await axios.get(`${PROXY}/main/store/review/${id}`, {}, config);
 };
 
 // 스토어 전체 상품 조회
-export const getProducts = async (storeId, config) => {
-    return await axios.get(`${PROXY}/main/store/products/${storeId}`, {}, config);
+export const getProducts = async (id, config) => {
+    return await axios.get(`${PROXY}/main/store/products/${id}`, {}, config);
 };
 
 
