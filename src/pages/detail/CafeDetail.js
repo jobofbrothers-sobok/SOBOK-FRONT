@@ -18,6 +18,7 @@ const CafeDetail = () => {
 
     const [tabMenu, setTabMenu] = useState("정보");
 
+    const storeId = 1;
 
     return (
         <>
@@ -54,10 +55,10 @@ const CafeDetail = () => {
                         리뷰
                     </TabMenuItem>
                 </div>
-                {tabMenu === '정보' ? <CafeInfo /> : <></>}
-                {tabMenu === '소식' ? <CafeNews /> : <></>}
-                {tabMenu === '메뉴' ? <CafeMenu /> : <></>}
-                {tabMenu === '리뷰' ? <CafeReview /> : <></>}
+                {tabMenu === '정보' ? <CafeInfo id={storeId}/> : <></>}
+                {tabMenu === '소식' ? <CafeNews id={storeId}/> : <></>}
+                {tabMenu === '메뉴' ? <CafeMenu id={storeId} /> : <></>}
+                {tabMenu === '리뷰' ? <CafeReview id={storeId} /> : <></>}
             </Container >
             <Footer />
         </>

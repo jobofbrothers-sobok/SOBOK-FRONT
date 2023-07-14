@@ -1,39 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import NewsItem from "./NewsItem";
+import { getCafeNews } from "../lib/api/main";
 
-const CafeNews = () => {
+const CafeNews = (props) => {
 
-    const [tag, setTag] = useState('전체');
+    const [tag, setTag] = useState('all');
+
+    const [news, setNews] = useState([]);
+
+    const id = props.id;
 
     // 임시 배열
     const dummy = [1, 2, 3];
     console.log(dummy);
 
+    // 카페 상세 정보 가져오기
+    const getNews = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'withCredentials': true,
+            }
+        }
+        const json = await getCafeNews(id, tag, config);
+        console.log(json);
+        setNews(json.data.data);
+    };
+
+    useEffect(() => {
+        getNews();
+    }, [tag]);
+
     return (
         <>
             <TagList>
-                <TagButton className={tag === '전체' ? 'active' : ''} onClick={() => setTag('전체')}>
+                <TagButton className={tag === 'all' ? 'active' : ''} onClick={() => setTag('all')}>
                     전체
                 </TagButton>
-                <TagButton className={tag === '신메뉴' ? 'active' : ''} onClick={() => setTag('신메뉴')}>
+                <TagButton className={tag === 'menu' ? 'active' : ''} onClick={() => setTag('menu')}>
                     신메뉴 소식
                 </TagButton>
-                <TagButton className={tag === '할인' ? 'active' : ''} onClick={() => setTag('할인')}>
+                <TagButton className={tag === 'sale' ? 'active' : ''} onClick={() => setTag('sale')}>
                     할인/이벤트
                 </TagButton>
-                <TagButton className={tag === '일상' ? 'active' : ''} onClick={() => setTag('일상')}>
+                {/* <TagButton className={tag === '일상' ? 'active' : ''} onClick={() => setTag('일상')}>
                     일상
-                </TagButton>
+                </TagButton> */}
             </TagList>
             <NewsList>
-                {dummy.map((i) =>
+                {news.map((item) =>
                     <NewsItem
-                        key={i}
-                        title="3년만에 신메뉴가 나왔습니다 !"
-                        content="3년동안 개발한 스페셜티가 드디어 론칭하였습니다. 1일 100잔 한정판매이니, 늦게와서 못드시는 일이 없도록 합시다."
-                        tag="신메뉴 소식"
-                        date="2023-01-01"
+                        key={item.id}
+                        title={item.title}
+                        content={item.content}
+                        tag={item.category}
+                        date={item.createdTime.substr(0, 10)}
                     />
                 )}
             </NewsList>

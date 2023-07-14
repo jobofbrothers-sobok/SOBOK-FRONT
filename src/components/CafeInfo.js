@@ -1,13 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import nokids2 from "../asset/images/category/nokids2.svg";
+import { getCafeInfo } from "../lib/api/main";
 
-const CafeInfo = () => {
+const CafeInfo = (props) => {
+
+    const id = props.id;
+    console.log(id);
+
+    const [cafeInfo, setCafeInfo] = useState('');
+
+    const { storeName, description, homepage, officeHour, dayOff, category, x, y } = cafeInfo;
 
     useEffect(() => {
         const { naver } = window;
 
-        const location = new naver.maps.LatLng(37.5456497, 126.967141);
+        const location = new naver.maps.LatLng(x, y);
 
         const mapOptions = {
             center: location,
@@ -21,24 +29,35 @@ const CafeInfo = () => {
         });
     }, [])
 
+    // 카페 상세 정보 가져오기
+    const getInfo = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'withCredentials': true,
+            }
+        }
+        const json = await getCafeInfo(id, config);
+        console.log(json);
+        setCafeInfo(json.data.data);
+    };
+
+    useEffect(() => {
+        getInfo();
+    }, []);
+
 
     return (
         <>
             <Container>
                 {/* category container */}
                 <div className="category-container">
-                    <div className="category-item">
-                        <img src={nokids2} alt="카테고리이미지" />
-                        <p>노키즈</p>
-                    </div>
-                    <div className="category-item">
-                        <img src={nokids2} alt="카테고리이미지" />
-                        <p>노키즈</p>
-                    </div>
-                    <div className="category-item">
-                        <img src={nokids2} alt="카테고리이미지" />
-                        <p>노키즈</p>
-                    </div>
+                    {category?.map((item) =>
+                        <div className="category-item">
+                            <img src={nokids2} alt="카테고리이미지" />
+                            <p>{item}</p>
+                        </div>
+                    )}
                 </div>
 
                 {/* map conainer */}
@@ -52,12 +71,12 @@ const CafeInfo = () => {
                     <hr />
                     <div className="list-item">
                         <p className="list-title">영업 시간</p>
-                        <p className="list-value">월 ~ 일  09 : 00 ~ 23 : 00 영업 / 매주 일요일 휴무</p>
+                        <p className="list-value">{officeHour}</p>
                     </div>
                     <hr />
                     <div className="list-item">
                         <p className="list-title">매장 소개</p>
-                        <p className="list-value">www.mansean.co.kr</p>
+                        <p className="list-value">{homepage}</p>
                     </div>
                 </div>
             </Container>

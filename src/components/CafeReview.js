@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "./common/Button";
 import ReviewItem from "./ReviewItem";
@@ -6,10 +6,16 @@ import MoreButton from './common/MoreButton';
 import Modal from "./common/Modal";
 import logo from '../asset/images/sobok_logo_square_jua.png';
 import InputBox from "./common/InputBox";
-import Footer from "./common/Footer";
 import isLogin from "../lib/router/isLogin";
+import { getCafeReviews } from "../lib/api/main";
+import { getCookie } from "../lib/cookie";
 
-const CafeReview = () => {
+const CafeReview = (props) => {
+
+
+    const id = props.id;
+
+    const [reviews, setReviews] = useState([]);
 
     // 로그인 유무
     const auth = isLogin();
@@ -27,18 +33,34 @@ const CafeReview = () => {
         setModalOpen(false);
     }
 
+    const getReviews = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'withCredentials': true,
+            }
+        }
+        const json = await getCafeReviews(id, config);
+        console.log(json);
+        setReviews(json.data.data);
+    };
+
+    useEffect(() => {
+        getReviews();
+    }, []);
+
     return (
         <>
             <Container>
                 <Button text="리뷰 작성하기" onClick={openModal} />
                 <br /><br />
                 <div className="review-list">
-                    {array1.map((item, index) =>
+                    {reviews.map((item, index) =>
                         <ReviewItem
-                            key={index}
+                            key={item.id}
                             nickname='고법123'
-                            content='분위기가 좋고 앙버터를 좋아하시는 분들 추천드립니다. 딸기 시즌이라서 딸기 제품이 나왔는대 정말 맜있었고 만약에 다시 방문한다면 유기농이라서 몸이 덜 해로워서 건강하지 않고 오늘 따라 라면이'
-                            date='2023-01-01'
+                            content={item.content}
+                            date={item.timestamp.substr(0, 10)}
                         />
                     )}
                 </div>
