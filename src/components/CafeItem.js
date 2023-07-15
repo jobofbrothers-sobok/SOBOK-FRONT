@@ -31,14 +31,14 @@ const CafeItem = (props) => {
         // 찜 True일 때, 찜 해제
         if (like) {
             setLike(!like);
-            deleteLike(id, config)
+            deleteLike(parseInt(id), config)
                 .then((res) => console.log(res))
                 .catch((err) => console.log(err))
         }
         // 찜 False일 때, 찜 등록
         else {
             setLike(!like);
-            postLike(id, config)
+            postLike(parseInt(id), config)
                 .then((res) => console.log(res))
                 .catch((err) => console.log(err));
         }
@@ -59,7 +59,7 @@ const CafeItem = (props) => {
             </div>
             <div className="cafe-desc">{intro}</div>
             <div className="tag-list">
-                {tag.map((item, index) => <div className="tag-wrap" key={index}>{item}</div>)}
+                {tag.slice(0, 3).map((item, index) => <div className="tag-wrap" key={index}>{item}</div>)}
             </div>
         </ItemBox>
     )

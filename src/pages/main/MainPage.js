@@ -49,7 +49,7 @@ const MainPage = () => {
     const [lon, setLongitude] = useState(null);
     console.log({ lat, lon });
 
-    const [checkList, setCheckList] = useState([]);
+    const [checkList, setCheckList] = useState(['concent', 'table', 'park', 'dog', 'rooftop', 'sofa', 'nokids', 'window', 'ciagrette']);
 
     const checkAll = (e) => {
         console.log(e.target.checked);
@@ -106,10 +106,10 @@ const MainPage = () => {
                 }
             }
             getAllCafe(parseFloat(lat), parseFloat(lon), checkList, config)
-                .then((res) => { console.log(res); setCafeList(cafeList); })
+                .then((res) => { console.log(res); setCafeList(res.data.data); })
                 .catch((err) => { console.log(err); })
         }
-    }, [checkList]);
+    }, [checkList, lon, lat]);
 
     console.log(cafeList)
 
@@ -274,13 +274,14 @@ const MainPage = () => {
                     </div>
                     <hr /><br />
                     <div className="cafe-list">
-                        {array.map((item, index) => <>
+                        {cafeList.map((item, index) => <>
                             <CafeItem
+                                id={item.id}
                                 key={item}
-                                title="페이브 베이커리"
+                                title={item.storeName}
                                 distance='55m'
-                                intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
-                                tag={['큰 테이블', '콘센트']}
+                                intro={item.description}
+                                tag={item.category}
                                 onClick={() => navigation(`/detail/${item}`)}
                             />
                         </>)}
