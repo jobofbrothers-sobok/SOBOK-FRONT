@@ -114,10 +114,6 @@ const MainPage = () => {
     console.log(cafeList)
 
 
-    // 카페 리스트 임시
-    const array = [0, 1, 2, 3, 4];
-
-
     return (
         <>
             <NavBar />
@@ -278,6 +274,7 @@ const MainPage = () => {
                             <CafeItem
                                 id={item.id}
                                 key={item}
+                                image={`http://58.225.75.202:5000/${item.image}`}
                                 title={item.storeName}
                                 distance='55m'
                                 intro={item.description}

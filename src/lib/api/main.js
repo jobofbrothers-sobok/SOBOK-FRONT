@@ -57,9 +57,49 @@ export const getCafeReviews = async (id, config) => {
 };
 
 // 스토어 전체 상품 조회
-export const getProducts = async (id, config) => {
-    return await axios.get(`${PROXY}/main/store/products/${id}`, {}, config);
+export const getProducts = async (tag) => {
+    return await axios.get(`${PROXY}/main/store/products?sort=${tag}`, {}, { headers: { 'Content-Type': 'application/json', } });
 };
+
+// 전체 매장 소식 조회
+export const getAllCafeNews = async (tag, config) => {
+    return await axios.get(`${PROXY}/main/notice/all?query=${tag}`, {}, config);
+};
+
+// 찜한 매장 소식 조회
+export const getLikedCafeNews = async (tag, config) => {
+    return await axios.get(`${PROXY}/main/notice/like?query=${tag}`, config);
+};
+
+// 문의사항 전체 조회
+export const getInquiry = async (tag, config) => {
+    return await axios.get(`${PROXY}/manager/inquiry`, config);
+};
+
+// 문의사항 작성
+export const postInquiry = async (user, title, content, config) => {
+    return await axios.post(`${PROXY}/main/inquiry?user=${user}`, { title: title, content: content }, config);
+};
+
+// 공지사항 전체 조회
+export const getAllNotice = async () => {
+    return await axios.get(`${PROXY}/main/notice`, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+};
+
+// 공지사항 상세 조회
+export const getDetailNotice = async (id) => {
+    return await axios.get(`${PROXY}/main/notice/${id}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+};
+
+
 
 
 

@@ -6,7 +6,6 @@ const NewsItem = (props) => {
 
     const { itemImg, title, content, tag, date } = props;
 
-    console.log(itemImg)
     return (
         <ItemBox>
             <img src={newsImg} alt="소식이미지" />

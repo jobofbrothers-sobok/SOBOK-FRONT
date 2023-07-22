@@ -5,6 +5,20 @@ import ListItem from '../../../components/common/ListItem';
 import MoreButton from '../../../components/common/MoreButton';
 
 const InquiriesList = () => {
+
+    // const [inquiry, setInquiry] = useState([]);
+
+    // // 스토어 상품 정보 가져오기
+    // const getInquiryList = async () => {
+    //     const json = await getInquiry();
+    //     console.log(json);
+    //     setInquiry(json.data.data);
+    // };
+
+    // useEffect(() => {
+    //     getInquiryList();
+    // }, []);
+
     return (
         <>
             <Container>

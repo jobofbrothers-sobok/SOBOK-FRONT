@@ -1,27 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "../../components/common/BackButton";
 import NavBar from "../../components/common/NavBar";
 import styled from "styled-components";
 import InputBox from "../../components/common/InputBox";
 import Button from "../../components/common/Button";
 import Footer from "../../components/common/Footer";
-import Modal from "../../components/common/Modal";
-import logo from "../../asset/images/sobok_logo_square_jua.png";
+import { postInquiry } from "../../lib/api/main";
+import { getCookie } from "../../lib/cookie";
+import { useNavigate } from "react-router-dom";
 
 const InquiryPage = () => {
 
-    // // 로그인 여부
-    // const [notlogin, setLogin] = useState(true);
+    const [title, setTitle] = useState();
+    const [content, setContent] = useState();
 
-    // // 모달 관련
-    // const [modalOpen, setModalOpen] = useState(notlogin);
+    const user = getCookie('who');
+    console.log(user);
 
-    // const openModal = () => {
-    //     setModalOpen(true);
-    // };
-    // const closeModal = () => {
-    //     setModalOpen(false);
-    // }
+    const navigator = useNavigate();
+
+    // 문의사항 등록 함수
+    const postInquiryForm = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+            }
+        }
+        await postInquiry(user, title, content, config)
+            .then((res) => { console.log(res); alert('문의사항 등록에 성공했습니다.') })
+            .catch((err) => { console.log(err); alert('문의사항 등록에 실패했습니다.') })
+    };
 
     return (
         <>
@@ -33,23 +42,16 @@ const InquiryPage = () => {
                 <br />
                 <div className="edit-form">
                     <p>제목<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setTitle(e.target.value)} />
                     <p>내용<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <InputBox rows="10" />
+                    <InputBox rows="10" onChange={(e) => setContent(e.target.value)} />
                 </div>
                 <br />
-                <Button text="문의하기" />
+                <Button text="문의하기" onClick={postInquiryForm} />
                 <br />
                 <div className='info'>최고관리자 확인 후 등록된 번호로<br />개별 연락드리겠습니다.</div>
             </Container>
             <Footer />
-            {/* <Modal open={modalOpen} close={closeModal} header="Modal heading">
-                <ContentBox>
-                    <img src={logo} alt="소복로고이미지" width="50%" />
-                    <p className="title">로그인이 필요한 서비스입니다.</p><br /><br /><br />
-                    <Button text="다시입력" onClick={() => navigator('/')} />
-                </ContentBox>
-            </Modal> */}
         </>
     )
 }
