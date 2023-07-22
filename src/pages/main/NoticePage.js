@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import Footer from "../../components/common/Footer";
@@ -7,10 +7,24 @@ import ListItem from "../../components/common/ListItem";
 import dummy from "../../data/data.json";
 import MoreButton from "../../components/common/MoreButton";
 import { useNavigate } from "react-router-dom";
+import { getAllNotice } from "../../lib/api/main";
 
 const NoticePage = () => {
 
     const navigator = useNavigate();
+
+    const [notices, setNotices] = useState([]);
+
+    // 스토어 상품 정보 가져오기
+    const getNotices = async () => {
+        const json = await getAllNotice();
+        console.log(json);
+        setNotices(json.data.data);
+    };
+
+    useEffect(() => {
+        getNotices();
+    }, []);
 
     return (
         <>
@@ -23,11 +37,11 @@ const NoticePage = () => {
                 <div className='apply-list'>
                     <br />
                     <hr />
-                    {dummy.notices.map(item => (
+                    {notices.map(item => (
                         <ListItem
                             id={item.id}
                             title={item.title}
-                            category={item.date}
+                            category={item.timestamp.substr(0,10)}
                             onClick={() => navigator(`/notice/item/${item.id}`)}
                         />
                     ))}

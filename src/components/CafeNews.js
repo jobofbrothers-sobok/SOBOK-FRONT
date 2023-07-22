@@ -10,11 +10,7 @@ const CafeNews = (props) => {
     const [news, setNews] = useState([]);
 
     const id = props.id;
-
-    // 임시 배열
-    const dummy = [1, 2, 3];
-    console.log(dummy);
-
+    
     // 카페 상세 정보 가져오기
     const getNews = async () => {
         let config = {

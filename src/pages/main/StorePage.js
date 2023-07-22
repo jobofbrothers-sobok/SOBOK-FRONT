@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import mainImg from '../../asset/images/news-main.png';
 import Footer from "../../components/common/Footer";
@@ -6,12 +6,25 @@ import NavBar from "../../components/common/NavBar";
 import itemImg from "../../asset/images/store-item.png";
 import MoreButton from "../../components/common/MoreButton";
 import StoreItem from "../../components/StoreItem";
+import { getProducts } from "../../lib/api/main";
 
 const StorePage = () => {
 
-    const [tag, setTag] = useState('전체');
+    const [tag, setTag] = useState('all');
 
-    const items = [0, 0, 0, 0, 0];
+    const [products, setProducts] = useState([]);
+
+    // 스토어 상품 정보 가져오기
+    const getAllProducts = async () => {
+        const json = await getProducts(tag);
+        console.log(json);
+        setProducts(json.data.data);
+    };
+
+    useEffect(() => {
+        getAllProducts();
+    }, [tag]);
+
 
     return (
         <>
@@ -21,17 +34,17 @@ const StorePage = () => {
                     <img src={mainImg} className="hero_img" alt="메인이미지" />
                 </div>
                 <TagList>
-                    <TagButton className={tag === '전체' ? 'active' : ''} onClick={() => setTag('전체')}>
+                    <TagButton className={tag === 'all' ? 'active' : ''} onClick={() => setTag('all')}>
                         전체
                     </TagButton>
-                    <TagButton className={tag === '신메뉴' ? 'active' : ''} onClick={() => setTag('신메뉴')}>
-                        신메뉴 소식
+                    <TagButton className={tag === 'cookie' ? 'active' : ''} onClick={() => setTag('cookie')}>
+                        수제 쿠키
                     </TagButton>
-                    <TagButton className={tag === '할인' ? 'active' : ''} onClick={() => setTag('할인')}>
-                        할인/이벤트
+                    <TagButton className={tag === 'cake' ? 'active' : ''} onClick={() => setTag('cake')}>
+                        수제 케이크
                     </TagButton>
-                    <TagButton className={tag === '일상' ? 'active' : ''} onClick={() => setTag('일상')}>
-                        일상
+                    <TagButton className={tag === 'bean' ? 'active' : ''} onClick={() => setTag('bean')}>
+                        원두
                     </TagButton>
                 </TagList>
                 <div className="tag-title">
@@ -39,13 +52,14 @@ const StorePage = () => {
                     <hr />
                 </div>
                 <StoreList>
-                    {items.map((item, index) =>
+                    {products.map((item) =>
                         <StoreItem
+                            id={item.id}
                             img={itemImg}
-                            name="*한정수량* 수제 뚜스 쿠기"
+                            name={item.name}
                             info="뚜스뚜스에서 매일 아침 직접 구운 세상에서 가장 맛있는 쿠키..."
-                            discount="60"
-                            price="6,400"
+                            discount={item.discountPrice}
+                            price={item.price}
                             original="20,000" />)
                     }
                 </StoreList>

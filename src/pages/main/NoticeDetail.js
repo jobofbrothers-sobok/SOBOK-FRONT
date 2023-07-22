@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import BackButton from "../../components/common/BackButton";
@@ -7,13 +7,27 @@ import Button from "../../components/common/Button";
 import dummy from "../../data/data.json";
 import { useNavigate, useParams } from "react-router-dom";
 import noImg from "../../asset/images/noImg.svg";
+import { getDetailNotice } from "../../lib/api/main";
 
 const NoticeDetail = () => {
 
     const { id } = useParams();
     console.log(id);
 
-    const { title, content, date } = dummy.notices.find((x) => x.id == id)
+    const [notice, setNotice] = useState([]);
+
+    const { title, content, timestamp } = notice;
+
+    // 스토어 상품 정보 가져오기
+    const getNotice = async () => {
+        const json = await getDetailNotice(id);
+        console.log(json);
+        setNotice(json.data.data);
+    };
+
+    useEffect(() => {
+        getNotice();
+    }, []);
 
     const navigator = useNavigate();
 
@@ -31,7 +45,7 @@ const NoticeDetail = () => {
                     {content}
                 </div>
                 <div className="date">
-                    {date}
+                    {timestamp?.substr(0, 10)}
                 </div>
                 <br />
                 <Button text="목록으로" onClick={() => navigator('/notice')} />

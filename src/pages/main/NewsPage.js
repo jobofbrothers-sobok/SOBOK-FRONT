@@ -1,17 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import mainImg from '../../asset/images/news-main.png';
 import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import Footer from "../../components/common/Footer";
 import NewsItem from "../../components/NewsItem";
 import MoreButton from "../../components/common/MoreButton";
+import { getAllCafeNews, getLikedCafeNews } from "../../lib/api/main";
+import { getCookie } from "../../lib/cookie";
 
 const NewsPage = () => {
 
     const [isall, setAll] = useState(true);
-    const [tag, setTag] = useState('전체');
+    const [tag, setTag] = useState('all');
 
-    const dummy = [1, 2, 3];
+
+    const [news, setNews] = useState([]);
+
+    // 매장 소식 가져오기
+    const getCafeNews = async (isall) => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+            }
+        }
+        if (isall) {
+            const json = await getAllCafeNews(tag, config);
+            console.log(json);
+            setNews(json.data.data);
+        }
+        else {
+            console.log(config);
+            const json = await getLikedCafeNews(tag, config)
+                .catch((err) => { alert('로그인 후 이용 가능합니다.'); setAll(true); });
+            if (json) {
+                console.log(json);
+                setNews(json.data.data);
+            }
+        }
+    };
+
+    useEffect(() => {
+        getCafeNews(isall);
+    }, [tag, isall]);
 
     return (
         <>
@@ -29,27 +60,25 @@ const NewsPage = () => {
                     </SendButton>
                 </div>
                 <TagList>
-                    <TagButton className={tag === '전체' ? 'active' : ''} onClick={() => setTag('전체')}>
+                    <TagButton className={tag === 'all' ? 'active' : ''} onClick={() => setTag('all')}>
                         전체
                     </TagButton>
-                    <TagButton className={tag === '신메뉴' ? 'active' : ''} onClick={() => setTag('신메뉴')}>
+                    <TagButton className={tag === 'menu' ? 'active' : ''} onClick={() => setTag('menu')}>
                         신메뉴 소식
                     </TagButton>
-                    <TagButton className={tag === '할인' ? 'active' : ''} onClick={() => setTag('할인')}>
+                    <TagButton className={tag === 'sale' ? 'active' : ''} onClick={() => setTag('sale')}>
                         할인/이벤트
-                    </TagButton>
-                    <TagButton className={tag === '일상' ? 'active' : ''} onClick={() => setTag('일상')}>
-                        일상
                     </TagButton>
                 </TagList>
                 <NewsList>
-                    {dummy.map((i) =>
+                    {news.map((item) =>
                         <NewsItem
-                            key={i}
-                            title="3년만에 신메뉴가 나왔습니다 !"
-                            content="3년동안 개발한 스페셜티가 드디어 론칭하였습니다. 1일 100잔 한정판매이니, 늦게와서 못드시는 일이 없도록 합시다."
-                            tag="신메뉴 소식"
-                            date="2023-01-01"
+                            key={item.id}
+                            id={item.id}
+                            title={item.title}
+                            content={item.content}
+                            tag={item.category}
+                            date={item.createdTime.substr(0, 10)}
                         />
                     )}
                 </NewsList>
