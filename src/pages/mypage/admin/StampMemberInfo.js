@@ -13,26 +13,27 @@ const StampMemberInfo = () => {
 
     const navigator = useNavigate();
 
-    // const [sort, setSort] = useState('all');
+    const [sort, setSort] = useState('auth');
 
     const [ownerList, setOwnerList] = useState([]);
+    console.log(ownerList);
 
-    let config = {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${getCookie('token')}`,
-            'withCredentials': true,
-        }
-    }
 
     const getStampMember = async () => {
-        const json = await getAllStampMember(config);
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        }
+        const json = await getAllStampMember(sort, config);
         setOwnerList(json.data.data);
     };
 
     useEffect(() => {
         getStampMember();
-    }, []);
+    }, [sort]);
 
 
     return (
@@ -46,14 +47,18 @@ const StampMemberInfo = () => {
                     <br />
                     <div className="list-top-box">
                         <p className="info-title">회원정보</p>
+                        <FilterBox name="category" onChange={(e) => setSort(e.target.value)}>
+                            <option value="auth">승인완료</option>
+                            <option value="pending">미승인</option>
+                        </FilterBox>
                     </div>
                     <hr />
                     {
                         ownerList.map((item, index) => (
-                            <div className='apply-item' key={item.id} onClick={() => navigator(`/admin/menu/6/member/${item.id}`)}>
+                            <div className='apply-item' key={item?.id} onClick={() => navigator(`/admin/menu/6/member/${item?.id}`)}>
                                 <div>
-                                    <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.director}</div>
-                                    <div className='item-category'>{item.store} / {item.phone}</div>
+                                    <div className='item-title'>{item?.stampAuthorized ? <img src={active} alt='확인요청' width="10px" /> : null}{item?.director}</div>
+                                    <div className='item-category'>{item?.store} / {item?.phone}</div>
                                 </div>
                             </div>
                         ))

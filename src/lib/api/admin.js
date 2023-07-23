@@ -78,8 +78,8 @@ export const postNotice = async (title, content, file, config) => {
 }
 
 // 스탬프 사용 회원 전체 조회
-export const getAllStampMember = async (config) => {
-    return await axios.get(`${PROXY}/manager/stamp`, config);
+export const getAllStampMember = async (sort, config) => {
+    return await axios.get(`${PROXY}/manager/stamp?sort=${sort}`, config);
 }
 
 // 스탬프 사용 회원 상세 조회
