@@ -5,6 +5,11 @@ import BackButton from "../../../components/common/BackButton";
 import SearchBox from "../../../components/common/SearchBox";
 import Button from "../../../components/common/Button";
 import Footer from "../../../components/common/Footer";
+import sobokFace from "../../../asset/images/sobok-face.svg";
+import Modal from "../../../components/common/Modal";
+import { postStampTour, searchStore } from "../../../lib/api/admin";
+import { getCookie } from "../../../lib/cookie";
+import dummy from "../../../data/data.json";
 
 const AddStampTour = () => {
 
@@ -12,6 +17,53 @@ const AddStampTour = () => {
     const [title, setTitle] = useState('');
     const [reward, setReward] = useState('');
     const [file, setFile] = useState('');
+    const [searchedCafe, setSearchedCafe] = useState([]);
+
+    // 검색 키워드
+    const [searchKey, setSearchKey] = useState('');
+
+    // 선택한 카페 리스트
+    const [checkList, setCheckList] = useState([]);
+
+    console.log(checkList);
+
+    const check = (e) => {
+        console.log(e.target.checked);
+        console.log(e.target.value);
+        e.target.checked
+            ? setCheckList([...checkList, e.target.value])
+            : setCheckList(checkList.filter((choice) => choice !== e.target.value))
+    }
+
+    // 모달 관련
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+    }
+
+
+    // 검색된 카페 리스트
+    const showSearched = async () => {
+        // let config = {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${getCookie('token')}`,
+        //     }
+        // }
+        // const json = await searchStore(searchKey, config);
+        // setSearchedCafe(json.data.data);
+        openModal();
+    }
+
+
+    // 선택한 카페 삭제
+    const deleteSelected = async (item) => {
+        setCheckList(checkList.filter((choice) => choice !== item));
+    }
 
 
     return (
@@ -22,19 +74,56 @@ const AddStampTour = () => {
                 <p className="title">스탬프 투어 추가</p>
                 <div className="info-div">
                     <p>투어 키워드<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setKeyword(e.target.value)} />
                     <p>투어 제목<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setTitle(e.target.value)} />
                     <p>리워드<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" />
+                    <input type="text" onChange={(e) => setReward(e.target.value)} />
                     <p>이미지 첨부<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" />
+                    <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                     <p>카페 등록<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <SearchBox />
+                    <SearchBox onClick={showSearched} onChange={(e) => setSearchKey(e.target.value)} />
+                    <StampCafeList>
+                        {checkList.map((item, index) =>
+                            <div className="stamp-cafe-wrapper">
+                                <div className="stamp-cafe-item" key={index}>
+                                    <img src={sobokFace} alt='소복얼굴' />
+                                    <p>{item}</p>
+                                </div>
+                                <p className='delete' onClick={(e) => { e.stopPropagation(); deleteSelected(item); }}>&times;</p>
+                            </div>
+                        )}
+                    </StampCafeList>
                     <Button text="추가하기" />
                 </div>
             </Container>
             <Footer />
+            {/* 검색된 카페 리스트 모달 */}
+            <Modal open={modalOpen} close={closeModal} header="Modal heading">
+                <ContentBox>
+                    <p className="title">검색된 카페 리스트</p>
+                    <br />
+                    <StampCafeList>
+                        {dummy.stores.map((item) =>
+                            <>
+                                <input
+                                    type="checkbox"
+                                    id={item.id}
+                                    name="category"
+                                    value={item.storeName}
+                                    onChange={check}
+                                    checked={checkList.includes(item.storeName) ? true : false}
+                                />
+                                <label htmlFor={item.id} className="stamp-cafe-item">
+                                    <p>{item?.storeName}</p>
+                                </label>
+                            </>
+                        )}
+                    </StampCafeList>
+                    <br />
+                    <Button text="선택 완료" onClick={closeModal} />
+                </ContentBox>
+            </Modal >
         </>
 
     )
@@ -42,6 +131,58 @@ const AddStampTour = () => {
 
 export default AddStampTour;
 
+const ContentBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+ 
+`
+
+const StampCafeList = styled.div`
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    flex-direction: column;
+    .stamp-cafe-wrapper{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .delete{
+        font-size: 30px;
+        color: #7E7E7E;
+    }
+    >input{
+        display: none;
+    }
+    >input[type="checkbox"] + label{background: none; cursor: pointer;}
+    >input[type="checkbox"]:checked + label{background: #EEEEEE; cursor: pointer;}
+
+    .stamp-cafe-item{
+        display: flex;
+        box-sizing: border-box;
+        padding: 15px 0px;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+        border-bottom: solid 1px #E4E4E4;
+    }
+    .stamp-cafe-item > img {
+        width: 60px;
+    }
+    .stamp-cafe-item > p {
+        font-size: 16px;
+    }
+`
 const Container = styled.div`
     width: 100%;
     padding: 0 20px 20px;

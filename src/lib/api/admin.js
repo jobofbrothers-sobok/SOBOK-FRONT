@@ -54,8 +54,8 @@ export const postStampTour = async (keyword, title, reward, cafeList, file, conf
 }
 
 // 스탬프 투어 등록시 매장 검색
-export const searchStore = async (keyword, config) => {
-    return await axios.get(`${PROXY}/manager/tour/search`, { storeName: keyword }, config);
+export const searchStore = async (searchKey, config) => {
+    return await axios.get(`${PROXY}/manager/tour/search`, { storeName: searchKey }, config);
 }
 
 // 배송 신청 전체 조회
@@ -101,3 +101,18 @@ export const getAllManager = async (config) => {
 export const getManagerDetail = async (id, config) => {
     return await axios.get(`${PROXY}/manager/alim/${id}`, config);
 }
+
+// 문의사항 전체 조회
+export const getInquiry = async (config) => {
+    return await axios.get(`${PROXY}/manager/inquiry`, config);
+};
+
+// 소복매니저 문자 전송
+export const postMessage = async (writerId, content, config) => {
+    return await axios.post(`${PROXY}/manager/message`, { writerId: writerId, content: content }, config);
+};
+
+// 소복매니저 카톡 전송
+export const postKakao = async (writerId, content, config) => {
+    return await axios.post(`${PROXY}/manager/kakao`, { writerId: writerId, content: content }, config);
+};
