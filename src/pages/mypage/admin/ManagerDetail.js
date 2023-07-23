@@ -8,19 +8,18 @@ import Footer from "../../../components/common/Footer";
 import { useParams } from "react-router-dom";
 import dummy from "../../../data/data.json";
 import { getCookie } from "../../../lib/cookie";
-import { getManagerDetail } from "../../../lib/api/admin";
+import { getManagerDetail, postKakao } from "../../../lib/api/admin";
 
 const ManagerDetail = () => {
 
     const [isSend, setSend] = useState(false);
     const [manager, setManager] = useState('');
-    const [contents, setContents] = useState('');
+    const [content, setContent] = useState('');
+
 
     const { id } = useParams();
-    console.log(id);
 
-    const { category, content, isMessage } = manager;
-    console.log(content)
+    const { category, isMessage, writerId } = manager;
 
     let config = {
         headers: {
@@ -34,21 +33,37 @@ const ManagerDetail = () => {
     const getManagerInfo = async () => {
         const json = await getManagerDetail(id, config);
         setManager(json.data.data);
+        setContent(json.data.data.content);
     };
 
     useEffect(() => {
-        getManagerInfo()
-        setContents(content)
+        getManagerInfo();
     }, []);
 
+    // 전송 페이지 이동
     const goSendPage = () => {
         setSend(!isSend);
     }
 
-
+    // 내용 수정
     const editContent = (e) => {
-        setContents(e.target.value);
+        setContent(e.target.value);
     }
+
+    // 문자 전송
+    const sendMessage = async () => {
+        await postMessage(writerId, content, config)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+    }
+
+    // 카톡 전송
+    const sendKaKao = async () => {
+        await postKakao(writerId, content, config)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+    }
+
 
     return (
         <>
@@ -67,19 +82,19 @@ const ManagerDetail = () => {
                     <p className="detail-text">내용</p>
                     {isSend ?
                         <>
-                            <p>{contents}</p>
+                            <p>{content}</p>
                             <br />
                             <div className="button-box">
-                                <Button text="문자 일괄전송" color="#FF9F74" /><Button text="카톡 일괄전송" color="#FEE500" textColor="#3D1B1A" />
+                                <Button text="문자 일괄전송" color="#FF9F74" onClick={sendMessage} /><Button text="카톡 일괄전송" color="#FEE500" textColor="#3D1B1A" onClick={sendKaKao} />
                             </div>
                         </>
                         :
                         <>
-                            <InputBox rows="10" value={contents} onChange={editContent} />
+                            <InputBox rows="10" value={content} onChange={editContent} />
                             <br />
                         </>
                     }
-                    <Button text={isSend ? "일괄전송" : "전송페이지로"} color="#FF9F74" onClick={goSendPage} />
+                    <Button text={isSend ? "일괄전송" : "전송페이지로"} color="#FF9F74" onClick={isSend ? null : goSendPage} />
                 </div>
             </Container>
             <Footer />
