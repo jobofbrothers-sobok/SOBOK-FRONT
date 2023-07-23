@@ -33,7 +33,7 @@ const AddStampTour = () => {
         e.target.checked
             ? setCheckList([...checkList, e.target.value])
             : setCheckList(checkList.filter((choice) => choice !== e.target.value))
-    }
+    };
 
     // 모달 관련
     const [modalOpen, setModalOpen] = useState(false);
@@ -43,7 +43,7 @@ const AddStampTour = () => {
     };
     const closeModal = () => {
         setModalOpen(false);
-    }
+    };
 
 
     // 검색된 카페 리스트
@@ -57,14 +57,25 @@ const AddStampTour = () => {
         // const json = await searchStore(searchKey, config);
         // setSearchedCafe(json.data.data);
         openModal();
-    }
+    };
 
 
     // 선택한 카페 삭제
     const deleteSelected = async (item) => {
         setCheckList(checkList.filter((choice) => choice !== item));
-    }
+    };
 
+    const postStampTourForm = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${getCookie('token')}`,
+            }
+        };
+        await postStampTour(keyword, title, reward, checkList, file, config)
+            .then((res) => { console.log(res); alert('스탬프 투어가 성공적으로 등록되었습니다.') })
+            .catch((err) => { console.log(err); alert('스탬프 투어 등록에 실패하였습니다.') });
+    };
 
     return (
         <>
@@ -94,7 +105,7 @@ const AddStampTour = () => {
                             </div>
                         )}
                     </StampCafeList>
-                    <Button text="추가하기" />
+                    <Button text="추가하기" onClick={postStampTourForm} />
                 </div>
             </Container>
             <Footer />
@@ -155,6 +166,7 @@ const StampCafeList = styled.div`
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        border-bottom: solid 1px #E4E4E4;
     }
     .delete{
         font-size: 30px;
@@ -173,8 +185,7 @@ const StampCafeList = styled.div`
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        gap: 10px;
-        border-bottom: solid 1px #E4E4E4;
+        gap: 10px;  
     }
     .stamp-cafe-item > img {
         width: 60px;
