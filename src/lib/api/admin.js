@@ -55,7 +55,7 @@ export const postStampTour = async (keyword, title, reward, checkList, file, con
 
 // 스탬프 투어 등록시 매장 검색
 export const searchStore = async (searchKey, config) => {
-    return await axios.get(`${PROXY}/manager/tour/search`, { storeName: searchKey }, config);
+    return await axios.post(`${PROXY}/manager/tour/search`, { storeName: searchKey }, config);
 }
 
 // 배송 신청 전체 조회

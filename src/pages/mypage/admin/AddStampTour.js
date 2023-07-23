@@ -48,14 +48,15 @@ const AddStampTour = () => {
 
     // 검색된 카페 리스트
     const showSearched = async () => {
-        // let config = {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Authorization': `Bearer ${getCookie('token')}`,
-        //     }
-        // }
-        // const json = await searchStore(searchKey, config);
-        // setSearchedCafe(json.data.data);
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+            }
+        }
+        await searchStore(searchKey, config)
+            .then((res) => { console.log(res); setSearchedCafe(res.data.data); })
+            .catch((err) => { console.log(err); });
         openModal();
     };
 
@@ -115,7 +116,7 @@ const AddStampTour = () => {
                     <p className="title">검색된 카페 리스트</p>
                     <br />
                     <StampCafeList>
-                        {dummy.stores.map((item) =>
+                        {searchedCafe?.map((item) =>
                             <>
                                 <input
                                     type="checkbox"

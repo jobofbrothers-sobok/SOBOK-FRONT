@@ -8,7 +8,8 @@ import Footer from "../../../components/common/Footer";
 import { useParams } from "react-router-dom";
 import dummy from "../../../data/data.json";
 import { getCookie } from "../../../lib/cookie";
-import { getManagerDetail, postKakao } from "../../../lib/api/admin";
+import { getManagerDetail, postKakao, postMessage } from "../../../lib/api/admin";
+
 
 const ManagerDetail = () => {
 
