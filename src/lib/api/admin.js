@@ -43,12 +43,12 @@ export const getAllStampTour = async (config) => {
 }
 
 // 스탬프 투어 등록
-export const postStampTour = async (keyword, title, reward, cafeList, file, config) => {
+export const postStampTour = async (keyword, title, reward, checkList, file, config) => {
     let formData = new FormData();
     formData.append('keyword', keyword);
     formData.append('title', title);
     formData.append('reward', reward);
-    formData.append('cafeList', cafeList);
+    formData.append('cafeList', checkList);
     formData.append('file', file);
     return await axios.post(`${PROXY}/manager/tour`, formData, config);
 }
