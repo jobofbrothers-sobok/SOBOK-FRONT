@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import search from "../../asset/images/search.svg";
 
-const SearchBox = () => {
+const SearchBox = (props) => {
+
+    const { onChange, onClick } = props;
 
     return (
         <Container>
-            <input type='text' placeholder='검색' />
-            <button><img src={search} alt='검색 버튼 이미지' /></button>
+            <input type='text' placeholder='검색' onChange={onChange}/>
+            <button onClick={onClick}><img src={search} alt='검색 버튼 이미지' /></button>
         </Container>
     )
 }

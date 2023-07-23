@@ -71,11 +71,6 @@ export const getLikedCafeNews = async (tag, config) => {
     return await axios.get(`${PROXY}/main/notice/like?query=${tag}`, config);
 };
 
-// 문의사항 전체 조회
-export const getInquiry = async (tag, config) => {
-    return await axios.get(`${PROXY}/manager/inquiry`, config);
-};
-
 // 문의사항 작성
 export const postInquiry = async (user, title, content, config) => {
     return await axios.post(`${PROXY}/main/inquiry?user=${user}`, { title: title, content: content }, config);
