@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dummy from '../../../data/data.json';
 import ListItem from '../../../components/common/ListItem';
 import MoreButton from '../../../components/common/MoreButton';
+import { getInquiry } from '../../../lib/api/admin';
+import { getCookie } from '../../../lib/cookie';
 
 const InquiriesList = () => {
 
-    // const [inquiry, setInquiry] = useState([]);
+    const [inquiry, setInquiry] = useState([]);
 
-    // // 스토어 상품 정보 가져오기
-    // const getInquiryList = async () => {
-    //     const json = await getInquiry();
-    //     console.log(json);
-    //     setInquiry(json.data.data);
-    // };
+    // 스토어 상품 정보 가져오기
+    const getInquiryList = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+            }
+        }
+        const json = await getInquiry(config);
+        console.log(json);
+        setInquiry(json.data.data);
+    };
 
-    // useEffect(() => {
-    //     getInquiryList();
-    // }, []);
+    useEffect(() => {
+        getInquiryList();
+    }, []);
 
     return (
         <>
@@ -27,12 +35,12 @@ const InquiriesList = () => {
                 <div className='apply-list'>
                     <br />
                     <hr />
-                    {dummy.inquiries.map(item => (
+                    {inquiry.map(item => (
                         <ListItem
                             id={item.id}
                             title={item.title}
-                            category={item.member + " / " + item.nickname + " / " + item.tel}
-                            date={item.date}
+                            category={item.who + " / " + item.name + " / " + item.phone}
+                            date={item.timestamp.substr(0, 10)}
                         />
                     ))}
                 </div>
