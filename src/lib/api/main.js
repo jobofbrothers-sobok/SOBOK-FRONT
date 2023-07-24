@@ -56,6 +56,15 @@ export const getCafeReviews = async (id, config) => {
     return await axios.get(`${PROXY}/main/store/review/${id}`, {}, config);
 };
 
+// 카페 리뷰 작성
+export const postReview = async (id, title, content, file, config) => {
+    let formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('file', file);
+    return await axios.post(`${PROXY}/main/store/review/${id}`, formData, config);
+};
+
 // 스토어 전체 상품 조회
 export const getProducts = async (tag) => {
     return await axios.get(`${PROXY}/main/store/products?sort=${tag}`, {}, { headers: { 'Content-Type': 'application/json', } });

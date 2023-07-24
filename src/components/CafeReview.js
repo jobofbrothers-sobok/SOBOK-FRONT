@@ -7,7 +7,7 @@ import Modal from "./common/Modal";
 import logo from '../asset/images/sobok_logo_square_jua.png';
 import InputBox from "./common/InputBox";
 import isLogin from "../lib/router/isLogin";
-import { getCafeReviews } from "../lib/api/main";
+import { getCafeReviews, postReview } from "../lib/api/main";
 import { getCookie } from "../lib/cookie";
 
 const CafeReview = (props) => {
@@ -16,6 +16,9 @@ const CafeReview = (props) => {
     const id = props.id;
 
     const [reviews, setReviews] = useState([]);
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [file, setFile] = useState('');
 
     // 로그인 유무
     const auth = isLogin();
@@ -49,6 +52,19 @@ const CafeReview = (props) => {
         getReviews();
     }, []);
 
+    const postReviewForm = async () => {
+        let config = {
+            headers: {
+                'Content-Type': `multipart/form-data`,
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        };
+        await postReview(id, title, content, file, config)
+            .then((res) => { console.log(res); alert('리뷰가 성공적으로 등록되었습니다.') })
+            .catch((err) => { console.log(err); alert('리뷰 등록에 실패하였습니다.') });
+    }
+
     return (
         <>
             <Container>
@@ -74,15 +90,15 @@ const CafeReview = (props) => {
                     <br />
                     <div className="edit-form">
                         <p>제목<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                        <input type="text" />
+                        <input type="text" onChange={(e) => setTitle(e.target.value)} />
                         <p>내용<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                        <InputBox rows="10">
+                        <InputBox rows="10" onChange={(e) => setContent(e.target.value)}>
                         </InputBox>
                         <br />
                         <p>메뉴 이미지<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                        <input type="file" />
+                        <input type="file" onChange={(e) => setFile(e.target.files[0])} />
                     </div>
-                    <Button text="작성완료" />
+                    <Button text="작성완료" onClick={postReviewForm} />
                 </ContentBox>
             </Modal> : <Modal open={modalOpen} close={closeModal} header="Modal heading">
                 <ContentBox>
