@@ -45,8 +45,8 @@ const MainPage = () => {
     }
 
     // 현재 위치 위도, 경도 가져오기
-    const [lat, setLatitude] = useState(null);
-    const [lon, setLongitude] = useState(null);
+    const [lat, setLatitude] = useState(126.9655202);
+    const [lon, setLongitude] = useState(37.5470439);
     console.log({ lat, lon });
 
     const [checkList, setCheckList] = useState(['concent', 'table', 'park', 'dog', 'rooftop', 'sofa', 'nokids', 'window', 'ciagrette']);

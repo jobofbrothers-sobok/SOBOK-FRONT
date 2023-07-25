@@ -99,3 +99,11 @@ export const ownerAddProduct = async (id, category, name, price, discountPrice, 
 }
 
 // 점주 소복 매니저 신청
+export const postManagerForm = async (category, content, isMessage, isKakao, config) => {
+    return await axios.post(`${PROXY}/owner/alim`, { category: category, content: content, isMessage: isMessage, isKakao: isKakao }, config);
+};
+
+// 점수 스탬프 사용 신청
+export const postownerStamp = async (config) => {
+    return await axios.post(`${PROXY}/owner/stamp/request`, {}, config);
+};

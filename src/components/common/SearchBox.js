@@ -8,7 +8,7 @@ const SearchBox = (props) => {
 
     return (
         <Container>
-            <input type='text' placeholder='검색' onChange={onChange}/>
+            <input type='text' placeholder='검색' onChange={onChange} />
             <button onClick={onClick}><img src={search} alt='검색 버튼 이미지' /></button>
         </Container>
     )

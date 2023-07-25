@@ -65,7 +65,10 @@ const LoginPage = () => {
                                 setCookie('storeId', res.data.data.storeId);
                                 setCookie('loginId', res.data.data.loginId);
                                 setCookie('store', res.data.data.store);
-                                setCookie('name', res.data.data.director); navigator('/');
+                                setCookie('name', res.data.data.director);
+                                setCookie('joinauth', res.data.data.authorized);
+                                setCookie('stampauth', res.data.data.stampAuthorized);
+                                navigator('/');
                             })
                             .catch((err) => { console.log('실패', err); alert('로그인 실패'); })
                         :

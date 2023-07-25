@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SearchBox from "./SearchBox";
 import { useNavigate } from "react-router";
@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import logo from '../../asset/images/sobok_logo_square_jua.png';
 import Button from "./Button";
 import { getCookie, removeCookie } from "../../lib/cookie";
+import { postSidebarSearch } from "../../lib/api/main";
 
 const SideBar = (props) => {
 
@@ -21,6 +22,11 @@ const SideBar = (props) => {
   const name = getCookie('name');
 
 
+  const [keyword, setKeword] = useState('');
+  const [keywordList, setKeywordList] = useState([]);
+  const [searchedCafe, setSearchedCafe] = useState([]);
+  const [search, setSearch] = useState(false);
+
   // 로그인 모달 관련
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -31,9 +37,26 @@ const SideBar = (props) => {
     setModalOpen(false);
   }
 
+  const searchCafe = async () => {
+    let config
+    const json = await postSidebarSearch(126.9655202, 37.5470439, keyword);
+    setSearchedCafe(json.data.data);
+    if (keyword) {
+      setKeywordList([...keywordList, keyword]);
+    }
+    setSearch(true)
+  }
+
+  const deleteKeyword = (item) => {
+    setKeywordList(keywordList.filter((choice) => choice !== item))
+  }
+
+  useEffect(() => {
+  }, [keyword])
+
 
   // 카페 리스트 임시
-  const array = [0, 1, 2, 3, 4];
+  const array = [0, 1, 2, 3];
 
   return (
     <>
@@ -47,19 +70,37 @@ const SideBar = (props) => {
               </button>
             </div>
             {auth ? <div className="logout-btn" onClick={() => { removeCookie('token'); window.location.replace(`/`); }}>로그아웃</div> : null}
-            <SearchBox />
+            <SearchBox onChange={(e) => setKeword(e.target.value)} onClick={searchCafe} />
             <br />
             <SearchList>
               <p className="list-title">최근 검색어</p>
               <div className="search-list">
+                {keywordList.map((item) =>
+                  <div className="search-item">{item}<p className='delete' onClick={() => deleteKeyword(item)}>&times;</p></div>
+                )}
+                {/* <div className="search-item">숙대 카페<p className='delete'>&times;</p></div>
                 <div className="search-item">숙대 카페<p className='delete'>&times;</p></div>
                 <div className="search-item">숙대 카페<p className='delete'>&times;</p></div>
-                <div className="search-item">숙대 카페<p className='delete'>&times;</p></div>
-                <div className="search-item">숙대 카페<p className='delete'>&times;</p></div>
-                <div className="search-item">숙대 카페<p className='delete'>&times;</p></div>
+                <div className="search-item">숙대 카페<p className='delete'>&times;</p></div> */}
               </div>
             </SearchList>
             <br />
+            <ResultWrapper>
+              {search ? <><p className="list-title">검색결과<span className="list-title2"> {searchedCafe.length}개의 카페</span></p>
+                <br /><hr /><br />
+                <div className="cafe-list">
+                  {searchedCafe.map((item, index) => <>
+                    <CafeItem
+                      key={item.id}
+                      image={`http://58.225.75.202:5000/${item.image}`}
+                      title={item.storeName}
+                      distance='55m'
+                      intro={item.description}
+                      tag={item.category}
+                    />
+                  </>)}
+                </div></> : <></>}
+            </ResultWrapper>
             <MenuList>
               <div className="menu-item" onClick={() => navigator('/news')}>
                 카페 소식 모아보기
@@ -81,21 +122,7 @@ const SideBar = (props) => {
               </div> : null}
             </MenuList>
             <br />
-            {/* <ResultWrapper>
-              <p className="list-title">검색결과<span className="list-title2"> 10개의 카페</span></p>
-              <br /><hr /><br />
-              <div className="cafe-list">
-                {array.map((item, index) => <>
-                  <CafeItem
-                    key={item}
-                    title="페이브 베이커리"
-                    distance='55m'
-                    intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
-                    tag={['큰 테이블', '콘센트']}
-                  />
-                </>)}
-              </div>
-            </ResultWrapper> */}
+
           </SideBarWrap>
           : null
         }
@@ -116,6 +143,7 @@ export default SideBar;
 
 const ResultWrapper = styled.div`
   width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   .cafe-list{
@@ -141,7 +169,7 @@ const SideBarContainer = styled.div`
   display: flex;
   box-sizing: border-box;
   justify-content: center;
-  z-index: 5;
+  z-index: 10;
   padding: 12px;
   background-color: #FFFFFF;
   height: 100%;
@@ -187,6 +215,7 @@ const SideBarWrap = styled.div`
     width: 100%;
     margin-bottom: 10px;
   }
+  overflow-y: auto;
 `
 const SearchList = styled.div`
   width: 100%;

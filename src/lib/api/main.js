@@ -103,6 +103,10 @@ export const getDetailNotice = async (id) => {
     });
 };
 
+// 햄버거 검색
+export const postSidebarSearch = async (x, y, keyword, config) => {
+    return await axios.post(`${PROXY}/main`, { x: x, y: y, keyword: keyword }, config);
+};
 
 
 
