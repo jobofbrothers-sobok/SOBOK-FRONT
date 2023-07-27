@@ -23,6 +23,8 @@ const CustomerPage = () => {
     const navigation = useNavigate();
 
     const name = getCookie('name');
+    const lat = getCookie('lat');
+    const lon = getCookie('lon');
 
     const getActivity = async () => {
         let config = {
@@ -32,7 +34,7 @@ const CustomerPage = () => {
                 'withCredentials': true,
             }
         }
-        const json = await getCustomerActivity(config);
+        const json = await getCustomerActivity(lat, lon, config);
         console.log(json);
         setLikedCafe(json.data.data.allLikeCafe);
         setReviews(json.data.data.allStoreReview);
@@ -52,14 +54,14 @@ const CustomerPage = () => {
                     <img src={sobokFace} alt="소복 얼굴 이미지" width="60px" />
                     <div className="text-div">
                         <p className="name-text"><span>{name}</span>님 마이페이지</p>
-                        <p className="edit-text" onClick={() => navigator('/customer/edit')}>회원정보 수정하기</p>
+                        <p className="edit-text" onClick={() => navigation('/customer/edit')}>회원정보 수정하기</p>
                     </div>
                 </div>
                 <br />
                 <div className="category-container">
                     <div className="list-top-box">
                         <p className="category-title">내가 찜한<span className="category-title2"> 카페</span></p>
-                        <p className="show-all" onClick={() => navigator('/customer/liked')}>전체보기+</p>
+                        <p className="show-all" onClick={() => navigation('/customer/liked')}>전체보기+</p>
                     </div>
                     <hr /><br />
                     <div className="cafe-list">
@@ -72,6 +74,7 @@ const CustomerPage = () => {
                                 distance='55m'
                                 intro={item.description}
                                 tag={item.category}
+                                isLiked={item.isLiked}
                                 onClick={() => navigation(`/detail/${item.id}`)}
                             />
                         </>)}
@@ -81,7 +84,7 @@ const CustomerPage = () => {
                 <div className="category-container">
                     <div className="list-top-box">
                         <p className="category-title">내가 작성한<span className="category-title2"> 리뷰</span></p>
-                        <p className="show-all" onClick={() => navigator('/customer/reviews')}>전체보기+</p>
+                        <p className="show-all" onClick={() => navigation('/customer/reviews')}>전체보기+</p>
                     </div>
                     <hr /><br />
                     <div className="review-list">

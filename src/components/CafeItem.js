@@ -9,10 +9,11 @@ import { getCookie } from "../lib/cookie";
 
 const CafeItem = (props) => {
 
-    const { id, title, distance, intro, tag, onClick, image } = props;
+    const { id, title, distance, intro, tag, onClick, image, isLiked } = props;
 
     // 좋아요 버튼
-    const [like, setLike] = useState(false);
+    console.log(isLiked);
+    const [like, setLike] = useState(isLiked);
 
     // 대체 이미지 설정
     const handleImgError = (e) => {

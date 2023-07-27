@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import NavBar from "../../components/common/NavBar";
 import Footer from "../../components/common/Footer";
@@ -13,12 +13,38 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import 'swiper/components/navigation/navigation.min.css'
 import 'swiper/components/pagination/pagination.min.css'
+import { useParams } from "react-router-dom";
+import { getCafeInfo } from "../../lib/api/main";
 
 const CafeDetail = () => {
 
     const [tabMenu, setTabMenu] = useState("정보");
 
-    const storeId = 1;
+    const { id } = useParams();
+    const storeId = id;
+
+    const [cafeInfo, setCafeInfo] = useState('');
+
+    const { storeName, description, address, homepage, officeHour, dayOff, category, x, y } = cafeInfo;
+
+
+    // 카페 상세 정보 가져오기
+    const getInfo = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'withCredentials': true,
+            }
+        }
+        const json = await getCafeInfo(id, config);
+        console.log(json);
+        setCafeInfo(json.data.data);
+    };
+
+    useEffect(() => {
+        getInfo();
+    }, []);
+
 
     return (
         <>
@@ -36,8 +62,8 @@ const CafeDetail = () => {
                 </Swiper>
                 {/* <img src={detailImg} className="hero_img" alt="메인이미지" /> */}
                 <div className="intro-box">
-                    <p className="cafe-title">청파맨션</p>
-                    <p className="cafe-intro">2009년  오픈한 카페청파맨션은<br />스페셜티커피 전문 카페입니다.</p>
+                    <p className="cafe-title">{storeName}</p>
+                    <p className="cafe-intro">{description}</p>
                 </div>
 
                 {/* menu container */}
@@ -55,8 +81,8 @@ const CafeDetail = () => {
                         리뷰
                     </TabMenuItem>
                 </div>
-                {tabMenu === '정보' ? <CafeInfo id={storeId}/> : <></>}
-                {tabMenu === '소식' ? <CafeNews id={storeId}/> : <></>}
+                {tabMenu === '정보' ? <CafeInfo id={storeId} address={address} homepage={homepage} officeHour={officeHour} dayOff={dayOff} x={x} y={y} category={category} /> : <></>}
+                {tabMenu === '소식' ? <CafeNews id={storeId} /> : <></>}
                 {tabMenu === '메뉴' ? <CafeMenu id={storeId} /> : <></>}
                 {tabMenu === '리뷰' ? <CafeReview id={storeId} /> : <></>}
             </Container >

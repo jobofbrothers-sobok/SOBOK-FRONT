@@ -33,29 +33,29 @@ import filterbtn from "../../asset/images/filter-arrow.svg";
 import CafeItem from "../../components/CafeItem";
 import { useNavigate } from "react-router-dom";
 import { getAllCafe } from "../../lib/api/main";
+import { getCookie, setCookie } from "../../lib/cookie";
 
 
 
 const MainPage = () => {
 
-    const config = {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    }
+
+    const token = getCookie('token');
+    console.log('토큰', token);
 
     // 현재 위치 위도, 경도 가져오기
     const [lat, setLatitude] = useState(126.9655202);
     const [lon, setLongitude] = useState(37.5470439);
     console.log({ lat, lon });
 
-    const [checkList, setCheckList] = useState(['concent', 'table', 'park', 'dog', 'rooftop', 'sofa', 'nokids', 'window', 'ciagrette']);
+    const [checkList, setCheckList] = useState([]);
 
     const checkAll = (e) => {
         console.log(e.target.checked);
-        e.target.checked
-            ? setCheckList(['concent', 'table', 'park', 'dog', 'rooftop', 'sofa', 'nokids', 'window', 'ciagrette'])
-            : setCheckList([]);
+        // e.target.checked
+        //     ? setCheckList(['concent', 'table', 'park', 'dog', 'rooftop', 'sofa', 'nokids', 'window', 'ciagrette'])
+        //     : setCheckList([]);
+        setCheckList([]);
     }
 
     const check = (e) => {
@@ -72,6 +72,8 @@ const MainPage = () => {
                 (position) => {
                     setLatitude(position.coords.latitude);
                     setLongitude(position.coords.longitude);
+                    setCookie('lat', lat);
+                    setCookie('lon', lon);
                 },
                 (err) => {
                     console.log(err);
@@ -99,13 +101,20 @@ const MainPage = () => {
     useEffect(() => {
         getLocation();
         if (lat !== null && lon !== null) {
-            console.log(lat, lon, checkList)
             let config = {
                 headers: {
                     'Content-Type': 'application/json',
                 }
             }
-            getAllCafe(parseFloat(lat), parseFloat(lon), checkList, config)
+            if (token) {
+                config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${getCookie('token')}`,
+                    }
+                }
+            }
+            getAllCafe(parseFloat(lon), parseFloat(lat), checkList, config)
                 .then((res) => { console.log(res); setCafeList(res.data.data); })
                 .catch((err) => { console.log(err); })
         }
@@ -132,12 +141,12 @@ const MainPage = () => {
                             name="category"
                             value="all"
                             onChange={checkAll}
-                            checked={checkList.length === 9 ? true : false}
+                            checked={checkList?.length === 0 ? true : false}
                         />
                         <label htmlFor="icon1">
                             <img src={all} alt="all" className="icon" />
                             <img src={all2} alt="all2" className="icon_active" />
-                            <p>all</p>
+                            <p>전체</p>
                         </label>
                         <input
                             type="checkbox"
@@ -273,13 +282,14 @@ const MainPage = () => {
                         {cafeList.map((item, index) => <>
                             <CafeItem
                                 id={item.id}
-                                key={item}
+                                key={item.id}
                                 image={`http://58.225.75.202:5000/${item.image}`}
                                 title={item.storeName}
-                                distance='55m'
+                                distance={item.distance >= 1000 ? Math.round(item.distance / 1000) + 'km' : Math.round(item.distance) + 'm'}
                                 intro={item.description}
                                 tag={item.category}
-                                onClick={() => navigation(`/detail/${item}`)}
+                                isLiked={item.isLiked}
+                                onClick={() => navigation(`/detail/${item.id}`)}
                             />
                         </>)}
                     </div>

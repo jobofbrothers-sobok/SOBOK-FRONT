@@ -5,17 +5,12 @@ import { getCafeInfo } from "../lib/api/main";
 
 const CafeInfo = (props) => {
 
-    const id = props.id;
-    console.log(id);
-
-    const [cafeInfo, setCafeInfo] = useState('');
-
-    const { storeName, description, homepage, officeHour, dayOff, category, x, y } = cafeInfo;
+    const { id, address, homepage, officeHour, dayOff, category, x, y } = props;
 
     useEffect(() => {
         const { naver } = window;
 
-        const location = new naver.maps.LatLng(x, y);
+        const location = new naver.maps.LatLng(y, x);
 
         const mapOptions = {
             center: location,
@@ -27,25 +22,7 @@ const CafeInfo = (props) => {
             map,
             position: location,
         });
-    }, [])
-
-    // 카페 상세 정보 가져오기
-    const getInfo = async () => {
-        let config = {
-            headers: {
-                'Content-Type': 'application/json',
-                'withCredentials': true,
-            }
-        }
-        const json = await getCafeInfo(id, config);
-        console.log(json);
-        setCafeInfo(json.data.data);
-    };
-
-    useEffect(() => {
-        getInfo();
-    }, []);
-
+    }, [x, y])
 
     return (
         <>
@@ -66,12 +43,12 @@ const CafeInfo = (props) => {
                 <div className="list-container">
                     <div className="list-item">
                         <p className="list-title" >주소</p>
-                        <p className="list-value">서울특별시 용산구 녹사평대로40길 47 2F</p>
+                        <p className="list-value">{address}</p>
                     </div>
                     <hr />
                     <div className="list-item">
                         <p className="list-title">영업 시간</p>
-                        <p className="list-value">{officeHour}</p>
+                        <p className="list-value">{officeHour} / 휴무: {dayOff}</p>
                     </div>
                     <hr />
                     <div className="list-item">

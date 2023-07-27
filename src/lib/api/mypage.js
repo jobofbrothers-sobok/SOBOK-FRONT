@@ -13,8 +13,8 @@ const config = {
 const PROXY = '/api';
 
 // 찜한 카페 및 작성한 리뷰 조회
-export const getCustomerActivity = async (config) => {
-    return await axios.get(`${PROXY}/main/mypage`, config)
+export const getCustomerActivity = async (lat, lon, config) => {
+    return await axios.post(`${PROXY}/main/mypage`, { x: lat, y: lon }, config)
 }
 
 // 고객 회원 정보 수정

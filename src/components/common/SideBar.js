@@ -20,12 +20,16 @@ const SideBar = (props) => {
   const auth = isLogin();
   const who = getCookie('who');
   const name = getCookie('name');
+  const x = getCookie('lat');
+  const y = getCookie('lon');
+  console.log(x, y)
 
 
-  const [keyword, setKeword] = useState('');
+  const [keyword, setKeyword] = useState('');
   const [keywordList, setKeywordList] = useState([]);
   const [searchedCafe, setSearchedCafe] = useState([]);
   const [search, setSearch] = useState(false);
+
 
   // 로그인 모달 관련
   const [modalOpen, setModalOpen] = useState(false);
@@ -37,22 +41,31 @@ const SideBar = (props) => {
     setModalOpen(false);
   }
 
-  const searchCafe = async () => {
-    let config
-    const json = await postSidebarSearch(126.9655202, 37.5470439, keyword);
-    setSearchedCafe(json.data.data);
-    if (keyword) {
-      setKeywordList([...keywordList, keyword]);
+  let config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getCookie('token')}`,
     }
-    setSearch(true)
+  };
+
+  const searchCafe = async () => {
+    console.log(config);
+    console.log(x, y);
+    const json = await postSidebarSearch(x, y, keyword, config);
+    console.log('키워드 검색', json);
+    setSearchedCafe(json.data.data);
+    console.log(keyword);
+    if (keyword) {
+      setKeywordList([keyword, ...keywordList]);
+    }
+    setSearch(true);
   }
 
   const deleteKeyword = (item) => {
     setKeywordList(keywordList.filter((choice) => choice !== item))
   }
 
-  useEffect(() => {
-  }, [keyword])
+
 
 
   // 카페 리스트 임시
@@ -70,26 +83,22 @@ const SideBar = (props) => {
               </button>
             </div>
             {auth ? <div className="logout-btn" onClick={() => { removeCookie('token'); window.location.replace(`/`); }}>로그아웃</div> : null}
-            <SearchBox onChange={(e) => setKeword(e.target.value)} onClick={searchCafe} />
+            <SearchBox value={keyword} onChange={(e) => setKeyword(e.target.value)} onClick={searchCafe} />
             <br />
             <SearchList>
               <p className="list-title">최근 검색어</p>
               <div className="search-list">
                 {keywordList.map((item) =>
-                  <div className="search-item">{item}<p className='delete' onClick={() => deleteKeyword(item)}>&times;</p></div>
+                  <div className="search-item" onClick={() => { setKeyword(item); console.log('키워드', keyword); searchCafe(); console.log('검색'); }}>{item}<p className='delete' onClick={(e) => { e.stopPropagation(); deleteKeyword(item); }}>&times;</p></div>
                 )}
-                {/* <div className="search-item">숙대 카페<p className='delete'>&times;</p></div>
-                <div className="search-item">숙대 카페<p className='delete'>&times;</p></div>
-                <div className="search-item">숙대 카페<p className='delete'>&times;</p></div>
-                <div className="search-item">숙대 카페<p className='delete'>&times;</p></div> */}
               </div>
             </SearchList>
             <br />
             <ResultWrapper>
-              {search ? <><p className="list-title">검색결과<span className="list-title2"> {searchedCafe.length}개의 카페</span></p>
+              {search ? <><p className="list-title">검색결과<span className="list-title2"> {searchedCafe?.length}개의 카페</span></p>
                 <br /><hr /><br />
                 <div className="cafe-list">
-                  {searchedCafe.map((item, index) => <>
+                  {searchedCafe?.map((item, index) => <>
                     <CafeItem
                       key={item.id}
                       image={`http://58.225.75.202:5000/${item.image}`}
@@ -182,7 +191,7 @@ const SideBarContainer = styled.div`
     right: 0;
     transition: 0.5s ease;
   }
-  overflow-y: auto;
+  overflow-y: hidden;
 `
 
 const SideBarWrap = styled.div`

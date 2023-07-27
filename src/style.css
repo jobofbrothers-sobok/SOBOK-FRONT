@@ -7,6 +7,10 @@
     letter-spacing: -0.04em;
 }
 
+button {
+    cursor: pointer;
+}
+
 body {
     margin: 0 auto;
     padding: 0;

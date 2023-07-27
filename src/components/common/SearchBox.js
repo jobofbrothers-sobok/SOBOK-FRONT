@@ -4,11 +4,11 @@ import search from "../../asset/images/search.svg";
 
 const SearchBox = (props) => {
 
-    const { onChange, onClick } = props;
+    const { onChange, onClick, value } = props;
 
     return (
         <Container>
-            <input type='text' placeholder='검색' onChange={onChange} />
+            <input type='text' value={value} placeholder='검색' onChange={onChange} />
             <button onClick={onClick}><img src={search} alt='검색 버튼 이미지' /></button>
         </Container>
     )

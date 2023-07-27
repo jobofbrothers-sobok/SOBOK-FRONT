@@ -13,17 +13,12 @@ const config = {
 }
 
 // 카페 전체 조회
-export const getAllCafe = async (lon, lat, checkList) => {
-    console.log('test', lat, lon, checkList);
+export const getAllCafe = async (lon, lat, checkList, config) => {
     return await axios.post(`${PROXY}/main/store`, {
         x: lon,
         y: lat,
         category: checkList
-    }, {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
+    }, config);
 };
 
 // 카페 찜하기
