@@ -10,7 +10,7 @@ const config = {
 }
 
 // const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
-const PROXY = '/api';
+const PROXY = 'https://b.sobok.co.kr/api';
 
 // 찜한 카페 및 작성한 리뷰 조회
 export const getCustomerActivity = async (lat, lon, config) => {
