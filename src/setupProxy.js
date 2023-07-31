@@ -5,7 +5,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://58.225.75.202:5000',
+            target: 'https://b.sobok.co.kr',
             changeOrigin: true,
         })
     );

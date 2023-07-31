@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Button from "../../../components/common/Button";
 import { getCookie, setCookie } from "../../../lib/cookie";
 import { ownerEdit } from "../../../lib/api/mypage";
-import DaumPostCode from 'react-daum-postcode';
 import DaumPostcodeEmbed from "react-daum-postcode";
 import Modal from "../../../components/common/Modal";
 
