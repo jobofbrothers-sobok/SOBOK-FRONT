@@ -96,10 +96,11 @@ const StampCheck = () => {
                             (<StampItem checked={false} />)
                         )}
                 </StampGridBox >
-                <div className="complete-box">
+                {stampList.length === 9 ? <div className="complete-box">
                     <img src={completeImg} alt='10개스탬프' width="40%" />
                     <div className="complete-text">경희대학교 카페 퉈 스탬프 완료!!<br />리워드를 신청해주세요!</div>
-                </div>
+                </div> : <></>}
+
             </Container>
             <Footer />
             <Modal open={modalOpen} close={closeModal} header="Modal heading">

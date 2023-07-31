@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Button from "../../../components/common/Button";
 import { getCookie, setCookie } from "../../../lib/cookie";
 import { ownerEdit } from "../../../lib/api/mypage";
+import DaumPostCode from 'react-daum-postcode';
+import DaumPostcodeEmbed from "react-daum-postcode";
+import Modal from "../../../components/common/Modal";
 
 const OwnerEditInfo = () => {
 
@@ -17,6 +20,21 @@ const OwnerEditInfo = () => {
     const [licenseImg, setLicenseImg] = useState();
     const [profile, setProfile] = useState();
 
+    // 주소 검색 모달 관련
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+    }
+
+    const onCompletePost = (data) => {
+        console.log(data.address);
+        setAddress(data.address);
+        closeModal();
+    }
 
     const onEditInfo = async () => {
         let config = {
@@ -54,7 +72,7 @@ const OwnerEditInfo = () => {
                     <input type="email" onChange={(e) => setEmail(e.target.value)} />
                     <p>가게 주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <div className="store-loc-box">
-                        <input type="text" onChange={(e) => setAddress(e.target.value)} /><button className="store-search">검색</button>
+                        <input type="text" value={address} onClick={openModal} onChange={openModal} /><button className="store-search" onClick={openModal}>검색</button>
                     </div>
                     <p>상세 주소</p>
                     <input type="text" onChange={(e) => setDetail(e.target.value)} />
@@ -66,6 +84,11 @@ const OwnerEditInfo = () => {
                     <Button text="수정완료" color="#FF9F74" onClick={onEditInfo} />
                 </div>
             </Container>
+            <Modal open={modalOpen} close={closeModal}>
+                <DaumPostcodeEmbed
+                    onComplete={onCompletePost}
+                />
+            </Modal>
         </>
     )
 }
