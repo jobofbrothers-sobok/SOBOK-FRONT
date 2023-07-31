@@ -5,7 +5,8 @@ import { useNavigate } from "react-router";
 import { getCookie, setCookie } from "../lib/cookie";
 import { customerJoin, ownerJoin, ownerLicense } from "../lib/api/auth";
 import axios from "axios";
-
+import DaumPostcodeEmbed from "react-daum-postcode";
+import Modal from "./common/Modal";
 
 const JoinInputForm = () => {
 
@@ -36,82 +37,63 @@ const JoinInputForm = () => {
     const [image, setImage] = useState();
 
 
-    const onHandleId = (e) => {
-        setId(e.target.value);
+    // 주소 검색 모달 관련
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
     };
-    const onHandlePw = (e) => {
-        setPw(e.target.value);
-    };
-    const onHandleCpw = (e) => {
-        setCpw(e.target.value);
-    };
-    const onHandleName = (e) => {
-        setName(e.target.value);
-    };
-    const onHandleTel = (e) => {
-        setTel(e.target.value);
-    };
-    const onHandleEmail = (e) => {
-        setEmail(e.target.value);
-    };
-    const onHandleStore = (e) => {
-        setStore(e.target.value);
-    };
-    const onHandleAddress = (e) => {
-        setAddress(e.target.value);
-    };
-    const onHandleDetail = (e) => {
-        setDetail(e.target.value);
-    };
-    const onHandleCode = (e) => {
-        setCode(e.target.value);
-    };
-    const onHandleImage = (e) => {
-        setImage(e.target.files[0]);
-        console.log(image);
+    const closeModal = () => {
+        setModalOpen(false);
+    }
+
+    const onCompletePost = (data) => {
+        console.log(data.address);
+        setAddress(data.address);
+        closeModal();
     }
 
     return (
         <InputContainer>
             <p>아이디<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
             <div className="new-id-box">
-                <input type="text" onChange={onHandleId} /><button className="id-check-btn">중복확인</button>
+                <input type="text" onChange={(e) => setId(e.target.value)} /><button className="id-check-btn">중복확인</button>
             </div>
             <p>비밀번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-            <input type="password" placeholder="Password" onChange={onHandlePw} />
+            <input type="password" placeholder="Password" onChange={(e) => setPw(e.target.value)} />
             <p>비밀번호 확인<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-            <input type="password" placeholder="Password" onChange={onHandleCpw} />
+            <input type="password" placeholder="Password" onChange={(e) => setCpw(e.target.value)} />
 
 
             {isOwner ?
                 <>
                     <p>매장명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" onChange={onHandleStore} />
+                    <input type="text" onChange={(e) => setStore(e.target.value)} />
                     <p>담당자명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" onChange={onHandleName} />
+                    <input type="text" onChange={(e) => setName(e.target.value)} />
                     <p>담당자 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" onChange={onHandleTel} />
+                    <input type="text" onChange={(e) => setTel(e.target.value)} />
                     <p>담당자 이메일<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" onChange={onHandleEmail} />
+                    <input type="text" onChange={(e) => setEmail(e.target.value)} />
                     <p>가게 주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <div className="store-loc-box">
-                        <input type="text" onChange={onHandleAddress} /><button className="store-search">검색</button>
+                        <input type="text" value={address} onChange={openModal} onClick={openModal} /><button className="store-search" onClick={openModal}>주소검색</button>
                     </div>
                     <p>상세 주소</p>
-                    <input type="text" onChange={onHandleDetail} />
+                    <input type="text" onChange={(e) => setDetail(e.target.value)} />
                     <p>사업자 등록 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" onChange={onHandleCode} />
+                    <input type="text" onChange={(e) => setCode(e.target.value)} />
                     <p>사업자 등록증<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" className="file-box" onChange={onHandleImage} />
+                    <input type="file" className="file-box" onChange={(e) => setImage(e.target.files[0])} />
                 </>
                 :
                 <>
                     <p>이름</p>
-                    <input type="text" onChange={onHandleName} />
+                    <input type="text" onChange={(e) => setName(e.target.value)} />
                     <p>이메일<span style={{ color: "#EB5757", fontWeight: "900" }} >*</span></p>
-                    <input type="text" placeholder="Email" onChange={onHandleEmail} />
+                    <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                     <p>핸드폰 번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" placeholder="010-0000-0000" onChange={onHandleTel} />
+                    <input type="text" placeholder="010-0000-0000" onChange={(e) => setTel(e.target.value)} />
                 </>
             }
             <Button text="가입 완료" color="#FF9F74" onClick={isOwner ? () => {
@@ -129,6 +111,11 @@ const JoinInputForm = () => {
                     .then((res) => { console.log('회원가입 성공', res); alert('회원가입 성공'); navigator('/login'); })
                     .catch((err) => { console.log('회원가입 실패', err); alert('회원가입 실패'); });
             }} />
+            <Modal open={modalOpen} close={closeModal}>
+                <DaumPostcodeEmbed
+                    onComplete={onCompletePost}
+                />
+            </Modal>
         </InputContainer >
     )
 }
