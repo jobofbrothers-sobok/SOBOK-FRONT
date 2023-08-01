@@ -14,11 +14,7 @@ const CustomerPage = () => {
     const [likedCafe, setLikedCafe] = useState([]);
     const [reviews, setReviews] = useState([]);
 
-    // 카페 리스트 임시
-    const array = [0, 1, 2, 3, 4];
-
-    // 임시 배열
-    const array1 = [0, 0, 0];
+    console.log(likedCafe);
 
     const navigation = useNavigate();
 
@@ -34,7 +30,7 @@ const CustomerPage = () => {
                 'withCredentials': true,
             }
         }
-        const json = await getCustomerActivity(lat, lon, config);
+        const json = await getCustomerActivity(lon, lat, config);
         console.log(json);
         setLikedCafe(json.data.data.allLikeCafe);
         setReviews(json.data.data.allStoreReview);
@@ -70,7 +66,7 @@ const CustomerPage = () => {
                                 key={item.id}
                                 image={`https:/b.sobok.co.kr/${item.image}`}
                                 title={item.storeName}
-                                distance='55m'
+                                distance={item.distance >= 1000 ? Math.round(item.distance / 1000) + 'km' : Math.round(item.distance) + 'm'}
                                 intro={item.description}
                                 tag={item.category}
                                 isLiked={item.isLiked}
