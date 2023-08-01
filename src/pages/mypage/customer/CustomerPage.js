@@ -6,7 +6,7 @@ import sobokFace from "../../../asset/images/sobok-face.svg";
 import ReviewItem from "../../../components/ReviewItem";
 import { useNavigate } from "react-router-dom";
 import CafeItem from "../../../components/CafeItem";
-import { getCookie } from "../../../lib/cookie";
+import { getCookie, removeCookie } from "../../../lib/cookie";
 import { getCustomerActivity } from "../../../lib/api/mypage";
 
 const CustomerPage = () => {
@@ -43,7 +43,6 @@ const CustomerPage = () => {
     useEffect(() => {
         getActivity();
     }, []);
-
 
 
     return (
@@ -99,7 +98,7 @@ const CustomerPage = () => {
                     </div>
                 </div>
                 <br />
-                <p className="logout-text">로그아웃</p>
+                <p className="logout-text" onClick={() => { removeCookie('token'); window.location.replace(`/`); }}>로그아웃</p>
             </Container>
             <br />
             <Footer />
