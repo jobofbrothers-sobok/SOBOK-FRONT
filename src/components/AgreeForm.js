@@ -92,13 +92,13 @@ const AgreeForm = () => {
                 <input type="checkbox" id="checkbox" name="essential" onChange={check} checked={checkList.includes('essential') ? true : false} />
                 <label className="remember-me" >[필수] 홈페이지 이용약관의 내용에 동의합니다.</label>
             </div>
-            <InputBox rows="6"></InputBox>
+            <InputBox rows="6" readOnly={true}></InputBox>
             <div className="agree-box2">
                 <input type="checkbox" id="checkbox" name="select" onChange={check} checked={checkList.includes('select') ? true : false} />
                 <label className="remember-me" >[선택] 광고성 정보 수신 및 마케팅 활용 동의</label>
             </div>
-            <InputBox rows="6"></InputBox>
-            <Button text="다음으로" color="#FF9F74" onClick={checkList.includes('essential') ? () => { navigator('/join'); setCookie('select', checkList.includes('select')) }  : console.log('필수 정보 선택 필요')} />
+            <InputBox rows="6" readOnly={true}></InputBox>
+            <Button text="다음으로" color="#FF9F74" onClick={checkList.includes('essential') ? () => { navigator('/join'); setCookie('select', checkList.includes('select')) } : console.log('필수 정보 선택 필요')} />
         </AgreeContainer>
     )
 
