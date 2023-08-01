@@ -55,7 +55,7 @@ const JoinInputForm = () => {
         closeModal();
     }
 
-
+    // 중복된 ID 검사
     const isOverlapId = async () => {
         await checkOverlapId(id, who)
             .then((res) => {

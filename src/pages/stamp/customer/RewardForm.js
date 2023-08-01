@@ -10,6 +10,7 @@ import logo from "../../../asset/images/sobok_logo_square_jua.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { postDelivery } from "../../../lib/api/stamp";
 import { getCookie } from "../../../lib/cookie";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 const RewardForm = () => {
 
@@ -43,6 +44,23 @@ const RewardForm = () => {
             'withCredentials': true,
         }
     }
+
+
+    const [addressModal, setAddressModal] = useState(false);
+
+    const openAddress = () => {
+        setAddressModal(true);
+    };
+    const closeAddress = () => {
+        setAddressModal(false);
+    }
+
+    const onCompletePost = (data) => {
+        console.log(data.address);
+        setAddress(data.address);
+        closeAddress();
+    }
+
     const postRewardForm = () => {
         postDelivery(reward, name, tel, address, detail, message, config)
             .then((res) => console.log(res))
@@ -66,7 +84,7 @@ const RewardForm = () => {
                     <input type="tel" placeholder="010-0000-0000" onChange={(e) => setTel(e.target.value)} />
                     <p>주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <div className="address-box">
-                        <input type="text" onChange={(e) => setAddress(e.target.value)} /><button className="address-search-btn">주소검색</button>
+                        <input type="text" value={address} onChange={openAddress} /><button className="address-search-btn" onClick={openAddress}>주소검색</button>
                     </div>
                     <p>상세주소<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={(e) => setDetail(e.target.value)} />
@@ -83,6 +101,11 @@ const RewardForm = () => {
                     <p className="title">배송 신청이 완료되었습니다.</p><br /><br /><br />
                     <Button text="메인으로" onClick={() => navigator('/stamp/customer')} />
                 </ContentBox>
+            </Modal>
+            <Modal open={addressModal} close={closeAddress}>
+                <DaumPostcodeEmbed
+                    onComplete={onCompletePost}
+                />
             </Modal>
         </>
     )
