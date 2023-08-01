@@ -47,7 +47,7 @@ const LoginPage = () => {
                 <br /><br />
                 <div className="login-form">
                     <p>아이디</p>
-                    <input type="text" placeholder="010-0000-0000" onChange={onHandleId} />
+                    <input type="text" placeholder="Id" onChange={onHandleId} />
                     <p>비밀번호</p>
                     <input type="password" placeholder="Password" onChange={onHandlePasswd} />
                     <div className="check">
