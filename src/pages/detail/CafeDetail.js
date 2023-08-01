@@ -25,8 +25,9 @@ const CafeDetail = () => {
 
     const [cafeInfo, setCafeInfo] = useState('');
 
-    const { storeName, description, address, homepage, officeHour, dayOff, category, x, y } = cafeInfo;
+    const { image, storeName, description, address, homepage, officeHour, dayOff, category, x, y } = cafeInfo;
 
+    const realImg = `https://b.sobok.co.kr/${image}`
 
     // 카페 상세 정보 가져오기
     const getInfo = async () => {
@@ -56,7 +57,7 @@ const CafeDetail = () => {
                     slidesPerView={1}
                     pagination={{ clickable: true }}
                 >
-                    <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
+                    <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={realImg ? realImg : detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
                     <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
                     <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
                 </Swiper>

@@ -5,11 +5,11 @@ import profileImg from "../asset/images/sobok-face.svg";
 
 const ReviewItem = (props) => {
 
-    const { nickname, date, content } = props;
+    const { image, nickname, date, content } = props;
 
     return (
         <ItemBox>
-            <img src={newsImg} alt="리뷰 이미지" />
+            <img src={image ? image : newsImg} alt="리뷰 이미지" />
             <p className="review-content">{content}</p>
             <div className="user-box">
                 <div className="profile">

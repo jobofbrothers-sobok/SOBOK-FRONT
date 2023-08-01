@@ -71,9 +71,10 @@ const CafeReview = (props) => {
                 <Button text="리뷰 작성하기" onClick={openModal} />
                 <br /><br />
                 <div className="review-list">
-                    {reviews.map((item, index) =>
+                    {reviews?.map((item, index) =>
                         <ReviewItem
                             key={item.id}
+                            image={`https://b.sobok.co.kr/${item.image}`}
                             nickname='고법123'
                             content={item.content}
                             date={item.timestamp.substr(0, 10)}

@@ -31,6 +31,7 @@ const CafeItem = (props) => {
         };
         // 찜 True일 때, 찜 해제
         if (like) {
+            console.log('찜해제', id);
             setLike(!like);
             deleteLike(parseInt(id), config)
                 .then((res) => console.log(res))
@@ -75,10 +76,11 @@ const ItemBox = styled.div`
     .imgBox{
         width: 100%;
         position: relative;
-        border-radius: 5px;
     }
     .cafe-img{
         width: 100%;
+        height: 160px;
+        border-radius: 5px;
     }
     .cafe-summary{
         display: flex;
