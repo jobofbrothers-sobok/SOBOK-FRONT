@@ -33,9 +33,11 @@ const Footer = () => {
     return (
         <FooterContainer>
             <img src={logo2} alt="소복 로고 이미지" width="150px" height="auto" />
-            <p className="sobok-info-text">소복  |  주소 : 서울시 경희대로 26 ㅣ 대표 : 기현우<br />
-                개인정보처리책임자 :  ㅣ  사업자 등록번호 :<br />
-                고객센터 : 010-0000-000  ㅣ  rhqjq123@naver.com<br /><br />
+            <p className="sobok-info-text">소복  |  주소 : 서울특별시 용산구 청파로47길 46 (청파동2가),<br />숙명 크로스캠퍼스 청파 ㅣ 대표 : 기현우<br />
+                ㅣ사업자 등록번호 : 798-11-02173
+                <br />
+                | 유선 상담 : 0507-1366-6996<br />
+                ㅣ 이메일 상담 : sobok.official@gmail.com<br /><br />
                 <span className="license-text">© SOBOK Inc. All rights reserved.</span>
             </p>
         </FooterContainer>
