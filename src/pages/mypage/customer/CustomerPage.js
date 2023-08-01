@@ -69,7 +69,7 @@ const CustomerPage = () => {
                             <CafeItem
                                 id={item.id}
                                 key={item.id}
-                                image={`http://58.225.75.202:5000/${item.image}`}
+                                image={`https:/b.sobok.co.kr/${item.image}`}
                                 title={item.storeName}
                                 distance='55m'
                                 intro={item.description}
