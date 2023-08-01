@@ -25,8 +25,8 @@ const OwnerAddStore = () => {
             }
         };
         ownerAddProduct(id, category, name, price, discountPrice, url, file, config)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err))
+            .then((res) => { console.log(res); alert('스토어 상품을 성공적으로 등록하였습니다.') })
+            .catch((err) => { console.log(err); alert('스토어 상품 등록에 실패하였습니다.') })
     }
 
     return (

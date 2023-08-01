@@ -41,7 +41,7 @@ const OwnerAddMenu = () => {
                     <InputBox rows="15" onChange={(e) => { setContent(e.target.value); console.log(content) }} />
                     <br />
                     <p>메뉴 이미지<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="file" onChange={(e) => { setFile(e.target); console.log(file); }} />
+                    <input type="file" onChange={(e) => { setFile(e.target.files[0]); console.log(file); }} />
                     <Button text="등록하기" color="#FF9F74" onClick={onAddMenu} />
                 </div>
             </Container>
