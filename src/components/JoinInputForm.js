@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "./common/Button";
 import { useNavigate } from "react-router";
 import { getCookie, setCookie } from "../lib/cookie";
-import { customerJoin, ownerJoin, ownerLicense } from "../lib/api/auth";
+import { checkOverlapId, customerJoin, ownerJoin, ownerLicense } from "../lib/api/auth";
 import axios from "axios";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import Modal from "./common/Modal";
@@ -19,6 +19,8 @@ const JoinInputForm = () => {
     const isSelect = getCookie('select') === 'true' ? true : false;
     console.log(isSelect);
     console.log(typeof (isSelect));
+
+    const who = isOwner ? 'owner' : 'customer';
 
 
     // 공통 정보
@@ -53,11 +55,21 @@ const JoinInputForm = () => {
         closeModal();
     }
 
+
+    const isOverlapId = async () => {
+        await checkOverlapId(id, who)
+            .then((res) => {
+                console.log('결과', res); res.data.data.idAlreadyExist
+                    ? alert('중복된 아이디입니다.') : alert('사용가능한 아이디입니다.')
+            })
+            .catch((err) => console.log(err));
+    }
+
     return (
         <InputContainer>
             <p>아이디<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
             <div className="new-id-box">
-                <input type="text" onChange={(e) => setId(e.target.value)} /><button className="id-check-btn">중복확인</button>
+                <input type="text" onChange={(e) => setId(e.target.value)} /><button className="id-check-btn" onClick={isOverlapId}>중복확인</button>
             </div>
             <p>비밀번호<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
             <input type="password" placeholder="Password" onChange={(e) => setPw(e.target.value)} />

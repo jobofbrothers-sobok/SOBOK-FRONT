@@ -52,3 +52,8 @@ export const ownerLicense = async (id, image) => {
 export const ownerFindpw = async (email) => {
     return await axios.post(`${PROXY}/auth/find/owner`, { email: email });
 }
+
+// 아이디 중복확인
+export const checkOverlapId = async (id, who) => {
+    return await axios.post(`${PROXY}/auth/signup/check?sort=${who}`, { loginId: id });
+}
