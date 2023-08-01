@@ -16,7 +16,7 @@ const NoticeDetail = () => {
 
     const [notice, setNotice] = useState([]);
 
-    const { title, content, timestamp } = notice;
+    const { image, title, content, timestamp } = notice;
 
     // 스토어 상품 정보 가져오기
     const getNotice = async () => {
@@ -39,7 +39,7 @@ const NoticeDetail = () => {
                 <br /><br />
                 <p className="title">{title}</p>
                 <br />
-                <img src={noImg} alt="이미지없음" />
+                <img src={image ? `https://b.sobok.co.kr/${image}` : noImg} alt="이미지없음" />
                 <br />
                 <div className="content">
                     {content}
