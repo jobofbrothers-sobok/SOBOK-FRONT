@@ -5,7 +5,8 @@ import NavBar from "../../../components/common/NavBar";
 import Footer from "../../../components/common/Footer";
 import styled from "styled-components";
 import { customerEdit, customerWithdraw } from "../../../lib/api/mypage";
-import { getCookie, setCookie } from "../../../lib/cookie";
+import { getCookie, removeCookie, setCookie } from "../../../lib/cookie";
+import { useNavigate } from "react-router";
 
 const EditCustomerInfo = () => {
     let config = {
@@ -29,6 +30,8 @@ const EditCustomerInfo = () => {
             .then((res) => { console.log(res); alert('회원정보가 성공적으로 수정되었습니다.'); setCookie('name', name); })
             .catch((err) => { alert(err, '회원가입 실패'); })
     }
+
+    const navigation = useNavigate();
 
 
     return (
@@ -61,7 +64,7 @@ const EditCustomerInfo = () => {
                 </div>
                 <br />
                 <p onClick={() => customerWithdraw(config)
-                    .then((res) => { console.log(res); alert('회원탈퇴가 성공적으로 완료되었습니다.') })
+                    .then((res) => { console.log(res); alert('회원탈퇴가 성공적으로 완료되었습니다.'); removeCookie('token'); navigation('/') })
                     .catch((err) => console.log(err))}>회원탈퇴</p>
             </Container >
             <Footer />
