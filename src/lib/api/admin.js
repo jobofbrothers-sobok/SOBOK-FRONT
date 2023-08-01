@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie } from "../cookie";
 
 // const PROXY = window.location.hostname === 'localhost' ? '/api' : '/proxy/api';
-const PROXY = '/api';
+const PROXY = 'https://b.sobok.co.kr/api';
 
 const config = {
     headers: {

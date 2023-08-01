@@ -283,7 +283,7 @@ const MainPage = () => {
                             <CafeItem
                                 id={item.id}
                                 key={item.id}
-                                image={`http://58.225.75.202:5000/${item.image}`}
+                                image={`https://b.sobok.co.kr/${item.image}`}
                                 title={item.storeName}
                                 distance={item.distance >= 1000 ? Math.round(item.distance / 1000) + 'km' : Math.round(item.distance) + 'm'}
                                 intro={item.description}
