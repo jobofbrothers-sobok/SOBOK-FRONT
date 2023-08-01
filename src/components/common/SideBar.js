@@ -22,7 +22,9 @@ const SideBar = (props) => {
   const name = getCookie('name');
   const x = getCookie('lat');
   const y = getCookie('lon');
-  console.log(x, y)
+  const joinAuth = getCookie('joinauth') === 'true' ? true : false;
+  const stampAuth = getCookie('stampauth') === 'true' ? true : false;
+  const pending = getCookie('pending') === 'true' ? true : false;
 
 
   const [keyword, setKeyword] = useState('');
@@ -66,6 +68,7 @@ const SideBar = (props) => {
   }
 
 
+  console.log(who);
 
 
   // 카페 리스트 임시
@@ -82,7 +85,7 @@ const SideBar = (props) => {
                 &times;
               </button>
             </div>
-            {auth ? <div className="logout-btn" onClick={() => { removeCookie('token'); window.location.replace(`/`); }}>로그아웃</div> : null}
+            {auth ? <div className="logout-btn" onClick={() => { removeCookie('token'); removeCookie('pending'); window.location.replace(`/`); }}>로그아웃</div> : null}
             <SearchBox value={keyword} onChange={(e) => setKeyword(e.target.value)} onClick={searchCafe} />
             <br />
             <SearchList>
@@ -101,7 +104,7 @@ const SideBar = (props) => {
                   {searchedCafe?.map((item, index) => <>
                     <CafeItem
                       key={item.id}
-                      image={`http://58.225.75.202:5000/${item.image}`}
+                      image={`https://b.sobok.co.kr/${item.image}`}
                       title={item.storeName}
                       distance='55m'
                       intro={item.description}
@@ -114,9 +117,12 @@ const SideBar = (props) => {
               <div className="menu-item" onClick={() => navigator('/news')}>
                 카페 소식 모아보기
               </div>
-              <div className="menu-item" onClick={auth ? () => { console.log('auth', auth); who === 'customer' ? navigator('/stamp/customer') : navigator('/stamp/owner') } : openModal}>
-                스탬프 서비스
-              </div>
+              {
+                who !== 'manager' ? <div className="menu-item" onClick={auth ?
+                  (who === 'customer' ? () => navigator('/stamp/customer') : (pending ? openModal : (stampAuth ? () => navigator('/stamp/owner') : () => navigator('/stamp/owner/no-approval')))) : openModal}>
+                  스탬프 서비스
+                </div> : <></>
+              }
               <div className="menu-item" onClick={() => navigator('/store')}>
                 소복 스토어
               </div>
@@ -126,7 +132,7 @@ const SideBar = (props) => {
               <div className="menu-item" onClick={auth ? () => navigator('/inquiry') : openModal}>
                 문의사항
               </div>
-              {auth ? <div className="menu-item" onClick={who === 'manager' ? () => navigator('/admin') : who === 'owner' ? () => navigator('/owner') : () => navigator('/customer')}>
+              {auth ? <div className="menu-item" onClick={who === 'manager' ? () => navigator('/admin') : who === 'owner' ? (joinAuth ? () => navigator('/owner') : openModal) : () => navigator('/customer')}>
                 마이페이지
               </div> : null}
             </MenuList>
@@ -139,9 +145,31 @@ const SideBar = (props) => {
         <Modal open={modalOpen} close={closeModal} header="Modal heading">
           <ContentBox>
             <img src={logo} alt="소복로고이미지" width="50%" />
-            <p className="title">로그인이 필요한 서비스입니다.</p><br /><br /><br />
-            <Button text="로그인" />
+            {
+              // 점주 회원가입 미승인시
+              who === 'owner' && !joinAuth ?
+                <>
+                  <p className="title">회원가입 승인 검토중입니다.</p><br />
+                  <p className="info-detail2">회원가입 신청일 기준 2~3일 정도 시간이 소요됩니다.</p><br /><br />
+                  <Button text="확인완료" onClick={closeModal} />
+                </>
+                :
+                // 점주 스탬프 승인 검토중
+                who === 'owner' && pending ?
+                  <>
+                    <p className="title">스탬프 승인 검토중입니다.</p><br />
+                    <p className="info-detail2">스탬프 신청일 기준 2~3일 정도<br />시간이 소요됩니다.</p><br /><br />
+                    <Button text="확인완료" onClick={closeModal} />
+                  </>
+                  :
+                  // 로그인 안했을 때
+                  <>
+                    <p className="title">로그인이 필요한 서비스입니다.</p><br /><br /><br />
+                    <Button text="로그인" onClick={() => navigator('/login')} />
+                  </>
+            }
           </ContentBox>
+
         </Modal>
       </SideBarContainer >
     </>
@@ -277,20 +305,8 @@ const ContentBox = styled.div`
         font-size: 18px;
         font-weight: 600;
     }
-    .edit-form{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .edit-form > p {
-        font-weight: 600;
-    }
-    .edit-form > input {
-        padding: 5px 10px;
-        height: 30px;
-        background: #FFFFFF;
-        border: 1px solid #D9D9D9;
-        border-radius: 4px;
-        margin-bottom: 13px;
+    .info-detail2{
+        text-align: center;
+        color: #7F7F7F;
     }
 `

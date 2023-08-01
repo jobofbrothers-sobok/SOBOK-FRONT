@@ -68,6 +68,7 @@ const LoginPage = () => {
                                 setCookie('name', res.data.data.director);
                                 setCookie('joinauth', res.data.data.authorized);
                                 setCookie('stampauth', res.data.data.stampAuthorized);
+                                setCookie('pending', res.data.data.pending);
                                 navigator('/');
                             })
                             .catch((err) => { console.log('실패', err); alert('로그인 실패'); })

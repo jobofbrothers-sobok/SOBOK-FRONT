@@ -35,3 +35,8 @@ export const checkStampStore = async (tag, config) => {
 export const postDelivery = async (reward, name, tel, address, detail, message, config) => {
     return await axios.post(`${PROXY}/customer/delivery`, { reward: reward, customer: name, phone: tel, address: address, detailAddress: detail, message: message }, config);
 };
+
+// 점주 스탬프 서비스 사용 신청
+export const postStampRequest = async (config) => {
+    return await axios.post(`${PROXY}/owner/stamp/request`, {}, config);
+};
