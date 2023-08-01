@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import BackButton from "../../../components/common/BackButton";
 import NavBar from "../../../components/common/NavBar";
@@ -6,12 +6,34 @@ import Footer from "../../../components/common/Footer";
 import Button from "../../../components/common/Button";
 import rewardImg from "../../../asset/images/rewardImg.svg";
 import { useNavigate } from "react-router-dom";
+import { getCookie } from "../../../lib/cookie";
+import { checkStamp } from "../../../lib/api/stamp";
 
 const StampReward = () => {
 
-    const [tag, setTag] = useState('회기역');
+
+    const [tag, setTag] = useState('hoegi');
+
+    const [stampList, setStamp] = useState([]);
+
+    let config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('token')}`,
+            'withCredentials': true,
+        }
+    }
+
+    const getStampList = async () => {
+        const json = await checkStamp(tag, config);
+        setStamp(json.data.data);
+    };
 
     const navigator = useNavigate();
+
+    useEffect(() => {
+        getStampList();
+    }, [tag])
 
     return (
         <>
@@ -21,16 +43,16 @@ const StampReward = () => {
                 <br /><br />
                 <div className="info-title">스탬프 사용 신청</div>
                 <TagList>
-                    <TagButton className={tag === '회기역' ? 'active' : ''} onClick={() => setTag('회기역')}>
+                    <TagButton className={tag === 'hoegi' ? 'active' : ''} onClick={() => setTag('hoegi')}>
                         회기역
                     </TagButton>
-                    <TagButton className={tag === '할로윈 특집' ? 'active' : ''} onClick={() => setTag('할로윈 특집')}>
+                    <TagButton className={tag === 'halloween' ? 'active' : ''} onClick={() => setTag('halloween')}>
                         할로윈 특집
                     </TagButton>
-                    <TagButton className={tag === '숙대입구파티' ? 'active' : ''} onClick={() => setTag('숙대입구파티')}>
+                    <TagButton className={tag === 'sookmyung' ? 'active' : ''} onClick={() => setTag('sookmyung')}>
                         숙대입구파티
                     </TagButton>
-                    <TagButton className={tag === '일상' ? 'active' : ''} onClick={() => setTag('일상')}>
+                    <TagButton className={tag === 'xmas' ? 'active' : ''} onClick={() => setTag('xmas')}>
                         일상
                     </TagButton>
                 </TagList>
@@ -42,7 +64,7 @@ const StampReward = () => {
                 <br />
                 <img src={rewardImg} alt="리워드이미지" />
                 <br />
-                <Button text='리워드 신청하기' color='#7F7F7F' onClick={() => navigator(`/stamp/customer/reward/form/${tag}`)} />
+                <Button text='리워드 신청하기' color='#7F7F7F' onClick={stampList.length === 9 ? () => navigator(`/stamp/customer/reward/form/${tag}`) : () => alert('스탬프 9개를 모은 후, 리워드 신청이 가능합니다.')} />
             </Container>
             <Footer />
         </>
