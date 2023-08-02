@@ -85,9 +85,9 @@ const ManagerDetail = () => {
                         <>
                             <p>{content}</p>
                             <br />
-                            <div className="button-box">
-                                <Button text="문자 일괄전송" color="#FF9F74" onClick={sendMessage} /><Button text="카톡 일괄전송" color="#FEE500" textColor="#3D1B1A" onClick={sendKaKao} />
-                            </div>
+                            {/* <div className="button-box"> */}
+                            <Button text="문자 일괄전송" color="#FF9F74" onClick={sendMessage} /><Button text="카톡 일괄전송" color="#FEE500" textColor="#3D1B1A" onClick={sendKaKao} />
+                            {/* </div> */}
                         </>
                         :
                         <>
@@ -95,7 +95,7 @@ const ManagerDetail = () => {
                             <br />
                         </>
                     }
-                    <Button text={isSend ? "일괄전송" : "전송페이지로"} color="#FF9F74" onClick={isSend ? null : goSendPage} />
+                    {isSend ? null : <Button text="전송페이지로" color="#FF9F74" onClick={goSendPage} />}
                 </div>
             </Container>
             <Footer />
