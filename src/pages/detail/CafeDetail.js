@@ -58,8 +58,6 @@ const CafeDetail = () => {
                     pagination={{ clickable: true }}
                 >
                     <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={realImg ? realImg : detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
-                    <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
-                    <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
                 </Swiper>
                 {/* <img src={detailImg} className="hero_img" alt="메인이미지" /> */}
                 <div className="intro-box">
