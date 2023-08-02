@@ -5,6 +5,7 @@ import cafeImg from "../asset/images/cafeImg.svg";
 import locMark from "../asset/images/locMark.svg";
 import { deleteLike, postLike } from "../lib/api/main";
 import { getCookie } from "../lib/cookie";
+import noImg from "../asset/images/noImg.svg";
 
 
 const CafeItem = (props) => {
@@ -20,7 +21,7 @@ const CafeItem = (props) => {
 
     // 대체 이미지 설정
     const handleImgError = (e) => {
-        e.target.src = cafeImg
+        e.target.src = noImg
     }
 
     // 찜 버튼 클릭시 DB 저장
@@ -49,12 +50,16 @@ const CafeItem = (props) => {
         }
     }
 
+    console.log(image, noImg);
+
     return (
-        <ItemBox onClick={onClick}>
-            <div className="imgBox">
-                <img className='cafe-img' src={image ? image : cafeImg} alt='카페대표이미지' onError={handleImgError} />
+        <ItemBox onClick={onClick} >
+            <div className="imgBox" >
+                <img className='cafe-img' src={image ? image : noImg} alt='카페대표이미지' onError={handleImgError} />
+                {/* <ImgBox style={{ backgroundImage: `url(${image ? image : noImg})` }}> */}
                 {who === 'customer' ? <HeartButton like={like} onClick={(event) => { event.stopPropagation(); handleHeartButton() }} /> : <></>
                 }
+                {/* </ImgBox> */}
             </div>
             <div className="cafe-summary">
                 <div className="cafe-title">{title}</div>
@@ -73,17 +78,31 @@ const CafeItem = (props) => {
 
 export default CafeItem;
 
+// const ImgBox = styled.div`
+//     width: 100%;
+//     height: 160px;
+//     position: relative;
+//     background-color: #dfdfdf;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     background-position: center;
+// `
+
 const ItemBox = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
     .imgBox{
         width: 100%;
+        height: 160px;
         position: relative;
+        overflow: hidden;
+        margin: 0 auto;
     }
     .cafe-img{
         width: 100%;
-        height: 160px;
+        height: 100%;
+        object-fit: cover;
         border-radius: 5px;
     }
     .cafe-summary{
