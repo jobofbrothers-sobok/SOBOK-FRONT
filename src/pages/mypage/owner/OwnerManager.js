@@ -52,8 +52,13 @@ const OwnerManager = () => {
                     </InputBox>
                     <Button text="신청하기" color="#FF9F74" onClick={postManager} />
                 </div>
-                <p className="bottom-text">최고관리자 확인 후 스탬프 이용고객에게<br />
-                    일괄 전송 됩니다.</p>
+                <p className="bottom-text">*안내*<br />
+                    담당자 확인 후 오전 11시, 오후 3시 중 희망하시는<br /> 시간에 전송됩니다. 발송 희망일시를 내용에 포함해주세요!<br /><br />
+                    *문자 메세지*<br />
+                    카페 방문 및 소복 스탬프 적립 이력이 있는 고객에게 요청하신<br />내용으로 일괄 전송됩니다.<br />
+                    *카카오톡*<br />
+                    카페 방문 및 소복 스탬프 적립 이력, 소복 카카오톡 채널 추가 고객에게 요청하신 내용으로 일괄 전송되며
+                    발송 실패 시<br />문자 메시지로 전송됩니다.</p>
             </Container>
         </>
     )
