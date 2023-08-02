@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import logo from "../../asset/images/sobok_logo_square_jua.png";
+// import logo from "../../asset/images/sobok_logo_square_jua.png";
+import logo from "../../asset/images/sobok_new_logo.png"
 import "../../asset/fonts/font.css";
 import Button from "../../components/common/Button";
 import { useNavigate } from "react-router-dom";
@@ -41,9 +42,9 @@ const LoginPage = () => {
             <LoginContainer>
                 <br />
                 <div className="logo">
-                    <img src={logo} alt="소복 로고 이미지" style={{ width: "35vw", maxWidth: "200px" }} />
+                    <img src={logo} alt="소복 로고 이미지" style={{ width: "30vw", maxWidth: "200px" }} />
                 </div>
-                <div className="description">디저트 속 소소한 행복</div>
+                <div className="description"><span className="point">소</span>소한 행<span className="point">복</span>이 될 카페를 찾아드려요!</div>
                 <br /><br />
                 <div className="login-form">
                     <p>아이디</p>
@@ -115,13 +116,22 @@ const LoginContainer = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'Jalnan';
+        font-family: 'GmarketSans';
         font-style: normal;
-        font-weight: 700;
-        font-size: 25px;
-        line-height: 42px;
-        letter-spacing: 0.02em;   
-        color: #C0C0C0;
+        font-weight: 900;
+        font-size: 18px;
+        line-height: 40px;
+        letter-spacing: 0.04em;   
+        color: #3D5A73;
+    }
+    .point{
+       font-family: 'GmarketSans';
+       font-style: normal;
+       font-weight: 900;
+       font-size: 18px;
+       line-height: 40px;
+       letter-spacing: 0.04em;   
+       color: #EC7649; 
     }
     .login-form {
         width: 100%;
