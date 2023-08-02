@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import nokids2 from "../asset/images/category/nokids2.svg";
+import nokids from "../asset/images/category/nokids2.svg";
+import concent from "../asset/images/category/concent2.svg";
 import { getCafeInfo } from "../lib/api/main";
 
 const CafeInfo = (props) => {
@@ -31,7 +32,7 @@ const CafeInfo = (props) => {
                 <div className="category-container">
                     {category?.map((item) =>
                         <div className="category-item">
-                            <img src={nokids2} alt="카테고리이미지" />
+                            <img src={`/image/${item}2.svg`} alt="카테고리이미지" />
                             <p>{item}</p>
                         </div>
                     )}

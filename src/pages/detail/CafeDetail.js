@@ -15,6 +15,7 @@ import 'swiper/components/navigation/navigation.min.css'
 import 'swiper/components/pagination/pagination.min.css'
 import { useParams } from "react-router-dom";
 import { getCafeInfo } from "../../lib/api/main";
+import noImg from '../../asset/images/noImg.svg';
 
 const CafeDetail = () => {
 
@@ -46,18 +47,24 @@ const CafeDetail = () => {
         getInfo();
     }, []);
 
+    // 대체 이미지 설정
+    const handleImgError = (e) => {
+        e.target.src = noImg
+    }
+
 
     return (
         <>
             <NavBar />
             <Container>
                 <Swiper
+                    style={{ height: '200px' }}
                     className="swiper"
                     modules={[Navigation, Pagination, Scrollbar]}
                     slidesPerView={1}
                     pagination={{ clickable: true }}
                 >
-                    <SwiperSlide className="slide" stlye={{ width: '100%' }}><img src={realImg ? realImg : detailImg} className="hero_img" alt="메인이미지" /></SwiperSlide>
+                    <SwiperSlide className="slide" style={{ width: '100%', height: '100%', objectFit: 'cover' }}><img src={realImg ? realImg : noImg} className="hero_img" alt="카페상세이미지" onError={handleImgError} /></SwiperSlide>
                 </Swiper>
                 {/* <img src={detailImg} className="hero_img" alt="메인이미지" /> */}
                 <div className="intro-box">
