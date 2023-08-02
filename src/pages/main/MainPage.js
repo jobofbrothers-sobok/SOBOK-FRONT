@@ -116,7 +116,7 @@ const MainPage = () => {
                     }
                 }
             }
-            if (who === 'customer') {
+            if (who === 'customer' || who === 'manager') {
                 getAllCafe(parseFloat(lon), parseFloat(lat), checkList, config)
                     .then((res) => { console.log(res); setCafeList(res.data.data); })
                     .catch((err) => { console.log(err); })
