@@ -21,6 +21,15 @@ export const getAllCafe = async (lon, lat, checkList, config) => {
     }, config);
 };
 
+// 점주 카페 전체 조회
+export const getOwnerAllCafe = async (lon, lat, checkList, config) => {
+    return await axios.post(`${PROXY}/main/store`, {
+        x: lon,
+        y: lat,
+        category: checkList
+    }, config);
+};
+
 // 카페 찜하기
 export const postLike = async (id, config) => {
     return await axios.post(`${PROXY}/main/store/${id}`, {}, config);

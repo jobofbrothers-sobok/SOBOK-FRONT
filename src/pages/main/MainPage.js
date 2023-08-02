@@ -32,13 +32,15 @@ import filterbtn from "../../asset/images/filter-arrow.svg";
 // 카페 예시 대표 이미지
 import CafeItem from "../../components/CafeItem";
 import { useNavigate } from "react-router-dom";
-import { getAllCafe } from "../../lib/api/main";
+import { getAllCafe, getOwnerAllCafe } from "../../lib/api/main";
 import { getCookie, setCookie } from "../../lib/cookie";
 
 
 
 const MainPage = () => {
 
+
+    const who = getCookie('who');
 
     const token = getCookie('token');
     console.log('토큰', token);
@@ -114,9 +116,17 @@ const MainPage = () => {
                     }
                 }
             }
-            getAllCafe(parseFloat(lon), parseFloat(lat), checkList, config)
-                .then((res) => { console.log(res); setCafeList(res.data.data); })
-                .catch((err) => { console.log(err); })
+            if (who === 'customer') {
+                getAllCafe(parseFloat(lon), parseFloat(lat), checkList, config)
+                    .then((res) => { console.log(res); setCafeList(res.data.data); })
+                    .catch((err) => { console.log(err); })
+            }
+            else if (who === 'owner') {
+                getOwnerAllCafe(parseFloat(lon), parseFloat(lat), checkList, config)
+                    .then((res) => { console.log(res); setCafeList(res.data.data); })
+                    .catch((err) => { console.log(err); })
+            }
+
         }
     }, [checkList, lon, lat]);
 
@@ -288,7 +298,7 @@ const MainPage = () => {
                                 distance={item.distance >= 1000 ? Math.round(item.distance / 1000) + 'km' : Math.round(item.distance) + 'm'}
                                 intro={item.description}
                                 tag={item.category}
-                                isLiked={item.isLiked}
+                                isLiked={item?.isLiked}
                                 onClick={() => navigation(`/detail/${item.id}`)}
                             />
                         </>)}

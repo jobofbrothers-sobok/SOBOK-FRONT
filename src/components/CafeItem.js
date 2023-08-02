@@ -11,6 +11,9 @@ const CafeItem = (props) => {
 
     const { id, title, distance, intro, tag, onClick, image, isLiked } = props;
 
+
+    const who = getCookie('who');
+
     // 좋아요 버튼
     console.log(isLiked);
     const [like, setLike] = useState(isLiked);
@@ -50,7 +53,8 @@ const CafeItem = (props) => {
         <ItemBox onClick={onClick}>
             <div className="imgBox">
                 <img className='cafe-img' src={image ? image : cafeImg} alt='카페대표이미지' onError={handleImgError} />
-                <HeartButton like={like} onClick={(event) => { event.stopPropagation(); handleHeartButton() }} />
+                {who === 'customer' ? <HeartButton like={like} onClick={(event) => { event.stopPropagation(); handleHeartButton() }} /> : <></>
+                }
             </div>
             <div className="cafe-summary">
                 <div className="cafe-title">{title}</div>
