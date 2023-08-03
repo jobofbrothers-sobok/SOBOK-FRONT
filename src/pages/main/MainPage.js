@@ -116,17 +116,18 @@ const MainPage = () => {
                     }
                 }
             }
-            if (who === 'customer' || who === 'manager') {
-                getAllCafe(parseFloat(lon), parseFloat(lat), checkList, config)
-                    .then((res) => { console.log(res); setCafeList(res.data.data); })
-                    .catch((err) => { console.log(err); })
-            }
-            else if (who === 'owner') {
+            // 점주 근처 카페 조회
+            if (who === 'owner') {
                 getOwnerAllCafe(parseFloat(lon), parseFloat(lat), checkList, config)
                     .then((res) => { console.log(res); setCafeList(res.data.data); })
                     .catch((err) => { console.log(err); })
             }
-
+            // 고객 근처 카페 조회 (최고관리자 포함)
+            else {
+                getAllCafe(parseFloat(lon), parseFloat(lat), checkList, config)
+                    .then((res) => { console.log(res); setCafeList(res.data.data); })
+                    .catch((err) => { console.log(err); })
+            }
         }
     }, [checkList, lon, lat]);
 
