@@ -85,7 +85,7 @@ const SideBar = (props) => {
                 &times;
               </button>
             </div>
-            {auth ? <div className="logout-btn" onClick={() => { removeCookie('token'); removeCookie('pending'); window.location.replace(`/`); }}>로그아웃</div> : null}
+            {auth ? <div className="logout-btn" onClick={() => { removeCookie('token'); removeCookie('pending'); removeCookie('who'); removeCookie('joinauth'); removeCookie('stampauth'); window.location.replace(`/`); }}>로그아웃</div> : null}
             <SearchBox value={keyword} onChange={(e) => setKeyword(e.target.value)} onClick={searchCafe} />
             <br />
             <SearchList>
@@ -118,10 +118,11 @@ const SideBar = (props) => {
                 카페 소식 모아보기
               </div>
               {
-                who !== 'manager' ? <div className="menu-item" onClick={auth ?
+                // 최고관리자이면 스탬프 서비스 메뉴 삭제
+                who === 'manager' && auth ? <></> : <div className="menu-item" onClick={auth ?
                   (who === 'customer' ? () => navigator('/stamp/customer') : (pending ? openModal : (stampAuth ? () => navigator('/stamp/owner') : () => navigator('/stamp/owner/no-approval')))) : openModal}>
                   스탬프 서비스
-                </div> : <></>
+                </div>
               }
               <div className="menu-item" onClick={() => navigator('/store')}>
                 소복 스토어
