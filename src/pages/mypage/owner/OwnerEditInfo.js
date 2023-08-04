@@ -40,12 +40,11 @@ const OwnerEditInfo = () => {
             headers: {
                 'Content-Type': `multipart/form-data`,
                 'Authorization': `Bearer ${getCookie('token')}`,
-                'withCredentials': true,
             }
         }
         await ownerEdit(pw, name, email, phone, address, detail, code, licenseImg, profile, config)
             .then((res) => { console.log(res); alert('회원정보가 성공적으로 수정되었습니다.'); setCookie('name', name) })
-            .catch((err) => { alert(err, '회원가입 실패'); })
+            .catch((err) => { alert(err, '회원정보 수정에 실패하였습니다'); })
     }
 
     return (
