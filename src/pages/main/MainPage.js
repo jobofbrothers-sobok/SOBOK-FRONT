@@ -283,10 +283,10 @@ const MainPage = () => {
                 <div className="category-container">
                     <div className="list-top-box">
                         <p className="category-title">내 근처 카페<span className="category-title2"> 찾기</span></p>
-                        <FilterBox name="category">
+                        {/* <FilterBox name="category">
                             <option value="event">숙명여대</option>
                             <option value="new-menu">경희대</option>
-                        </FilterBox>
+                        </FilterBox> */}
                     </div>
                     <hr /><br />
                     <div className="cafe-list">
