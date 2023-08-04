@@ -4,7 +4,7 @@ import newsImg from '../asset/images/news-item.png';
 
 const NewsItem = (props) => {
 
-    const { itemImg, title, content, tag, date } = props;
+    const { image, title, content, tag, date } = props;
 
     return (
         <ItemBox>

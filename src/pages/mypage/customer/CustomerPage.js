@@ -89,6 +89,7 @@ const CustomerPage = () => {
                                 nickname={name}
                                 content={item.content}
                                 date={item.timestamp.substr(0, 10)}
+                                image={`https://b.sobok.co.kr/${item.image}`}
                             />
                         )}
                     </div>

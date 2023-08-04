@@ -1,15 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../../components/common/NavBar";
 import BackButton from "../../../components/common/BackButton";
 import styled from "styled-components";
 import Footer from "../../../components/common/Footer";
 import CafeItem from "../../../components/CafeItem";
 import MoreButton from "../../../components/common/MoreButton";
+import { getCookie } from "../../../lib/cookie";
+import { getCustomerActivity } from "../../../lib/api/mypage";
+import { useNavigate } from "react-router-dom";
 
 const LikedCafeList = () => {
 
-    // 카페 리스트 임시
-    const array = [0, 1, 2, 3, 4];
+    const navigation = useNavigate();
+
+    const [likedCafe, setLikedCafe] = useState([]);
+
+    console.log(likedCafe);
+
+    const lat = getCookie('lat');
+    const lon = getCookie('lon');
+
+    const getActivity = async () => {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getCookie('token')}`,
+                'withCredentials': true,
+            }
+        }
+        const json = await getCustomerActivity(lon, lat, config);
+        console.log(json);
+        setLikedCafe(json.data.data.allLikeCafe);
+    };
+
+    useEffect(() => {
+        getActivity();
+    }, []);
+
 
     return (
         <>
@@ -21,13 +48,17 @@ const LikedCafeList = () => {
                     <p className="title">내가 찜한 카페</p>
                     <br /><br />
                     <div className="cafe-list">
-                        {array.map((item, index) => <>
+                        {likedCafe.map((item, index) => <>
                             <CafeItem
-                                key={item}
-                                title="페이브 베이커리"
-                                distance='55m'
-                                intro='흑석역 카페 뚜스뚜스 브런치도 파는 베이커리 카페'
-                                tag={['큰 테이블', '콘센트']}
+                                id={item.id}
+                                key={item.id}
+                                image={`https:/b.sobok.co.kr/${item.image}`}
+                                title={item.storeName}
+                                distance={item.distance >= 1000 ? Math.round(item.distance / 1000) + 'km' : Math.round(item.distance) + 'm'}
+                                intro={item.description}
+                                tag={item.category}
+                                isLiked={item.isLiked}
+                                onClick={() => navigation(`/detail/${item.id}`)}
                             />
                         </>)}
                     </div>

@@ -50,8 +50,6 @@ const CafeItem = (props) => {
         }
     }
 
-    console.log(image, noImg);
-
     return (
         <ItemBox onClick={onClick} >
             <div className="imgBox" >
