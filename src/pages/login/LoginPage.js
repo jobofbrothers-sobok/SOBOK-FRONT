@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import logo from "../../asset/images/sobok_logo_square_jua.png";
-import logo from "../../asset/images/sobok_new_logo.png"
+import logo from "../../asset/images/sobok_logo_square_jua.png";
+// import logo from "../../asset/images/sobok_new_logo.png"
 import "../../asset/fonts/font.css";
 import Button from "../../components/common/Button";
 import { useNavigate } from "react-router-dom";
@@ -40,7 +40,7 @@ const LoginPage = () => {
             <LoginContainer>
                 <br />
                 <div className="logo">
-                    <img src={logo} alt="소복 로고 이미지" style={{ width: "30vw", maxWidth: "200px" }} />
+                    <img src={logo} alt="소복 로고 이미지" style={{ width: "35vw", maxWidth: "200px" }} />
                 </div>
                 <div className="description"><span className="point">소</span>소한 행<span className="point">복</span>이 될 카페를 찾아드려요!</div>
                 <br /><br />
