@@ -21,6 +21,8 @@ const MemberDetail = () => {
     const [ownerInfo, setOwnerInfo] = useState('');
     const [clientInfo, setClientInfo] = useState('');
 
+    console.log(ownerInfo);
+
     // 점주 상세 정보
     const { store, director, phone, email, address, licenseNumber, licenseImage, authorized } = ownerInfo;
 
@@ -103,6 +105,7 @@ const MemberDetail = () => {
                                 </div>
                                 <div className="info-item">
                                     <p className="info-name">사업자 등록증</p>
+                                    <img src={`https://b.sobok.co.kr/${licenseImage}`} />
                                 </div>
                             </>
                             :

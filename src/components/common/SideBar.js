@@ -68,7 +68,7 @@ const SideBar = (props) => {
   }
 
 
-  console.log(who);
+  console.log('who =', who);
 
 
   // 카페 리스트 임시

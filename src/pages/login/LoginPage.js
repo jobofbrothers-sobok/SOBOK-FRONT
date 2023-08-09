@@ -28,12 +28,10 @@ const LoginPage = () => {
 
     const onHandleId = (e) => {
         setId(e.target.value);
-        console.log(id);
     }
 
     const onHandlePasswd = (e) => {
         setPasswd(e.target.value);
-        console.log(pw);
     }
 
     return (
