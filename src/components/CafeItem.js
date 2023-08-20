@@ -59,18 +59,18 @@ const CafeItem = (props) => {
                 }
                 {/* </ImgBox> */}
             </div>
-            <div className="cafe-summary">
+            <div div className="cafe-summary" >
                 <div className="cafe-title">{title}</div>
                 <div className="cafe-loc">
                     <img src={locMark} alt="위치아이콘" width="13px" />
                     {distance}
                 </div>
-            </div>
+            </div >
             <div className="cafe-desc">{intro}</div>
             <div className="tag-list">
                 {tag.slice(0, 3).map((item, index) => <div className="tag-wrap" key={index}>{item}</div>)}
             </div>
-        </ItemBox>
+        </ItemBox >
     )
 }
 
@@ -87,14 +87,16 @@ export default CafeItem;
 // `
 
 const ItemBox = styled.div`
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 5px;
     .imgBox{
+        box-sizing: border-box;
         width: 100%;
         height: 160px;
         position: relative;
-        overflow: hidden;
         margin: 0 auto;
     }
     .cafe-img{
@@ -104,6 +106,8 @@ const ItemBox = styled.div`
         border-radius: 5px;
     }
     .cafe-summary{
+        width: 100%;
+        box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -126,6 +130,7 @@ const ItemBox = styled.div`
     }
     .tag-list{
         display: flex;
+        flex-wrap: wrap;
         gap: 5px;
     }
     .tag-wrap{
