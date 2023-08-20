@@ -2,14 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import newsImg from "../asset/images/news-item.png";
 import profileImg from "../asset/images/sobok-face.svg";
+import noImg from "../asset/images/noImg.svg";
 
 const ReviewItem = (props) => {
 
     const { image, nickname, date, content } = props;
 
+    // 대체 이미지 설정
+    const handleImgError = (e) => {
+        e.target.src = noImg
+    }
+
     return (
         <ItemBox>
-            <img src={image ? image : newsImg} alt="리뷰 이미지" />
+            <img src={image ? image : newsImg} alt="리뷰 이미지" onError={handleImgError} />
             <p className="review-content">{content}</p>
             <div className="user-box">
                 <div className="profile">
@@ -28,8 +34,10 @@ const ItemBox = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
-    .review-item > img {
+    > img {
         width: 100%;
+        height: 200px;
+        object-fit: cover;
     }
     .review-content{
         color: #7F7F7F;

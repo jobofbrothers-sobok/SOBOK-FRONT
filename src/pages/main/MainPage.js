@@ -290,7 +290,7 @@ const MainPage = () => {
                     </div>
                     <hr /><br />
                     <div className="cafe-list">
-                        {cafeList.map((item, index) => <>
+                        {cafeList.map((item) =>
                             <CafeItem
                                 id={item.id}
                                 key={item.id}
@@ -302,7 +302,7 @@ const MainPage = () => {
                                 isLiked={item?.isLiked}
                                 onClick={() => navigation(`/detail/${item.id}`)}
                             />
-                        </>)}
+                        )}
                     </div>
                 </div>
                 <MoreButton />
@@ -382,6 +382,7 @@ const Container = styled.div`
         margin-bottom: 8px;
     }
     .cafe-list{
+        box-sizing: border-box;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;

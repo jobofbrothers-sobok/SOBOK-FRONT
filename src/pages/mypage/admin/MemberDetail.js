@@ -26,6 +26,8 @@ const MemberDetail = () => {
     // 점주 상세 정보
     const { store, director, phone, email, address, licenseNumber, licenseImage, authorized } = ownerInfo;
 
+    console.log(`https://b.sobok.co.kr/${licenseImage}`);
+
     // 고객 상세 정보
     const { name, stampCount, couponCount } = clientInfo;
 

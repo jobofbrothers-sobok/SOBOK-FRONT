@@ -52,6 +52,7 @@ const CafeNews = (props) => {
                         content={item.content}
                         tag={item.category}
                         date={item.createdTime.substr(0, 10)}
+                        image={`https://b.sobok.co.kr/${item.image}`}
                     />
                 )}
             </NewsList>

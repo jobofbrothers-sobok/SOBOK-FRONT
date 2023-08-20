@@ -1,13 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import noImg from "../asset/images/noImg.svg";
 
 const StoreItem = (props) => {
 
-    const { img, name, info, discount, price, original } = props;
+    const { image, name, info, discount, price, original } = props;
+
+    // 대체 이미지 설정
+    const handleImgError = (e) => {
+        e.target.src = noImg
+    }
 
     return (
         <ItemBox>
-            <img className="item-img" src={img} alt="아이템이미지" />
+            <img className="item-img" src={image ? image : noImg} alt="아이템이미지" onError={handleImgError} />
             <div className="name">{name}</div>
             <div className="info">{info}</div>
             <div className="price-wrap">
@@ -27,6 +33,8 @@ const ItemBox = styled.div`
     gap: 5px;
     .item-img{
         width: 100%;
+        height: 140px;
+        object-fit: cover;
     }
     .name{
         font-size: 16px;

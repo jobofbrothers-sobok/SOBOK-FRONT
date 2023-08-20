@@ -58,7 +58,7 @@ const CafeDetail = () => {
             <NavBar />
             <Container>
                 <Swiper
-                    style={{ height: '200px' }}
+                    style={{ height: '200px', objectFit: 'cover' }}
                     className="swiper"
                     modules={[Navigation, Pagination, Scrollbar]}
                     slidesPerView={1}
