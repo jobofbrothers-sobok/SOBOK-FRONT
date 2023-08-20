@@ -42,7 +42,7 @@ const LoginPage = () => {
                 <div className="logo">
                     <img src={logo} alt="소복 로고 이미지" style={{ width: "35vw", maxWidth: "200px" }} />
                 </div>
-                <div className="description"><span className="point">소</span>소한 행<span className="point">복</span>이 될 카페를 찾아드려요!</div>
+                <div className="description"><span className="point">소</span>{isOwner ? '상공인의 행' : '소한 행'}<span className="point">복</span>이 될 카페를 찾아드려요!</div>
                 <br /><br />
                 <div className="login-form">
                     <p>아이디</p>
