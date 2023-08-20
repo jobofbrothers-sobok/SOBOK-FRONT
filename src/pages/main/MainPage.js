@@ -34,6 +34,7 @@ import CafeItem from "../../components/CafeItem";
 import { useNavigate } from "react-router-dom";
 import { getAllCafe, getOwnerAllCafe } from "../../lib/api/main";
 import { getCookie, setCookie } from "../../lib/cookie";
+import MainPopup from "../../components/MainPopup";
 
 
 
@@ -135,7 +136,8 @@ const MainPage = () => {
 
 
     return (
-        <>
+        <>  
+            <MainPopup />
             <NavBar />
             <Container>
                 <div className="hero_main">
