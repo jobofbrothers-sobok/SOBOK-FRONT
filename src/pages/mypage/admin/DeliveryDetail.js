@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import dummy from "../../../data/data.json";
 import styled from "styled-components";
 import NavBar from "../../../components/common/NavBar";
@@ -17,6 +17,8 @@ const DeliveryDetail = () => {
     const [deliveryInfo, setDeliveryInfo] = useState('');
 
     const { reward, customer, phone, address, detailAddress, message } = deliveryInfo;
+
+    const navigation = useNavigate();
 
 
     // 고객 상세 정보 조회
@@ -71,7 +73,7 @@ const DeliveryDetail = () => {
                 </div>
                 <br />
                 <div className="button-box">
-                    <Button text="목록으로" color="#7F7F7F" />
+                    <Button text="목록으로" color="#7F7F7F" onClick={() => navigation('/admin/menu/3')} />
                     <Button text="완료" />
                 </div>
             </Container>
