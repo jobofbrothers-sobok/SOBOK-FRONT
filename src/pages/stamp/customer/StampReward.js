@@ -64,7 +64,7 @@ const StampReward = () => {
                 <br />
                 <img src={rewardImg} alt="리워드이미지" />
                 <br />
-                <Button text='리워드 신청하기' color='#7F7F7F' onClick={stampList.length === 9 ? () => navigator(`/stamp/customer/reward/form/${tag}`) : () => alert('스탬프 9개를 모은 후, 리워드 신청이 가능합니다.')} />
+                <Button text='리워드 신청하기' color={stampList.length === 9 ? '#FF9F74' : '#7F7F7F'} onClick={stampList.length === 9 ? () => navigator(`/stamp/customer/reward/form/${tag}`) : () => alert('스탬프 9개를 모은 후, 리워드 신청이 가능합니다.')} />
             </Container>
             <Footer />
         </>
