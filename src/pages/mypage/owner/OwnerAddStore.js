@@ -11,6 +11,7 @@ const OwnerAddStore = () => {
     const id = getCookie('storeId');
     const [category, setCategory] = useState('커피원두');
     const [name, setName] = useState('');
+    const [original, setOriginal] = useState('');
     const [price, setPrice] = useState('');
     const [discountPrice, setDiscount] = useState('');
     const [url, setUrl] = useState('');
@@ -43,10 +44,12 @@ const OwnerAddStore = () => {
                     <br />
                     <p>상품명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={(e) => setName(e.target.value)} />
-                    <p>가격<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" onChange={(e) => setPrice(e.target.value)} />
-                    <p>할인가<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
+                    <p>원가<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
+                    <input type="text" onChange={(e) => setOriginal(e.target.value)} />
+                    <p>할인율<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={(e) => setDiscount(e.target.value)} />
+                    <p>할인가<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
+                    <input type="text" onChange={(e) => setPrice(e.target.value)} />
                     <p>판매중인 상품 URL<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={(e) => setUrl(e.target.value)} />
                     <p>상품 이미지<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
