@@ -45,7 +45,7 @@ const DeliveryList = () => {
                             id={item.id}
                             title={item.customer}
                             category={item.reward}
-                            onClick={() => navigator(`/admin/menu/4/detail/${item.id}`)}
+                            onClick={() => navigator(`/admin/menu/3/detail/${item.id}`)}
                         />
                     ))}
                 </div>

@@ -37,7 +37,7 @@ const StampInfoList = () => {
             <Container>
                 <p className="title">스탬프 정보 리스트</p>
                 <br />
-                <Button text="생성하기" color="#FF9F74" radius="5px" height="50px" onClick={() => navigator('/admin/menu/2/add-stamp-tour')} />
+                <Button text="생성하기" color="#FF9F74" radius="5px" height="50px" onClick={() => navigator('/admin/menu/1/add-stamp-tour')} />
                 <br />
                 <SearchBox />
                 <div className='apply-list'>

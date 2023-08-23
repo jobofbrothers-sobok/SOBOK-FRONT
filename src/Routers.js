@@ -59,9 +59,9 @@ const Routers = () => {
                 <Route element={<AdminPage />} path='/admin' />
                 <Route element={<AdminMenuDetail />} path='/admin/menu/:id' />
                 <Route element={<MemberDetail />} path='/admin/menu/0/member/:id' />
-                <Route element={<AddStampTour />} path='/admin/menu/2/add-stamp-tour' />
-                <Route element={<ManagerDetail />} path='/admin/menu/3/detail/:id' />
-                <Route element={<DeliveryDetail />} path='/admin/menu/4/detail/:id' />
+                <Route element={<AddStampTour />} path='/admin/menu/1/add-stamp-tour' />
+                <Route element={<ManagerDetail />} path='/admin/menu/2/detail/:id' />
+                <Route element={<DeliveryDetail />} path='/admin/menu/3/detail/:id' />
                 <Route element={<StampMemberDetail />} path='/admin/menu/6/member/:id' />
 
                 {/* 점주 마이페이지 */}

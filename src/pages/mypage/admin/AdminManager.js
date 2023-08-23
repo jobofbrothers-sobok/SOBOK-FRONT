@@ -47,7 +47,7 @@ const AdminManager = () => {
                             category={(item.isMessage ? '문자' : '카톡') + ' / ' + item.category}
                             date={item.timestamp.substr(0, 10)}
                             isActive={true}
-                            onClick={() => navigator(`/admin/menu/3/detail/${item.id}`)}
+                            onClick={() => navigator(`/admin/menu/2/detail/${item.id}`)}
                         />
                     ))}
                 </div>
