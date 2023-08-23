@@ -4,7 +4,7 @@ import noImg from "../asset/images/noImg.svg";
 
 const StoreItem = (props) => {
 
-    const { image, name, info, discount, price, original } = props;
+    const { image, name, info, discount, price, original, url } = props;
 
     // 대체 이미지 설정
     const handleImgError = (e) => {
@@ -12,7 +12,7 @@ const StoreItem = (props) => {
     }
 
     return (
-        <ItemBox>
+        <ItemBox onClick={() => window.open(url, '_blank')}>
             <img className="item-img" src={image ? image : noImg} alt="아이템이미지" onError={handleImgError} />
             <div className="name">{name}</div>
             <div className="info">{info}</div>

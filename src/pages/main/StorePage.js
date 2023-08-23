@@ -59,7 +59,9 @@ const StorePage = () => {
                             info="뚜스뚜스에서 매일 아침 직접 구운 세상에서 가장 맛있는 쿠키..."
                             discount={item.discountPrice}
                             price={item.price}
-                            original="20,000" />)
+                            original="20,000"
+                            url={item.url}
+                        />)
                     }
                 </StoreList>
                 <MoreButton />
