@@ -68,7 +68,7 @@ const CafeItem = (props) => {
             </div >
             <div className="cafe-desc">{intro}</div>
             <div className="tag-list">
-                {tag.slice(0, 3).map((item, index) => <div className="tag-wrap" key={index}>{item}</div>)}
+                {tag.slice(0, 3).map((item, index) => <div className="tag-wrap" key={index}>{item === 'concent' ? '콘센트' : item === 'table' ? '테이블' : item === 'park' ? '주차장' : item === 'dog' ? '애견동반' : item === 'window' ? '통유리' : item === 'cigarette' ? '흡연실' : item === 'nokids' ? '노키즈' : item === 'sofa' ? '쇼파' : item === 'rooftop' ? '루프탑' : null}</div>)}
             </div>
         </ItemBox >
     )
