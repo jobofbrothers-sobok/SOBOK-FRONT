@@ -6,6 +6,7 @@ import message from "../../../asset/images/messageIcon.svg";
 import filterbtn from "../../../asset/images/filter-arrow.svg";
 import { postManagerForm } from "../../../lib/api/mypage";
 import { getCookie } from "../../../lib/cookie";
+import { useNavigate } from "react-router-dom";
 
 const OwnerManager = () => {
 
@@ -13,6 +14,8 @@ const OwnerManager = () => {
     const [isMessage, setMessage] = useState(false);
     const [isKakao, setKakao] = useState(false);
     const [content, setContent] = useState('');
+
+    const navigation = useNavigate();
 
     const postManager = async () => {
         let config = {
@@ -23,7 +26,7 @@ const OwnerManager = () => {
             }
         }
         await postManagerForm(category, content, isMessage, isKakao, config)
-            .then((res) => { console.log(res); alert('소복매니저 신청 완료되었습니다.') })
+            .then((res) => { console.log(res); alert('소복매니저 신청 완료되었습니다.'); navigation('/owner'); })
             .catch((err) => { console.log(err); alert('소복매니저 신청 실패하였습니다.') })
     }
 

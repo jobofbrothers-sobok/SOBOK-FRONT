@@ -4,6 +4,7 @@ import InputBox from "../../../components/common/InputBox";
 import Button from "../../../components/common/Button";
 import { postNotice } from "../../../lib/api/admin";
 import { getCookie } from "../../../lib/cookie";
+import { useNavigate } from "react-router-dom";
 
 const AddNotice = () => {
 
@@ -18,9 +19,12 @@ const AddNotice = () => {
             'withCredentials': true,
         }
     }
+
+    const navigation = useNavigate();
+
     const postNoticeForm = async () => {
         await postNotice(title, content, file, config)
-            .then((res) => { console.log(res); alert('공지글을 성공적으로 등록하였습니다.') })
+            .then((res) => { console.log(res); alert('공지글을 성공적으로 등록하였습니다.'); navigation('/admin'); })
             .catch((err) => { console.log(err); alert('공지글을 등록에 실패하였습니다.') })
     }
 

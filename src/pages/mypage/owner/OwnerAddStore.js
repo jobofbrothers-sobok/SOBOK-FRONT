@@ -4,6 +4,7 @@ import filterbtn from "../../../asset/images/filter-arrow.svg";
 import Button from "../../../components/common/Button";
 import { ownerAddProduct } from "../../../lib/api/mypage";
 import { getCookie, setCookie } from "../../../lib/cookie";
+import { useNavigate } from "react-router-dom";
 
 const OwnerAddStore = () => {
 
@@ -17,6 +18,8 @@ const OwnerAddStore = () => {
     const [url, setUrl] = useState('');
     const [file, setFile] = useState('');
 
+    const navigation = useNavigate();
+
     const onAddProduct = () => {
         let config = {
             headers: {
@@ -26,7 +29,7 @@ const OwnerAddStore = () => {
             }
         };
         ownerAddProduct(id, category, name, price, discountPrice, url, file, config)
-            .then((res) => { console.log(res); alert('스토어 상품을 성공적으로 등록하였습니다.') })
+            .then((res) => { console.log(res); alert('스토어 상품을 성공적으로 등록하였습니다.'); navigation('/owner'); })
             .catch((err) => { console.log(err); alert('스토어 상품 등록에 실패하였습니다.') })
     }
 

@@ -4,6 +4,7 @@ import filterbtn from "../../../asset/images/filter-arrow.svg";
 import Button from "../../../components/common/Button";
 import { ownerAddNews } from "../../../lib/api/mypage";
 import { getCookie } from "../../../lib/cookie";
+import { useNavigate } from "react-router-dom";
 
 const OwnerAddNews = () => {
 
@@ -12,6 +13,8 @@ const OwnerAddNews = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [image, setImage] = useState();
+
+    const navigation = useNavigate();
 
     const onAddNews = () => {
         let config = {
@@ -22,7 +25,7 @@ const OwnerAddNews = () => {
             }
         }
         ownerAddNews(id, category, title, content, image, config)
-            .then((res) => { console.log(res); alert('소식이 성공적으로 추가되었습니다.') })
+            .then((res) => { console.log(res); alert('소식이 성공적으로 추가되었습니다.'); navigation('/owner'); })
             .catch((err) => { console.log(err); alert('소식 추가에 실패하였습니다.') })
     }
 

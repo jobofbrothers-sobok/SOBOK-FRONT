@@ -9,6 +9,7 @@ import InputBox from "./common/InputBox";
 import isLogin from "../lib/router/isLogin";
 import { getCafeReviews, postReview } from "../lib/api/main";
 import { getCookie } from "../lib/cookie";
+import { useNavigate } from "react-router-dom";
 
 const CafeReview = (props) => {
 
@@ -22,9 +23,6 @@ const CafeReview = (props) => {
 
     // 로그인 유무
     const auth = isLogin();
-
-    // 임시 배열
-    const array1 = [0, 0, 0];
 
     // 모달 관련
     const [modalOpen, setModalOpen] = useState(false);
@@ -61,7 +59,7 @@ const CafeReview = (props) => {
             }
         };
         await postReview(id, title, content, file, config)
-            .then((res) => { console.log(res); alert('리뷰가 성공적으로 등록되었습니다.') })
+            .then((res) => { console.log(res); alert('리뷰가 성공적으로 등록되었습니다.'); window.location.reload(); })
             .catch((err) => { console.log(err); alert('리뷰 등록에 실패하였습니다.') });
     }
 

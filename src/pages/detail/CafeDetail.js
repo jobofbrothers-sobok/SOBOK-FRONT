@@ -16,10 +16,14 @@ import 'swiper/components/pagination/pagination.min.css'
 import { useParams } from "react-router-dom";
 import { getCafeInfo } from "../../lib/api/main";
 import noImg from '../../asset/images/noImg.svg';
+import { getCookie, setCookie } from "../../lib/cookie";
 
 const CafeDetail = () => {
 
-    const [tabMenu, setTabMenu] = useState("정보");
+    const history = getCookie('detailtag');
+    console.log(history);
+
+    const [tabMenu, setTabMenu] = useState(history);
 
     const { id } = useParams();
     const storeId = id;
@@ -74,16 +78,16 @@ const CafeDetail = () => {
 
                 {/* menu container */}
                 <div className="menu-container">
-                    <TabMenuItem className={tabMenu === '정보' ? 'active' : ''} onClick={() => setTabMenu('정보')}>
+                    <TabMenuItem className={tabMenu === '정보' ? 'active' : ''} onClick={() => { setCookie('detailtag', '정보'); setTabMenu('정보'); }}>
                         정보
                     </TabMenuItem>
-                    <TabMenuItem className={tabMenu === '소식' ? 'active' : ''} onClick={() => setTabMenu('소식')}>
+                    <TabMenuItem className={tabMenu === '소식' ? 'active' : ''} onClick={() => { setCookie('detailtag', '소식'); setTabMenu('소식'); }}>
                         소식
                     </TabMenuItem>
-                    <TabMenuItem className={tabMenu === '메뉴' ? 'active' : ''} onClick={() => setTabMenu('메뉴')}>
+                    <TabMenuItem className={tabMenu === '메뉴' ? 'active' : ''} onClick={() => { setCookie('detailtag', '메뉴'); setTabMenu('메뉴'); }}>
                         메뉴
                     </TabMenuItem>
-                    <TabMenuItem className={tabMenu === '리뷰' ? 'active' : ''} onClick={() => setTabMenu('리뷰')}>
+                    <TabMenuItem className={tabMenu === '리뷰' ? 'active' : ''} onClick={() => { setCookie('detailtag', '리뷰'); setTabMenu('리뷰'); }}>
                         리뷰
                     </TabMenuItem>
                 </div>

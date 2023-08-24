@@ -10,6 +10,7 @@ import Modal from "../../../components/common/Modal";
 import { postStampTour, searchStore } from "../../../lib/api/admin";
 import { getCookie } from "../../../lib/cookie";
 import dummy from "../../../data/data.json";
+import { useNavigate } from "react-router-dom";
 
 const AddStampTour = () => {
 
@@ -66,6 +67,8 @@ const AddStampTour = () => {
         setCheckList(checkList.filter((choice) => choice !== item));
     };
 
+    const navigation = useNavigate();
+
     const postStampTourForm = async () => {
         let config = {
             headers: {
@@ -74,7 +77,7 @@ const AddStampTour = () => {
             }
         };
         await postStampTour(keyword, title, reward, checkList, file, config)
-            .then((res) => { console.log(res); alert('스탬프 투어가 성공적으로 등록되었습니다.') })
+            .then((res) => { console.log(res); alert('스탬프 투어가 성공적으로 등록되었습니다.'); navigation('/admin/menu/1'); })
             .catch((err) => { console.log(err); alert('스탬프 투어 등록에 실패하였습니다.') });
     };
 

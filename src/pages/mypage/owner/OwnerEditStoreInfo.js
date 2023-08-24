@@ -24,6 +24,7 @@ import rooftop from "../../../asset/images/category/rooftop.svg";
 import rooftop2 from "../../../asset/images/category/rooftop2.svg";
 import { ownerAddStore } from "../../../lib/api/mypage";
 import { getCookie, setCookie } from "../../../lib/cookie";
+import { useNavigate } from "react-router-dom";
 
 
 const OwnerEditStoreInfo = () => {
@@ -52,6 +53,7 @@ const OwnerEditStoreInfo = () => {
             : setCheckList(checkList.filter((choice) => choice !== e.target.value))
     }
 
+    const navigation = useNavigate();
 
     const onAddStore = () => {
         let config = {
@@ -64,7 +66,7 @@ const OwnerEditStoreInfo = () => {
         let checkString = checkList.join();
         console.log(checkString);
         ownerAddStore(store, summary, time, dayOff, link, image, checkString, config)
-            .then((res) => { console.log(res); alert('매장이 성공적으로 등록되었습니다.'); })
+            .then((res) => { console.log(res); alert('매장이 성공적으로 등록되었습니다.'); navigation('/owner'); })
             .catch((err) => { console.log(err); alert('매장 등록에 실패하였습니다.') })
     }
 

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../../../components/common/Button";
 import { getCookie } from "../../../lib/cookie";
 import { ownerAddMenu } from "../../../lib/api/mypage";
+import { useNavigate } from "react-router-dom";
 
 const OwnerAddMenu = () => {
 
@@ -12,6 +13,7 @@ const OwnerAddMenu = () => {
     const [file, setFile] = useState();
     console.log(id);
 
+    const navigation = useNavigate();
 
     const onAddMenu = () => {
         console.log('클릭');
@@ -24,7 +26,7 @@ const OwnerAddMenu = () => {
         };
         console.log('클릭2');
         ownerAddMenu(id, title, content, file, config)
-            .then((res) => { console.log(res); alert('메뉴를 성공적으로 등록하였습니다.') })
+            .then((res) => { console.log(res); alert('메뉴를 성공적으로 등록하였습니다.'); navigation('/owner'); })
             .catch((err) => { console.log(err); alert('메뉴 등록에 실패하였습니다.') })
         console.log('클릭3');
     }

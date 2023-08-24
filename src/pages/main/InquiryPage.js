@@ -17,7 +17,7 @@ const InquiryPage = () => {
     const user = getCookie('who');
     console.log(user);
 
-    const navigator = useNavigate();
+    const navigation = useNavigate();
 
     // 문의사항 등록 함수
     const postInquiryForm = async () => {
@@ -28,8 +28,8 @@ const InquiryPage = () => {
             }
         }
         await postInquiry(user, title, content, config)
-            .then((res) => { console.log(res); alert('문의사항 등록에 성공했습니다.') })
-            .catch((err) => { console.log(err); alert('문의사항 등록에 실패했습니다.') })
+            .then((res) => { console.log(res); alert('문의사항 등록에 성공했습니다.'); navigation('/') })
+            .catch((err) => { console.log(err); alert('문의사항 등록에 실패했습니다.'); })
     };
 
     return (

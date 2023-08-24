@@ -5,6 +5,7 @@ import { getCookie, setCookie } from "../../../lib/cookie";
 import { ownerEdit } from "../../../lib/api/mypage";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import Modal from "../../../components/common/Modal";
+import { useNavigate } from "react-router-dom";
 
 const OwnerEditInfo = () => {
 
@@ -35,6 +36,8 @@ const OwnerEditInfo = () => {
         closeModal();
     }
 
+    const navigation = useNavigate();
+
     const onEditInfo = async () => {
         let config = {
             headers: {
@@ -43,7 +46,7 @@ const OwnerEditInfo = () => {
             }
         }
         await ownerEdit(pw, name, email, phone, address, detail, code, licenseImg, profile, config)
-            .then((res) => { console.log(res); alert('회원정보가 성공적으로 수정되었습니다.'); setCookie('name', name) })
+            .then((res) => { console.log(res); alert('회원정보가 성공적으로 수정되었습니다.'); setCookie('name', name); navigation('/owner'); })
             .catch((err) => { alert(err, '회원정보 수정에 실패하였습니다'); })
     }
 
