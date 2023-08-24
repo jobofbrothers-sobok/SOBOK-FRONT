@@ -23,7 +23,7 @@ export const getAllCafe = async (lon, lat, checkList, config) => {
 
 // 점주 카페 전체 조회
 export const getOwnerAllCafe = async (lon, lat, checkList, config) => {
-    return await axios.post(`${PROXY}/main/store`, {
+    return await axios.post(`${PROXY}/main/store/owner`, {
         x: lon,
         y: lat,
         category: checkList
