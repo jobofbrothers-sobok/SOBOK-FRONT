@@ -5,12 +5,12 @@ import ListItem from '../../../components/common/ListItem';
 import MoreButton from '../../../components/common/MoreButton';
 import { getInquiry } from '../../../lib/api/admin';
 import { getCookie } from '../../../lib/cookie';
+import { useNavigate } from 'react-router-dom';
 
 const InquiriesList = () => {
 
     const [inquiry, setInquiry] = useState([]);
 
-    // 스토어 상품 정보 가져오기
     const getInquiryList = async () => {
         let config = {
             headers: {
@@ -22,6 +22,8 @@ const InquiriesList = () => {
         console.log(json);
         setInquiry(json.data.data);
     };
+
+    const navigation = useNavigate();
 
     useEffect(() => {
         getInquiryList();
@@ -41,6 +43,7 @@ const InquiriesList = () => {
                             title={item.title}
                             category={item.who + " / " + item.name + " / " + item.phone}
                             date={item.timestamp.substr(0, 10)}
+                            onClick={() => navigation(`/admin/menu/5/detail/${item.id}`)}
                         />
                     ))}
                 </div>

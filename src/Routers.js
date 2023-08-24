@@ -35,6 +35,7 @@ import NoticeDetail from "./pages/main/NoticeDetail";
 import InquiryPage from "./pages/main/InquiryPage";
 import AgreePage from "./pages/login/AgreePage";
 import StampMemberDetail from "./pages/mypage/admin/StampMemberDetail";
+import InquiryDetail from "./pages/mypage/admin/InquiryDetail";
 
 const Routers = () => {
     return (
@@ -62,6 +63,7 @@ const Routers = () => {
                 <Route element={<AddStampTour />} path='/admin/menu/1/add-stamp-tour' />
                 <Route element={<ManagerDetail />} path='/admin/menu/2/detail/:id' />
                 <Route element={<DeliveryDetail />} path='/admin/menu/3/detail/:id' />
+                <Route element={<InquiryDetail />} path='/admin/menu/5/detail/:id' />
                 <Route element={<StampMemberDetail />} path='/admin/menu/6/member/:id' />
 
                 {/* 점주 마이페이지 */}
