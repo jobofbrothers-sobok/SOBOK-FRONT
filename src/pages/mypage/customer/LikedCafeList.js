@@ -52,7 +52,7 @@ const LikedCafeList = () => {
                             <CafeItem
                                 id={item.id}
                                 key={item.id}
-                                image={`https:/b.sobok.co.kr/${item.image}`}
+                                image={`https://b.sobok.co.kr/${item.image}`}
                                 title={item.storeName}
                                 distance={item.distance >= 1000 ? Math.round(item.distance / 1000) + 'km' : Math.round(item.distance) + 'm'}
                                 intro={item.description}
