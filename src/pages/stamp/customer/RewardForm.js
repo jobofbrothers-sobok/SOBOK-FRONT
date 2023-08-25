@@ -63,8 +63,8 @@ const RewardForm = () => {
 
     const postRewardForm = () => {
         postDelivery(reward, name, tel, address, detail, message, config)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
+            .then((res) => { console.log(res); alert('배송 신청이 완료되었습니다.'); navigator('/stamp/customer/reward') })
+            .catch((err) => { console.log(err); alert('배송 신청에 실패하였습니다.') });
     }
     return (
         <>
