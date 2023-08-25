@@ -13,7 +13,6 @@ const EditCustomerInfo = () => {
         headers: {
             'Content-Type': `multipart/form-data`,
             'Authorization': `Bearer ${getCookie('token')}`,
-            'withCredentials': true,
         }
     }
 
@@ -26,9 +25,9 @@ const EditCustomerInfo = () => {
 
 
     const onEditInfo = async () => {
-        await customerEdit(pw, name, email, phone, file)
-            .then((res) => { console.log(res); alert('회원정보가 성공적으로 수정되었습니다.'); setCookie('name', name); })
-            .catch((err) => { alert(err, '회원가입 실패'); })
+        await customerEdit(pw, name, email, phone, file, config)
+            .then((res) => { console.log(res); alert('회원정보가 성공적으로 수정되었습니다.'); setCookie('name', name); navigation(`/customer`); })
+            .catch((err) => { alert(err, '회원정보 수정 실패'); })
     }
 
     const navigation = useNavigate();

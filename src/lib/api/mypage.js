@@ -18,7 +18,7 @@ export const getCustomerActivity = async (lat, lon, config) => {
 }
 
 // 고객 회원 정보 수정
-export const customerEdit = async (pw, name, email, phone, file) => {
+export const customerEdit = async (pw, name, email, phone, file, config) => {
     let formData = new FormData();
     formData.append('password', pw);
     formData.append('name', name);
