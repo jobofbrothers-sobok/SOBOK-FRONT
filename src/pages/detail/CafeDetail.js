@@ -23,7 +23,7 @@ const CafeDetail = () => {
     const history = getCookie('detailtag');
     console.log(history);
 
-    const [tabMenu, setTabMenu] = useState(history);
+    const [tabMenu, setTabMenu] = useState(history ? history : '정보');
 
     const { id } = useParams();
     const storeId = id;
