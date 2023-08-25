@@ -33,7 +33,7 @@ const CafeInfo = (props) => {
                     {category?.map((item) =>
                         <div className="category-item">
                             <img src={`/image/${item}2.svg`} alt="카테고리이미지" />
-                            <p>{item}</p>
+                            <p>{item === 'concent' ? '콘센트' : item === 'table' ? '테이블' : item === 'park' ? '주차장' : item === 'dog' ? '애견동반' : item === 'window' ? '통유리' : item === 'cigarette' ? '흡연실' : item === 'nokids' ? '노키즈' : item === 'sofa' ? '쇼파' : item === 'rooftop' ? '루프탑' : null}</p>
                         </div>
                     )}
                 </div>
