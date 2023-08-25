@@ -16,6 +16,10 @@ const StampReward = () => {
 
     const [stampList, setStamp] = useState([]);
 
+    const inquiryCount = stampList[0]?.inquiryCount;
+    console.log(stampList);
+    console.log(stampList[0]?.inquiryCount);
+
     let config = {
         headers: {
             'Content-Type': 'application/json',
@@ -64,7 +68,7 @@ const StampReward = () => {
                 <br />
                 <img src={rewardImg} alt="리워드이미지" />
                 <br />
-                <Button text='리워드 신청하기' color={stampList.length === 9 ? '#FF9F74' : '#7F7F7F'} onClick={stampList.length === 9 ? () => navigator(`/stamp/customer/reward/form/${tag}`) : () => alert('스탬프 9개를 모은 후, 리워드 신청이 가능합니다.')} />
+                <Button text='리워드 신청하기' color={stampList.length === 9 && inquiryCount === 0 ? '#FF9F74' : '#7F7F7F'} onClick={stampList.length === 9 && inquiryCount === 0 ? () => navigator(`/stamp/customer/reward/form/${tag}`) : stampList.length === 9 && inquiryCount !== 0 ? () => alert('이미 배송 신청이 완료된 투어 상품입니다.') : () => alert('스탬프 9개를 모은 후, 리워드 신청이 가능합니다.')} />
             </Container>
             <Footer />
         </>
