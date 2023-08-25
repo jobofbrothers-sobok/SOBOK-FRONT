@@ -57,9 +57,9 @@ const StorePage = () => {
                             image={`https://b.sobok.co.kr/${item.image}`}
                             name={item.name}
                             info="뚜스뚜스에서 매일 아침 직접 구운 세상에서 가장 맛있는 쿠키..."
-                            discount={item.discountPrice}
-                            price={item.price}
-                            original="20,000"
+                            price={item.discountPrice}
+                            original={item.price}
+                            discount={Math.round((1 - (Number(item.discountPrice) / Number(item.price))) * 100)}
                             url={item.url}
                         />)
                     }

@@ -12,7 +12,6 @@ const OwnerAddStore = () => {
     const id = getCookie('storeId');
     const [category, setCategory] = useState('커피원두');
     const [name, setName] = useState('');
-    const [original, setOriginal] = useState('');
     const [price, setPrice] = useState('');
     const [discountPrice, setDiscount] = useState('');
     const [url, setUrl] = useState('');
@@ -20,17 +19,24 @@ const OwnerAddStore = () => {
 
     const navigation = useNavigate();
 
+    // 원가, 할인가 숫자인지 아닌지 확인 함수
+    const isNumeric = n => !!Number(n);
+
     const onAddProduct = () => {
         let config = {
             headers: {
                 'Content-Type': `multipart/form-data`,
                 'Authorization': `Bearer ${getCookie('token')}`,
-                'withCredentials': true,
             }
         };
-        ownerAddProduct(id, category, name, price, discountPrice, url, file, config)
-            .then((res) => { console.log(res); alert('스토어 상품을 성공적으로 등록하였습니다.'); navigation('/owner'); })
-            .catch((err) => { console.log(err); alert('스토어 상품 등록에 실패하였습니다.') })
+        if (isNumeric(price) && isNumeric(discountPrice)) {
+            ownerAddProduct(id, category, name, price, discountPrice, url, file, config)
+                .then((res) => { console.log(res); alert('스토어 상품을 성공적으로 등록하였습니다.'); navigation('/owner'); })
+                .catch((err) => { console.log(err); alert('스토어 상품 등록에 실패하였습니다.'); })
+        }
+        else {
+            alert('원가와 할인가는 숫자로만 입력해야합니다.');
+        }
     }
 
     return (
@@ -42,17 +48,16 @@ const OwnerAddStore = () => {
                     <p>카테고리<span style={{ color: "#EB5757", fontWeight: "900" }}></span></p>
                     <FilterBox name="category" onChange={(e) => setCategory(e.target.value)}>
                         <option value="커피원두">커피원두</option>
-                        <option value="디저트">디저트</option>
+                        <option value="수제쿠키">수제쿠키</option>
+                        <option value="수제케이크">수제케이크</option>
                     </FilterBox>
                     <br />
                     <p>상품명<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={(e) => setName(e.target.value)} />
                     <p>원가<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" onChange={(e) => setOriginal(e.target.value)} />
-                    <p>할인율<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
-                    <input type="text" onChange={(e) => setDiscount(e.target.value)} />
-                    <p>할인가<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={(e) => setPrice(e.target.value)} />
+                    <p>할인가<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
+                    <input type="text" onChange={(e) => setDiscount(e.target.value)} />
                     <p>판매중인 상품 URL<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
                     <input type="text" onChange={(e) => setUrl(e.target.value)} />
                     <p>상품 이미지<span style={{ color: "#EB5757", fontWeight: "900" }}>*</span></p>
