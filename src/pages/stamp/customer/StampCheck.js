@@ -74,8 +74,8 @@ const StampCheck = () => {
                     </TagButton>
                 </TagList>
                 <div className="cafe-info-box">
-                    <div className="location">경희대학교 카페 투어 스탬프</div>
-                    <div className="stamp-manual">리워드 : 9장 모으면, 경희대학교 한정판 선물세트</div>
+                    <div className="location">{tag} 투어 스탬프</div>
+                    <div className="stamp-manual">리워드 : 9장 모으면, {tag} 한정판 선물세트</div>
                     <button className="check-cafe-btn" onClick={openModal}>참여 매장 확인</button>
                 </div>
                 <br />
@@ -98,7 +98,7 @@ const StampCheck = () => {
                 </StampGridBox >
                 {stampList.length === 9 ? <div className="complete-box">
                     <img src={completeImg} alt='10개스탬프' width="40%" />
-                    <div className="complete-text">경희대학교 카페 퉈 스탬프 완료!!<br />리워드를 신청해주세요!</div>
+                    <div className="complete-text">{tag} 스탬프 투어 완료!!<br />리워드를 신청해주세요!</div>
                 </div> : <></>}
 
             </Container>
