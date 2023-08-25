@@ -90,7 +90,7 @@ const AgreeForm = () => {
         <AgreeContainer>
             <div className="all-agree-box">
                 <input type="checkbox" id="checkbox" name="all" onChange={checkAll} checked={checkList.length === 2 ? true : false} />
-                <label className="remember-me" >모두 동의(선택 정보 포함)</label>
+                <label className="remember-me" >모두 동의</label>
             </div>
             <div className="agree-box1">
                 <input type="checkbox" id="checkbox" name="essential" onChange={check} checked={checkList.includes('essential') ? true : false} />
@@ -450,7 +450,7 @@ const AgreeForm = () => {
 - 방문에 관한 기록(서비스 이용기록, 접속로그, 접속 IP 정보)
 ㆍ보존 이유 : 통신비밀보호법
 ㆍ보존 기간 : 3년' readOnly={true}></InputBox>
-            <Button text="다음으로" color="#FF9F74" onClick={checkList.includes('essential') ? () => { navigator('/join'); setCookie('select', checkList.includes('select')) } : console.log('필수 정보 선택 필요')} />
+            <Button text="다음으로" color="#FF9F74" onClick={checkList.includes('essential') && checkList.includes('select') ? () => { navigator('/join'); setCookie('select', checkList.includes('select')) } : () => alert('필수 정보에 모두 동의하셔야 다음 페이지로 이동 가능합니다.')} />
         </AgreeContainer>
     )
 
