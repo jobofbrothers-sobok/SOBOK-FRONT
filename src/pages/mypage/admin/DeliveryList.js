@@ -12,6 +12,8 @@ const DeliveryList = () => {
     const navigator = useNavigate();
 
     const [deliveryList, setDeliveryList] = useState([]);
+    const [searchName, setSearchName] = useState('');
+    const [keyword, setKeyword] = useState('');
 
     let config = {
         headers: {
@@ -22,21 +24,21 @@ const DeliveryList = () => {
     }
 
     const showDeliveryList = async () => {
-        const json = await getDeliveryList(config);
+        const json = await getDeliveryList(keyword, config);
         setDeliveryList(json.data.data);
     };
 
     useEffect(() => {
         showDeliveryList();
         console.log(deliveryList);
-    }, []);
+    }, [keyword]);
 
     return (
         <>
             <Container>
                 <p className="title">배송 신청 리스트</p>
                 <br />
-                <SearchBox />
+                <SearchBox onChange={(e) => setSearchName(e.target.value)} onClick={() => setKeyword(searchName)} />
                 <div className='apply-list'>
                     <br />
                     <hr />

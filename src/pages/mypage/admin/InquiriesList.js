@@ -6,6 +6,7 @@ import MoreButton from '../../../components/common/MoreButton';
 import { getInquiry } from '../../../lib/api/admin';
 import { getCookie } from '../../../lib/cookie';
 import { useNavigate } from 'react-router-dom';
+import SearchBox from '../../../components/common/SearchBox';
 
 const InquiriesList = () => {
 

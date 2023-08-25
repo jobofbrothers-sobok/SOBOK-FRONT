@@ -33,7 +33,7 @@ const StampReward = () => {
 
     useEffect(() => {
         getStampList();
-    }, [tag])
+    }, [tag]);
 
     return (
         <>

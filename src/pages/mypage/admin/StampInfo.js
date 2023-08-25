@@ -14,6 +14,9 @@ const StampInfoList = () => {
 
     const [tourList, setTourList] = useState([]);
 
+    const [searchName, setSearchName] = useState('');
+    const [keyword, setKeyword] = useState('');
+
     let config = {
         headers: {
             'Content-Type': 'application/json',
@@ -23,14 +26,14 @@ const StampInfoList = () => {
     }
 
     const showTourList = async () => {
-        const json = await getAllStampTour(config);
+        const json = await getAllStampTour(keyword, config);
         setTourList(json.data.data);
     };
 
     useEffect(() => {
         showTourList();
         console.log(tourList);
-    }, []);
+    }, [keyword]);
 
     return (
         <>
@@ -39,7 +42,7 @@ const StampInfoList = () => {
                 <br />
                 <Button text="생성하기" color="#FF9F74" radius="5px" height="50px" onClick={() => navigator('/admin/menu/1/add-stamp-tour')} />
                 <br />
-                <SearchBox />
+                <SearchBox onChange={(e) => setSearchName(e.target.value)} onClick={() => setKeyword(searchName)} />
                 <div className='apply-list'>
                     <br />
                     <hr />

@@ -13,8 +13,8 @@ const config = {
 }
 
 // 점주 회원정보 전체 조회
-export const readAllOwner = async (sort, config) => {
-    return await axios.get(`${PROXY}/manager/owner?sort=${sort}`, config);
+export const readAllOwner = async (sort, searchName, config) => {
+    return await axios.post(`${PROXY}/manager/owner?sort=${sort}`, { ownerName: searchName }, config);
 }
 
 // 점주 회원정보 상세 조회
@@ -28,8 +28,8 @@ export const postOwnerApproval = async (id, config) => {
 }
 
 // 고객 회원정보 전체 조회
-export const readAllClient = async (config) => {
-    return await axios.get(`${PROXY}/manager/client`, config);
+export const readAllClient = async (searchName, config) => {
+    return await axios.post(`${PROXY}/manager/client`, { customerName: searchName }, config);
 }
 
 // 고객 회원정보 상세 조회
@@ -38,8 +38,8 @@ export const readDetailClient = async (id, config) => {
 }
 
 // 스탬프 투어 전체 조회
-export const getAllStampTour = async (config) => {
-    return await axios.get(`${PROXY}/manager/tour`, config);
+export const getAllStampTour = async (keyword, config) => {
+    return await axios.post(`${PROXY}/manager/tour/info`, { keyword: keyword }, config);
 }
 
 // 스탬프 투어 등록
@@ -59,8 +59,8 @@ export const searchStore = async (searchKey, config) => {
 }
 
 // 배송 신청 전체 조회
-export const getDeliveryList = async (config) => {
-    return await axios.get(`${PROXY}/manager/delivery`, config);
+export const getDeliveryList = async (keyword, config) => {
+    return await axios.post(`${PROXY}/manager/delivery`, { keyword: keyword }, config);
 }
 
 // 배송 신청 상세 조회
@@ -78,8 +78,8 @@ export const postNotice = async (title, content, file, config) => {
 }
 
 // 스탬프 사용 회원 전체 조회
-export const getAllStampMember = async (sort, config) => {
-    return await axios.get(`${PROXY}/manager/stamp?sort=${sort}`, config);
+export const getAllStampMember = async (sort, keyword, config) => {
+    return await axios.post(`${PROXY}/manager/stamp?sort=${sort}`, { keyword: keyword }, config);
 }
 
 // 스탬프 사용 회원 상세 조회
@@ -93,18 +93,18 @@ export const postStampApproval = async (id, config) => {
 }
 
 // 소복매니저 신청 리스트 전체 조회
-export const getAllManager = async (config) => {
-    return await axios.get(`${PROXY}/manager/alim`, config);
+export const getAllManager = async (keyword, config) => {
+    return await axios.post(`${PROXY}/manager/alim`, { keyword: keyword }, config);
 }
 
-// 소복매니저 신청 리스트 전체 조회
+// 소복매니저 신청 리스트 상세 조회
 export const getManagerDetail = async (id, config) => {
     return await axios.get(`${PROXY}/manager/alim/${id}`, config);
 }
 
 // 문의사항 전체 조회
 export const getInquiry = async (config) => {
-    return await axios.get(`${PROXY}/manager/inquiry`, config);
+    return await axios.post(`${PROXY}/manager/inquiry`, {}, config);
 };
 
 // 소복매니저 문자 전송

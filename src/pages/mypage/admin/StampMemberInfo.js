@@ -16,7 +16,9 @@ const StampMemberInfo = () => {
     const [sort, setSort] = useState('auth');
 
     const [ownerList, setOwnerList] = useState([]);
-    console.log(ownerList);
+    const [searchName, setSearchName] = useState('');
+    const [keyword, setKeyword] = useState('');
+
 
 
     const getStampMember = async () => {
@@ -27,13 +29,13 @@ const StampMemberInfo = () => {
                 'withCredentials': true,
             }
         }
-        const json = await getAllStampMember(sort, config);
+        const json = await getAllStampMember(sort, keyword, config);
         setOwnerList(json.data.data);
     };
 
     useEffect(() => {
         getStampMember();
-    }, [sort]);
+    }, [sort, keyword]);
 
 
     return (
@@ -42,7 +44,7 @@ const StampMemberInfo = () => {
                 <p className="title">점주 스탬프 승인</p>
                 <br />
                 <br />
-                <SearchBox />
+                <SearchBox onChange={(e) => setSearchName(e.target.value)} onClick={() => setKeyword(searchName)} />
                 <div className='apply-list'>
                     <br />
                     <div className="list-top-box">

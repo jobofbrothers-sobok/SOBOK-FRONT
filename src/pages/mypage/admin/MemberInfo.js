@@ -17,6 +17,9 @@ const MemberInfo = () => {
 
 
     const [sort, setSort] = useState('all');
+    const [searchName, setSearchName] = useState('');
+    const [keyword, setKeyword] = useState('');
+
 
     const [ownerList, setOwnerList] = useState([]);
     const [clientList, setClientList] = useState([]);
@@ -30,12 +33,12 @@ const MemberInfo = () => {
     }
 
     const getAllOwner = async () => {
-        const json = await readAllOwner(sort, config);
+        const json = await readAllOwner(sort, searchName, config);
         setOwnerList(json.data.data);
     };
 
     const getAllClient = async () => {
-        const json = await readAllClient(config);
+        const json = await readAllClient(searchName, config);
         setClientList(json.data.data);
     };
 
@@ -48,7 +51,7 @@ const MemberInfo = () => {
             getAllClient();
             setCookie('isowner', isowner);
         }
-    }, [sort, isowner]);
+    }, [sort, isowner, keyword]);
 
 
     return (
@@ -65,7 +68,7 @@ const MemberInfo = () => {
                     </SendButton>
                 </div>
                 <br />
-                <SearchBox />
+                <SearchBox onChange={(e) => setSearchName(e.target.value)} onClick={() => setKeyword(searchName)} />
                 <div className='apply-list'>
                     <br />
                     <div className="list-top-box">
@@ -91,8 +94,8 @@ const MemberInfo = () => {
                             clientList.map((item, index) => (
                                 <div className='apply-item' key={item.id} onClick={() => navigator(`/admin/menu/0/member/${item.id}`)}>
                                     <div>
-                                        <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.loginId}</div>
-                                        <div className='item-category'>{item.name} / {item.email} / {item.phone}</div>
+                                        <div className='item-title'>{item.active ? <img src={active} alt='확인요청' width="10px" /> : null}{item.name}</div>
+                                        <div className='item-category'>{item.loginId} / {item.email} / {item.phone}</div>
                                     </div>
                                     <div className="cupon-stamp">
                                         보유쿠폰 {item.cupon}개<br />

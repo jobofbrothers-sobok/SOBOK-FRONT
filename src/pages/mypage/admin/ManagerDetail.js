@@ -20,7 +20,9 @@ const ManagerDetail = () => {
 
     const { id } = useParams();
 
-    const { category, isMessage, writerId } = manager;
+    const { title, category, isMessage, writerId } = manager;
+
+    console.log(manager);
 
     let config = {
         headers: {
@@ -72,7 +74,7 @@ const ManagerDetail = () => {
             <Container>
                 <BackButton />
                 <br /><br />
-                <p className="title">{isMessage ? '문자' : '카톡'}서비스 신청</p>
+                <p className="title">{title}</p>
                 <br /><br />
                 <div className="detail-box">
                     <p className="info-text">요청 정보</p>

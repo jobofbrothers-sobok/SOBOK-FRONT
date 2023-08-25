@@ -13,6 +13,8 @@ const AdminManager = () => {
     const navigator = useNavigate();
 
     const [managers, setManagers] = useState([]);
+    const [searchName, setSearchName] = useState('');
+    const [keyword, setKeyword] = useState('');
 
     let config = {
         headers: {
@@ -23,27 +25,28 @@ const AdminManager = () => {
     }
 
     const getManagerList = async () => {
-        const json = await getAllManager(config);
+        const json = await getAllManager(keyword, config);
         setManagers(json.data.data);
+        console.log(json.data.data);
     };
 
     useEffect(() => {
         getManagerList();
-    }, []);
+    }, [keyword]);
 
     return (
         <>
             <Container>
                 <p className="title">소복 매니저</p>
                 <br />
-                <SearchBox />
+                <SearchBox onChange={(e) => setSearchName(e.target.value)} onClick={() => setKeyword(searchName)} />
                 <div className='apply-list'>
                     <br />
                     <hr />
                     {managers.map(item => (
                         <ListItem
                             id={item.id}
-                            title={item.content.substr(0, 10)}
+                            title={item.title}
                             category={(item.isMessage ? '문자' : '카톡') + ' / ' + item.category}
                             date={item.timestamp.substr(0, 10)}
                             isActive={true}
