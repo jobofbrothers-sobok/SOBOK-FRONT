@@ -13,7 +13,7 @@ import { getCookie } from "../../../lib/cookie";
 
 const StampCheck = () => {
 
-    const [tag, setTag] = useState('hoegi');
+    const [tag, setTag] = useState('sookmyung');
 
     const [stampList, setStamp] = useState([]);
     const [stampCafe, setStampCafe] = useState([]);
@@ -60,17 +60,17 @@ const StampCheck = () => {
                 <br /><br />
                 <div className="info-title">스탬프 적립 내역</div>
                 <TagList>
-                    <TagButton className={tag === 'hoegi' ? 'active' : ''} onClick={() => setTag('hoegi')}>
-                        회기역
-                    </TagButton>
-                    <TagButton className={tag === 'halloween' ? 'active' : ''} onClick={() => setTag('halloween')}>
-                        할로윈 특집
-                    </TagButton>
                     <TagButton className={tag === 'sookmyung' ? 'active' : ''} onClick={() => setTag('sookmyung')}>
-                        숙대입구파티
+                        숙명여대 순헌황귀비길
                     </TagButton>
-                    <TagButton className={tag === 'xmas' ? 'active' : ''} onClick={() => setTag('xmas')}>
-                        일상
+                    <TagButton className={tag === 'itaewon' ? 'active' : ''} onClick={() => setTag('itaewon')}>
+                        이태원 카페
+                    </TagButton>
+                    <TagButton className={tag === 'kyunghee' ? 'active' : ''} onClick={() => setTag('kyunghee')}>
+                        경희대
+                    </TagButton>
+                    <TagButton className={tag === 'chungang' ? 'active' : ''} onClick={() => setTag('chungang')}>
+                        흑석동&상도동
                     </TagButton>
                 </TagList>
                 <div className="cafe-info-box">
