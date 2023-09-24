@@ -29,16 +29,10 @@ const CafeMenu = (props) => {
 
     return (
         <Container>
-            <img src={newsImg} alt="메뉴 이미지" />
+            {menus[0] ? <img src={`https://b.sobok.co.kr/${menus[0]?.image}`} alt="메뉴 이미지" /> : null}
             <p className="menu-intro">메뉴 안내</p>
             <div className="menu-list">
                 {menus.map((item) => <div key={item.id} className="menu-item">{item.content}</div>)}
-                {/* <div className="menu-item">Espresso Croccantino (에소티노)</div>
-                <div className="menu-item">Espresso Crontino (에소프레소 크로칸티노)</div>
-                <div className="menu-item">Espresso Croccantino (에레소 칸티노)</div>
-                <div className="menu-item">Espresso Crontino (에노)</div>
-                <div className="menu-item">Espresso Crcantino (에레소 크로칸티노)</div>
-                <div className="menu-item">Espresso Croccantino (에 크로칸티노)</div> */}
             </div>
         </Container>
     )
